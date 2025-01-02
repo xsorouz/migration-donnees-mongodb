@@ -1,19 +1,20 @@
+import os  # <-- Import de la bibliothèque 'os'
 from pymongo import MongoClient
 from loguru import logger
 import pandas as pd
 
-# Connexion à MongoDB
-def connect_to_mongodb(uri="mongodb://localhost:27017/", database_name="healthcare_database"):
+def connect_to_mongodb():
     """
-    Établit une connexion à MongoDB et retourne la base de données spécifiée.
-
-    Args:
-        uri (str): URI de connexion à MongoDB.
-        database_name (str): Nom de la base de données.
+    Établit une connexion à MongoDB en lisant la variable d'environnement MONGO_URI
+    et retourne la base de données spécifiée ('healthcare_database').
 
     Returns:
         Database: Objet base de données MongoDB.
     """
+    # 🔸 Lit la variable MONGO_URI (ou utilise mongodb://localhost:27017/ par défaut)
+    uri = os.environ.get("MONGO_URI", "mongodb://localhost:27017/")
+    database_name = "healthcare_database"
+
     client = MongoClient(uri)
     db = client[database_name]
     logger.info(f"Connecté à MongoDB, base de données : {database_name}")
@@ -91,7 +92,10 @@ if __name__ == "__main__":
     collection = db["patients_data"]
 
     # CREATE : Insérer des données
-    sample_data = [{"Name": "John Doe", "Age": 30, "Gender": "Male"}, {"Name": "Jane Doe", "Age": 28, "Gender": "Female"}]
+    sample_data = [
+        {"Name": "John Doe", "Age": 30, "Gender": "Male"},
+        {"Name": "Jane Doe", "Age": 28, "Gender": "Female"}
+    ]
     insert_records(collection, sample_data)
 
     # READ : Lire des données

@@ -160,3 +160,6 @@ project/
 ```
 
 ---
+
+Avec ce guide, vous pouvez gérer Docker et Docker Compose efficacement pour ce projet. Si vous avez des questions, n'hésitez pas à demander !
+
