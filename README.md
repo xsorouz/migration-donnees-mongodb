@@ -1,5 +1,3 @@
-# migration-donnees-mongodb
- Projet de migration de données médicales vers MongoDB avec conteneurisation Docker
 # Migration de Données Médicales vers MongoDB
 
 Ce projet a pour objectif de migrer des données médicales d'un fichier CSV vers une base de données MongoDB, tout en utilisant Docker pour la conteneurisation et en explorant des solutions de déploiement cloud avec AWS.
