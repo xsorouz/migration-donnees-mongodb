@@ -45,8 +45,3 @@ Ce projet a pour objectif de migrer des données médicales d'un fichier CSV ver
 - **Pip** : Gestionnaire de paquets Python.
 
 ---
-
-## **Installation :**
-1. **Clonez le dépôt :**
-   ```bash
-   git clone <URL>
