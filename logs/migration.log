@@ -1,12 +1,20 @@
-2025-01-02 11:56:59.570 | INFO     | __main__:<module>:23 - Démarrage du notebook
-2025-01-02 11:56:59.572 | INFO     | __main__:setup_and_log_directories:56 - Répertoire racine pour le projet défini : migration-donnees-mongodb
-2025-01-02 11:56:59.573 | INFO     | __main__:setup_and_log_directories:60 - Répertoire pour les fichiers bruts (RAW_DIR) configuré : migration-donnees-mongodb\data\raw
-2025-01-02 11:56:59.574 | INFO     | __main__:setup_and_log_directories:64 - Répertoire pour les fichiers nettoyés (PROCESSED_DIR) configuré : migration-donnees-mongodb\data\processed
-2025-01-02 11:56:59.575 | INFO     | __main__:<module>:81 - Répertoires vérifiés et créés avec succès.
-2025-01-02 11:57:00.195 | INFO     | __main__:<module>:9 - Dataset téléchargé avec succès
-2025-01-02 11:57:00.208 | INFO     | __main__:<module>:19 - Fichiers disponibles dans le dataset : ['healthcare_dataset.csv']
-2025-01-02 11:57:00.320 | INFO     | __main__:<module>:31 - Fichier 'healthcare_dataset.csv' chargé avec succès. Nombre de lignes : 55500. Nombre de colonnes : 15.
-2025-01-02 11:57:00.333 | INFO     | __main__:<module>:3 - Aperçu des données : 
+2025-01-02 13:33:00.415 | INFO     | __main__:<module>:23 - Démarrage du notebook
+2025-01-02 13:33:00.416 | INFO     | __main__:setup_and_log_directories:58 - Répertoire racine pour le projet défini : migration-donnees-mongodb
+2025-01-02 13:33:00.417 | INFO     | __main__:setup_and_log_directories:62 - Répertoire pour les fichiers bruts (RAW_DIR) configuré : migration-donnees-mongodb\data\raw
+2025-01-02 13:33:00.418 | INFO     | __main__:setup_and_log_directories:66 - Répertoire pour les fichiers nettoyés (PROCESSED_DIR) configuré : migration-donnees-mongodb\data\processed
+2025-01-02 13:33:00.419 | INFO     | __main__:setup_and_log_directories:70 - Répertoire pour les scripts (SCRIPTS_DIR) configuré : migration-donnees-mongodb\scripts
+2025-01-02 13:33:00.432 | INFO     | __main__:<module>:88 - Répertoires vérifiés et créés avec succès.
+2025-01-02 13:33:01.168 | INFO     | __main__:<module>:9 - Dataset téléchargé avec succès
+2025-01-02 13:33:01.169 | INFO     | __main__:<module>:19 - Fichiers disponibles dans le dataset : ['healthcare_dataset.csv']
+2025-01-02 13:33:01.275 | INFO     | __main__:<module>:31 - Fichier 'healthcare_dataset.csv' chargé avec succès. Nombre de lignes : 55500. Nombre de colonnes : 15.
+2025-01-02 13:33:01.286 | INFO     | __main__:<module>:2 - ============================================================
+2025-01-02 13:33:01.287 | INFO     | __main__:<module>:3 - Début de l'exportation des DataFrames en fichiers CSV
+2025-01-02 13:33:01.287 | INFO     | __main__:<module>:4 - ----------
+2025-01-02 13:33:01.475 | INFO     | __main__:export_dataframes_to_csv:35 - ✅ DataFrame 'healthcare_data' exporté avec succès : data\raw\healthcare_data.csv
+2025-01-02 13:33:01.475 | INFO     | __main__:<module>:43 - ----------
+2025-01-02 13:33:01.476 | INFO     | __main__:<module>:44 - Fin de l'exportation des DataFrames en fichiers CSV
+2025-01-02 13:33:01.477 | INFO     | __main__:<module>:45 - ============================================================
+2025-01-02 13:33:01.491 | INFO     | __main__:<module>:3 - Aperçu des données : 
             Name  Age  Gender Blood Type Medical Condition Date of Admission            Doctor                    Hospital Insurance Provider  Billing Amount  Room Number Admission Type Discharge Date   Medication  Test Results
 0  Bobby JacksOn   30    Male         B-            Cancer        2024-01-31     Matthew Smith             Sons and Miller         Blue Cross    18856.281306          328         Urgent     2024-02-02  Paracetamol        Normal
 1   LesLie TErRy   62    Male         A+           Obesity        2019-08-20   Samantha Davies                     Kim Inc           Medicare    33643.327287          265      Emergency     2019-08-26    Ibuprofen  Inconclusive
@@ -14,53 +22,53 @@
 3   andrEw waTtS   28  Female         O+          Diabetes        2020-11-18       Kevin Wells  Hernandez Rogers and Vang,           Medicare    37909.782410          450       Elective     2020-12-18    Ibuprofen      Abnormal
 4  adrIENNE bEll   43  Female        AB+            Cancer        2022-09-19    Kathleen Hanna                 White-White              Aetna    14238.317814          458         Urgent     2022-10-09   Penicillin      Abnormal
 
-2025-01-02 11:57:00.334 | INFO     | __main__:<module>:7 - Résumé pour le dataset 'healthcare_dataset':
-2025-01-02 11:57:00.691 | INFO     | __main__:<module>:11 - ============================================================
-2025-01-02 11:57:00.692 | INFO     | __main__:<module>:15 - 📊 Types des colonnes pour le DataFrame 'healthcare'
-2025-01-02 11:57:00.693 | INFO     | __main__:<module>:16 - ------------------------------------------------------------
-2025-01-02 11:57:00.705 | INFO     | __main__:<module>:23 - 🔹 Name : object | Valeurs : str
-2025-01-02 11:57:00.716 | INFO     | __main__:<module>:23 - 🔹 Age : int64 | Valeurs : int
-2025-01-02 11:57:00.727 | INFO     | __main__:<module>:23 - 🔹 Gender : object | Valeurs : str
-2025-01-02 11:57:00.737 | INFO     | __main__:<module>:23 - 🔹 Blood Type : object | Valeurs : str
-2025-01-02 11:57:00.748 | INFO     | __main__:<module>:23 - 🔹 Medical Condition : object | Valeurs : str
-2025-01-02 11:57:00.758 | INFO     | __main__:<module>:23 - 🔹 Date of Admission : object | Valeurs : str
-2025-01-02 11:57:00.768 | INFO     | __main__:<module>:23 - 🔹 Doctor : object | Valeurs : str
-2025-01-02 11:57:00.778 | INFO     | __main__:<module>:23 - 🔹 Hospital : object | Valeurs : str
-2025-01-02 11:57:00.787 | INFO     | __main__:<module>:23 - 🔹 Insurance Provider : object | Valeurs : str
-2025-01-02 11:57:00.799 | INFO     | __main__:<module>:23 - 🔹 Billing Amount : float64 | Valeurs : float
-2025-01-02 11:57:00.810 | INFO     | __main__:<module>:23 - 🔹 Room Number : int64 | Valeurs : int
-2025-01-02 11:57:00.820 | INFO     | __main__:<module>:23 - 🔹 Admission Type : object | Valeurs : str
-2025-01-02 11:57:00.829 | INFO     | __main__:<module>:23 - 🔹 Discharge Date : object | Valeurs : str
-2025-01-02 11:57:00.838 | INFO     | __main__:<module>:23 - 🔹 Medication : object | Valeurs : str
-2025-01-02 11:57:00.849 | INFO     | __main__:<module>:23 - 🔹 Test Results : object | Valeurs : str
-2025-01-02 11:57:00.850 | INFO     | __main__:<module>:26 - ============================================================
+2025-01-02 13:33:01.493 | INFO     | __main__:<module>:7 - Résumé pour le dataset 'healthcare_dataset':
+2025-01-02 13:33:01.830 | INFO     | __main__:<module>:11 - ============================================================
+2025-01-02 13:33:01.832 | INFO     | __main__:<module>:15 - 📊 Types des colonnes pour le DataFrame 'healthcare'
+2025-01-02 13:33:01.832 | INFO     | __main__:<module>:16 - ------------------------------------------------------------
+2025-01-02 13:33:01.843 | INFO     | __main__:<module>:23 - 🔹 Name : object | Valeurs : str
+2025-01-02 13:33:01.853 | INFO     | __main__:<module>:23 - 🔹 Age : int64 | Valeurs : int
+2025-01-02 13:33:01.864 | INFO     | __main__:<module>:23 - 🔹 Gender : object | Valeurs : str
+2025-01-02 13:33:01.876 | INFO     | __main__:<module>:23 - 🔹 Blood Type : object | Valeurs : str
+2025-01-02 13:33:01.887 | INFO     | __main__:<module>:23 - 🔹 Medical Condition : object | Valeurs : str
+2025-01-02 13:33:01.897 | INFO     | __main__:<module>:23 - 🔹 Date of Admission : object | Valeurs : str
+2025-01-02 13:33:01.908 | INFO     | __main__:<module>:23 - 🔹 Doctor : object | Valeurs : str
+2025-01-02 13:33:01.918 | INFO     | __main__:<module>:23 - 🔹 Hospital : object | Valeurs : str
+2025-01-02 13:33:01.928 | INFO     | __main__:<module>:23 - 🔹 Insurance Provider : object | Valeurs : str
+2025-01-02 13:33:01.939 | INFO     | __main__:<module>:23 - 🔹 Billing Amount : float64 | Valeurs : float
+2025-01-02 13:33:01.951 | INFO     | __main__:<module>:23 - 🔹 Room Number : int64 | Valeurs : int
+2025-01-02 13:33:01.963 | INFO     | __main__:<module>:23 - 🔹 Admission Type : object | Valeurs : str
+2025-01-02 13:33:01.974 | INFO     | __main__:<module>:23 - 🔹 Discharge Date : object | Valeurs : str
+2025-01-02 13:33:01.984 | INFO     | __main__:<module>:23 - 🔹 Medication : object | Valeurs : str
+2025-01-02 13:33:01.993 | INFO     | __main__:<module>:23 - 🔹 Test Results : object | Valeurs : str
+2025-01-02 13:33:01.995 | INFO     | __main__:<module>:26 - ============================================================
 
-2025-01-02 11:57:00.919 | INFO     | __main__:<module>:36 - Colonnes générées après le merge : Index(['temp_id', 'Name', 'Age', 'Gender', 'Blood Type', 'Medical Condition', 'Date of Admission', 'Doctor', 'Hospital', 'Insurance Provider', 'Billing Amount', 'Room Number', 'Admission Type', 'Discharge Date', 'Medication', 'Test Results', 'is_duplicate', 'is_primary', 'group_id'], dtype='object')
-2025-01-02 11:57:00.921 | WARNING  | __main__:<module>:47 - La colonne 'Name_primary' n'existe pas. Comparaison ignorée.
-2025-01-02 11:57:00.922 | WARNING  | __main__:<module>:47 - La colonne 'Age_primary' n'existe pas. Comparaison ignorée.
-2025-01-02 11:57:00.923 | WARNING  | __main__:<module>:47 - La colonne 'Gender_primary' n'existe pas. Comparaison ignorée.
-2025-01-02 11:57:00.924 | WARNING  | __main__:<module>:47 - La colonne 'Blood Type_primary' n'existe pas. Comparaison ignorée.
-2025-01-02 11:57:00.925 | WARNING  | __main__:<module>:47 - La colonne 'Medical Condition_primary' n'existe pas. Comparaison ignorée.
-2025-01-02 11:57:00.925 | WARNING  | __main__:<module>:47 - La colonne 'Date of Admission_primary' n'existe pas. Comparaison ignorée.
-2025-01-02 11:57:00.926 | WARNING  | __main__:<module>:47 - La colonne 'Doctor_primary' n'existe pas. Comparaison ignorée.
-2025-01-02 11:57:00.927 | WARNING  | __main__:<module>:47 - La colonne 'Hospital_primary' n'existe pas. Comparaison ignorée.
-2025-01-02 11:57:00.928 | WARNING  | __main__:<module>:47 - La colonne 'Insurance Provider_primary' n'existe pas. Comparaison ignorée.
-2025-01-02 11:57:00.929 | WARNING  | __main__:<module>:47 - La colonne 'Billing Amount_primary' n'existe pas. Comparaison ignorée.
-2025-01-02 11:57:00.929 | WARNING  | __main__:<module>:47 - La colonne 'Room Number_primary' n'existe pas. Comparaison ignorée.
-2025-01-02 11:57:00.930 | WARNING  | __main__:<module>:47 - La colonne 'Admission Type_primary' n'existe pas. Comparaison ignorée.
-2025-01-02 11:57:00.931 | WARNING  | __main__:<module>:47 - La colonne 'Discharge Date_primary' n'existe pas. Comparaison ignorée.
-2025-01-02 11:57:00.931 | WARNING  | __main__:<module>:47 - La colonne 'Medication_primary' n'existe pas. Comparaison ignorée.
-2025-01-02 11:57:00.932 | WARNING  | __main__:<module>:47 - La colonne 'Test Results_primary' n'existe pas. Comparaison ignorée.
-2025-01-02 11:57:00.933 | INFO     | __main__:<module>:52 - Groupes concernés par des doublons : [81, 21, 279, 61, 211, 383, 112, 196, 231, 55, 309, 508, 172, 384, 387, 202, 450, 92, 481, 432, 223, 307, 183, 114, 394, 404, 85, 227, 164, 366, 28, 430, 257, 378, 95, 502, 472, 152, 496, 40, 301, 178, 461, 241, 515, 17, 107, 410, 118, 498, 518, 75, 269, 186, 278, 32, 373, 251, 339, 26, 501, 138, 206, 140, 375, 67, 299, 367, 157, 117, 425, 197, 131, 128, 71, 284, 449, 479, 207, 139, 204, 219, 259, 274, 455, 477, 395, 97, 188, 361, 534, 525, 13, 267, 136, 218, 69, 41, 124, 89, 72, 439, 143, 492, 533, 187, 289, 260, 108, 385, 332, 122, 266, 456, 34, 101, 371, 58, 296, 311, 180, 419, 150, 78, 190, 369, 159, 195, 179, 320, 451, 8, 99, 146, 393, 322, 512, 53, 250, 243, 434, 464, 185, 297, 50, 191, 225, 105, 520, 382, 465, 4, 354, 347, 209, 109, 217, 104, 390, 350, 386, 532, 411, 275, 43, 141, 359, 397, 429, 169, 177, 293, 220, 153, 230, 235, 379, 189, 356, 503, 514, 485, 443, 155, 282, 222, 205, 506, 165, 484, 238, 16, 133, 252, 380, 264, 120, 463, 233, 331, 82, 182, 249, 482, 47, 377, 400, 391, 521, 343, 167, 292, 93, 295, 171, 467, 115, 522, 363, 98, 291, 470, 20, 446, 487, 77, 460, 242, 402, 364, 306, 22, 431, 335, 262, 210, 27, 270, 511, 74, 529, 163, 253, 254, 48, 414, 281, 173, 73, 63, 38, 277, 338, 480, 340, 68, 415, 84, 509, 458, 123, 126, 392, 351, 417, 325, 111, 83, 424, 176, 256, 35, 313, 286, 106, 294, 57, 149, 76, 300, 19, 528, 103, 240, 94, 440, 154, 489, 328, 271, 144, 324, 433, 389, 374, 304, 388, 490, 276, 341, 147, 184, 346, 427, 370, 453, 305, 221, 505, 471, 491, 170, 321, 355, 524, 272, 31, 298, 493, 25, 125, 365, 212, 436, 7, 9, 360, 288, 317, 497, 408, 372, 132, 24, 200, 507, 110, 310, 255, 116, 473, 435, 156, 426, 466, 353, 60, 406, 396, 344, 420, 283, 265, 62, 44, 90, 323, 316, 11, 263, 476, 148, 3, 454, 287, 273, 18, 412, 280, 403, 79, 318, 42, 158, 258, 192, 407, 499, 486, 87, 516, 290, 495, 142, 423, 100, 229, 345, 421, 234, 5, 45, 137, 442, 59, 504, 166, 102, 302, 37, 319, 459, 314, 203, 452, 162, 56, 224, 457, 308, 86, 199, 39, 2, 368, 312, 29, 66, 468, 376, 448, 236, 483, 14, 208, 46, 194, 96, 358, 462, 474, 239, 237, 526, 228, 193, 447, 488, 413, 441, 337, 381, 330, 232, 418, 245, 36, 6, 500, 15, 168, 248, 416, 80, 198, 401, 268, 174, 399, 478, 213, 49, 65, 398, 315, 215, 342, 357, 151, 54, 513, 129, 422, 113, 64, 30, 519, 409, 1, 405, 244, 201, 475, 329, 130, 33, 445, 469, 444, 226, 12, 135, 51, 349, 160, 91, 494, 121, 119, 88, 348, 336, 333, 428, 517, 303, 52, 352, 437, 161, 23, 261, 127, 510, 134, 327, 216, 246, 70, 530, 145, 10, 247, 214, 531, 326, 285, 438, 527, 362, 334, 523, 175, 181]
-2025-01-02 11:57:00.937 | INFO     | __main__:<module>:58 - Groupes de doublons avec colonnes de différences : 
+2025-01-02 13:33:02.063 | INFO     | __main__:<module>:36 - Colonnes générées après le merge : Index(['temp_id', 'Name', 'Age', 'Gender', 'Blood Type', 'Medical Condition', 'Date of Admission', 'Doctor', 'Hospital', 'Insurance Provider', 'Billing Amount', 'Room Number', 'Admission Type', 'Discharge Date', 'Medication', 'Test Results', 'is_duplicate', 'is_primary', 'group_id'], dtype='object')
+2025-01-02 13:33:02.065 | WARNING  | __main__:<module>:47 - La colonne 'Name_primary' n'existe pas. Comparaison ignorée.
+2025-01-02 13:33:02.066 | WARNING  | __main__:<module>:47 - La colonne 'Age_primary' n'existe pas. Comparaison ignorée.
+2025-01-02 13:33:02.066 | WARNING  | __main__:<module>:47 - La colonne 'Gender_primary' n'existe pas. Comparaison ignorée.
+2025-01-02 13:33:02.067 | WARNING  | __main__:<module>:47 - La colonne 'Blood Type_primary' n'existe pas. Comparaison ignorée.
+2025-01-02 13:33:02.068 | WARNING  | __main__:<module>:47 - La colonne 'Medical Condition_primary' n'existe pas. Comparaison ignorée.
+2025-01-02 13:33:02.069 | WARNING  | __main__:<module>:47 - La colonne 'Date of Admission_primary' n'existe pas. Comparaison ignorée.
+2025-01-02 13:33:02.069 | WARNING  | __main__:<module>:47 - La colonne 'Doctor_primary' n'existe pas. Comparaison ignorée.
+2025-01-02 13:33:02.070 | WARNING  | __main__:<module>:47 - La colonne 'Hospital_primary' n'existe pas. Comparaison ignorée.
+2025-01-02 13:33:02.071 | WARNING  | __main__:<module>:47 - La colonne 'Insurance Provider_primary' n'existe pas. Comparaison ignorée.
+2025-01-02 13:33:02.072 | WARNING  | __main__:<module>:47 - La colonne 'Billing Amount_primary' n'existe pas. Comparaison ignorée.
+2025-01-02 13:33:02.072 | WARNING  | __main__:<module>:47 - La colonne 'Room Number_primary' n'existe pas. Comparaison ignorée.
+2025-01-02 13:33:02.073 | WARNING  | __main__:<module>:47 - La colonne 'Admission Type_primary' n'existe pas. Comparaison ignorée.
+2025-01-02 13:33:02.074 | WARNING  | __main__:<module>:47 - La colonne 'Discharge Date_primary' n'existe pas. Comparaison ignorée.
+2025-01-02 13:33:02.075 | WARNING  | __main__:<module>:47 - La colonne 'Medication_primary' n'existe pas. Comparaison ignorée.
+2025-01-02 13:33:02.076 | WARNING  | __main__:<module>:47 - La colonne 'Test Results_primary' n'existe pas. Comparaison ignorée.
+2025-01-02 13:33:02.076 | INFO     | __main__:<module>:52 - Groupes concernés par des doublons : [81, 21, 279, 61, 211, 383, 112, 196, 231, 55, 309, 508, 172, 384, 387, 202, 450, 92, 481, 432, 223, 307, 183, 114, 394, 404, 85, 227, 164, 366, 28, 430, 257, 378, 95, 502, 472, 152, 496, 40, 301, 178, 461, 241, 515, 17, 107, 410, 118, 498, 518, 75, 269, 186, 278, 32, 373, 251, 339, 26, 501, 138, 206, 140, 375, 67, 299, 367, 157, 117, 425, 197, 131, 128, 71, 284, 449, 479, 207, 139, 204, 219, 259, 274, 455, 477, 395, 97, 188, 361, 534, 525, 13, 267, 136, 218, 69, 41, 124, 89, 72, 439, 143, 492, 533, 187, 289, 260, 108, 385, 332, 122, 266, 456, 34, 101, 371, 58, 296, 311, 180, 419, 150, 78, 190, 369, 159, 195, 179, 320, 451, 8, 99, 146, 393, 322, 512, 53, 250, 243, 434, 464, 185, 297, 50, 191, 225, 105, 520, 382, 465, 4, 354, 347, 209, 109, 217, 104, 390, 350, 386, 532, 411, 275, 43, 141, 359, 397, 429, 169, 177, 293, 220, 153, 230, 235, 379, 189, 356, 503, 514, 485, 443, 155, 282, 222, 205, 506, 165, 484, 238, 16, 133, 252, 380, 264, 120, 463, 233, 331, 82, 182, 249, 482, 47, 377, 400, 391, 521, 343, 167, 292, 93, 295, 171, 467, 115, 522, 363, 98, 291, 470, 20, 446, 487, 77, 460, 242, 402, 364, 306, 22, 431, 335, 262, 210, 27, 270, 511, 74, 529, 163, 253, 254, 48, 414, 281, 173, 73, 63, 38, 277, 338, 480, 340, 68, 415, 84, 509, 458, 123, 126, 392, 351, 417, 325, 111, 83, 424, 176, 256, 35, 313, 286, 106, 294, 57, 149, 76, 300, 19, 528, 103, 240, 94, 440, 154, 489, 328, 271, 144, 324, 433, 389, 374, 304, 388, 490, 276, 341, 147, 184, 346, 427, 370, 453, 305, 221, 505, 471, 491, 170, 321, 355, 524, 272, 31, 298, 493, 25, 125, 365, 212, 436, 7, 9, 360, 288, 317, 497, 408, 372, 132, 24, 200, 507, 110, 310, 255, 116, 473, 435, 156, 426, 466, 353, 60, 406, 396, 344, 420, 283, 265, 62, 44, 90, 323, 316, 11, 263, 476, 148, 3, 454, 287, 273, 18, 412, 280, 403, 79, 318, 42, 158, 258, 192, 407, 499, 486, 87, 516, 290, 495, 142, 423, 100, 229, 345, 421, 234, 5, 45, 137, 442, 59, 504, 166, 102, 302, 37, 319, 459, 314, 203, 452, 162, 56, 224, 457, 308, 86, 199, 39, 2, 368, 312, 29, 66, 468, 376, 448, 236, 483, 14, 208, 46, 194, 96, 358, 462, 474, 239, 237, 526, 228, 193, 447, 488, 413, 441, 337, 381, 330, 232, 418, 245, 36, 6, 500, 15, 168, 248, 416, 80, 198, 401, 268, 174, 399, 478, 213, 49, 65, 398, 315, 215, 342, 357, 151, 54, 513, 129, 422, 113, 64, 30, 519, 409, 1, 405, 244, 201, 475, 329, 130, 33, 445, 469, 444, 226, 12, 135, 51, 349, 160, 91, 494, 121, 119, 88, 348, 336, 333, 428, 517, 303, 52, 352, 437, 161, 23, 261, 127, 510, 134, 327, 216, 246, 70, 530, 145, 10, 247, 214, 531, 326, 285, 438, 527, 362, 334, 523, 175, 181]
+2025-01-02 13:33:02.080 | INFO     | __main__:<module>:58 - Groupes de doublons avec colonnes de différences : 
    temp_id                Name  Age  Gender Blood Type Medical Condition Date of Admission             Doctor        Hospital Insurance Provider  Billing Amount  Room Number Admission Type Discharge Date  Medication  Test Results  is_duplicate  is_primary  group_id
 0    50023        samuel joyce   56    male         o+         arthritis        2022-11-03     krista hartman  thomas-ballard   unitedhealthcare    15654.830587          157         urgent     2022-11-22     aspirin  inconclusive          True       False        81
 1    50040    kimberly vasquez   26    male         a-           obesity        2023-10-23   jennifer bennett       cowan inc   unitedhealthcare    38142.109678          313         urgent     2023-11-18  penicillin      abnormal          True       False        21
 2    50055      scott thornton   55  female         b-           obesity        2021-04-08      joshua ingram      keller llc           medicare    30894.904511          455         urgent     2021-04-15     aspirin      abnormal          True       False       279
 3    50070         william lee   27  female         o+         arthritis        2020-01-31  lauren montgomery   winters-simon              cigna    46229.434901          153       elective     2020-02-13     lipitor        normal          True       False        61
 4    50078  christopher norris   38    male        ab-         arthritis        2023-01-14       denise blair     inc morales           medicare     9072.127142          452      emergency     2023-02-12  penicillin        normal          True       False       211
-2025-01-02 11:57:00.938 | INFO     | __main__:<module>:59 - Colonnes avec des différences détectées : []
-2025-01-02 11:57:00.953 | INFO     | __main__:<module>:15 - Contenu complet des groupes triés par 'group_id' : 
+2025-01-02 13:33:02.081 | INFO     | __main__:<module>:59 - Colonnes avec des différences détectées : []
+2025-01-02 13:33:02.099 | INFO     | __main__:<module>:15 - Contenu complet des groupes triés par 'group_id' : 
      temp_id                 Name  Age  Gender Blood Type Medical Condition Date of Admission                 Doctor                      Hospital Insurance Provider  Billing Amount  Room Number Admission Type Discharge Date   Medication  Test Results  is_duplicate  is_primary  group_id
 20      1336     kimberly vasquez   26    male         a-           obesity        2023-10-23       jennifer bennett                     cowan inc   unitedhealthcare    38142.109678          313         urgent     2023-11-18   penicillin      abnormal          True        True        21
 1      50040     kimberly vasquez   26    male         a-           obesity        2023-10-23       jennifer bennett                     cowan inc   unitedhealthcare    38142.109678          313         urgent     2023-11-18   penicillin      abnormal          True       False        21
@@ -106,17 +114,17 @@
 18     50171     angelica wilkins   53  female         a-          diabetes        2023-10-29        michael francis                  price-stuart           medicare     1666.476595          422         urgent     2023-11-14      lipitor      abnormal          True       False       481
 507    47686     cynthia sullivan   77    male         a+         arthritis        2022-10-01          tanya collins                    garcia inc              cigna     9764.712742          306      emergency     2022-10-26      aspirin  inconclusive          True        True       508
 11     50116     cynthia sullivan   77    male         a+         arthritis        2022-10-01          tanya collins                    garcia inc              cigna     9764.712742          306      emergency     2022-10-26      aspirin  inconclusive          True       False       508
-2025-01-02 11:57:01.021 | INFO     | __main__:<module>:21 - Nombre de lignes après suppression des doublons : 54966
-2025-01-02 11:57:01.025 | INFO     | __main__:<module>:22 - Aperçu des données nettoyées : 
+2025-01-02 13:33:02.176 | INFO     | __main__:<module>:21 - Nombre de lignes après suppression des doublons : 54966
+2025-01-02 13:33:02.179 | INFO     | __main__:<module>:22 - Aperçu des données nettoyées : 
             Name  Age  Gender Blood Type Medical Condition Date of Admission            Doctor                    Hospital Insurance Provider  Billing Amount  Room Number Admission Type Discharge Date   Medication  Test Results
 0  Bobby JacksOn   30    Male         B-            Cancer        2024-01-31     Matthew Smith             Sons and Miller         Blue Cross    18856.281306          328         Urgent     2024-02-02  Paracetamol        Normal
 1   LesLie TErRy   62    Male         A+           Obesity        2019-08-20   Samantha Davies                     Kim Inc           Medicare    33643.327287          265      Emergency     2019-08-26    Ibuprofen  Inconclusive
 2    DaNnY sMitH   76  Female         A-           Obesity        2022-09-22  Tiffany Mitchell                    Cook PLC              Aetna    27955.096079          205      Emergency     2022-10-07      Aspirin        Normal
 3   andrEw waTtS   28  Female         O+          Diabetes        2020-11-18       Kevin Wells  Hernandez Rogers and Vang,           Medicare    37909.782410          450       Elective     2020-12-18    Ibuprofen      Abnormal
 4  adrIENNE bEll   43  Female        AB+            Cancer        2022-09-19    Kathleen Hanna                 White-White              Aetna    14238.317814          458         Urgent     2022-10-09   Penicillin      Abnormal
-2025-01-02 11:57:01.032 | INFO     | __main__:<module>:4 - Analyse initiale des données :
-2025-01-02 11:57:01.033 | INFO     | __main__:<module>:5 - Colonnes disponibles : ['Name', 'Age', 'Gender', 'Blood Type', 'Medical Condition', 'Date of Admission', 'Doctor', 'Hospital', 'Insurance Provider', 'Billing Amount', 'Room Number', 'Admission Type', 'Discharge Date', 'Medication', 'Test Results']
-2025-01-02 11:57:01.035 | INFO     | __main__:<module>:6 - Types des colonnes avant transformation : 
+2025-01-02 13:33:02.188 | INFO     | __main__:<module>:4 - Analyse initiale des données :
+2025-01-02 13:33:02.189 | INFO     | __main__:<module>:5 - Colonnes disponibles : ['Name', 'Age', 'Gender', 'Blood Type', 'Medical Condition', 'Date of Admission', 'Doctor', 'Hospital', 'Insurance Provider', 'Billing Amount', 'Room Number', 'Admission Type', 'Discharge Date', 'Medication', 'Test Results']
+2025-01-02 13:33:02.192 | INFO     | __main__:<module>:6 - Types des colonnes avant transformation : 
 Name                   object
 Age                     int64
 Gender                 object
@@ -133,36 +141,36 @@ Discharge Date         object
 Medication             object
 Test Results           object
 dtype: object
-2025-01-02 11:57:01.042 | INFO     | __main__:<module>:12 - Statistiques pour 'Date of Admission': 
+2025-01-02 13:33:02.197 | INFO     | __main__:<module>:12 - Statistiques pour 'Date of Admission': 
 count          54966
 unique          1827
 top       2024-03-16
 freq              50
 Name: Date of Admission, dtype: object
-2025-01-02 11:57:01.047 | INFO     | __main__:<module>:12 - Statistiques pour 'Discharge Date': 
+2025-01-02 13:33:02.201 | INFO     | __main__:<module>:12 - Statistiques pour 'Discharge Date': 
 count          54966
 unique          1856
 top       2020-03-15
 freq              53
 Name: Discharge Date, dtype: object
-2025-01-02 11:57:01.060 | INFO     | __main__:<module>:12 - Statistiques pour 'Doctor': 
+2025-01-02 13:33:02.214 | INFO     | __main__:<module>:12 - Statistiques pour 'Doctor': 
 count             54966
 unique            40341
 top       Michael Smith
 freq                 27
 Name: Doctor, dtype: object
-2025-01-02 11:57:01.072 | INFO     | __main__:<module>:12 - Statistiques pour 'Hospital': 
+2025-01-02 13:33:02.227 | INFO     | __main__:<module>:12 - Statistiques pour 'Hospital': 
 count         54966
 unique        39876
 top       LLC Smith
 freq             44
 Name: Hospital, dtype: object
-2025-01-02 11:57:01.077 | INFO     | __main__:<module>:17 - Valeurs initiales pour 'Gender' : {'Female', 'Male'}
-2025-01-02 11:57:01.081 | INFO     | __main__:<module>:23 - Valeurs initiales pour 'Blood Type' : {'O-', 'B-', 'O+', 'AB-', 'AB+', 'A+', 'A-', 'B+'}
-2025-01-02 11:57:01.112 | INFO     | __main__:<module>:8 - Les colonnes de dates ont été converties en type datetime.
-2025-01-02 11:57:01.141 | INFO     | __main__:<module>:15 - Les colonnes de texte ont été normalisées (espaces supprimés, titres formatés).
-2025-01-02 11:57:01.150 | INFO     | __main__:<module>:4 - Analyse après transformation des données :
-2025-01-02 11:57:01.152 | INFO     | __main__:<module>:5 - Types des colonnes après transformation : 
+2025-01-02 13:33:02.232 | INFO     | __main__:<module>:17 - Valeurs initiales pour 'Gender' : {'Male', 'Female'}
+2025-01-02 13:33:02.236 | INFO     | __main__:<module>:23 - Valeurs initiales pour 'Blood Type' : {'A+', 'O-', 'AB-', 'A-', 'AB+', 'O+', 'B-', 'B+'}
+2025-01-02 13:33:02.272 | INFO     | __main__:<module>:8 - Les colonnes de dates ont été converties en type datetime.
+2025-01-02 13:33:02.303 | INFO     | __main__:<module>:15 - Les colonnes de texte ont été normalisées (espaces supprimés, titres formatés).
+2025-01-02 13:33:02.310 | INFO     | __main__:<module>:4 - Analyse après transformation des données :
+2025-01-02 13:33:02.311 | INFO     | __main__:<module>:5 - Types des colonnes après transformation : 
 Name                          object
 Age                            int64
 Gender                        object
@@ -179,47 +187,54 @@ Discharge Date        datetime64[ns]
 Medication                    object
 Test Results                  object
 dtype: object
-2025-01-02 11:57:01.154 | INFO     | __main__:<module>:10 - Exemple de valeurs après conversion pour 'Date of Admission': 
+2025-01-02 13:33:02.313 | INFO     | __main__:<module>:10 - Exemple de valeurs après conversion pour 'Date of Admission': 
 0   2024-01-31
 1   2019-08-20
 2   2022-09-22
 3   2020-11-18
 4   2022-09-19
 Name: Date of Admission, dtype: datetime64[ns]
-2025-01-02 11:57:01.155 | INFO     | __main__:<module>:10 - Exemple de valeurs après conversion pour 'Discharge Date': 
+2025-01-02 13:33:02.314 | INFO     | __main__:<module>:10 - Exemple de valeurs après conversion pour 'Discharge Date': 
 0   2024-02-02
 1   2019-08-26
 2   2022-10-07
 3   2020-12-18
 4   2022-10-09
 Name: Discharge Date, dtype: datetime64[ns]
-2025-01-02 11:57:01.156 | INFO     | __main__:<module>:15 - Exemple de valeurs après normalisation pour 'Doctor': 
+2025-01-02 13:33:02.316 | INFO     | __main__:<module>:15 - Exemple de valeurs après normalisation pour 'Doctor': 
 0       Matthew Smith
 1     Samantha Davies
 2    Tiffany Mitchell
 3         Kevin Wells
 4      Kathleen Hanna
 Name: Doctor, dtype: object
-2025-01-02 11:57:01.157 | INFO     | __main__:<module>:15 - Exemple de valeurs après normalisation pour 'Hospital': 
+2025-01-02 13:33:02.317 | INFO     | __main__:<module>:15 - Exemple de valeurs après normalisation pour 'Hospital': 
 0               Sons And Miller
 1                       Kim Inc
 2                      Cook Plc
 3    Hernandez Rogers And Vang,
 4                   White-White
 Name: Hospital, dtype: object
-2025-01-02 11:57:01.164 | INFO     | __main__:<module>:2 - ============================================================
-2025-01-02 11:57:01.166 | INFO     | __main__:<module>:3 - Début de l'exportation des DataFrames en fichiers CSV
-2025-01-02 11:57:01.167 | INFO     | __main__:<module>:4 - ----------
-2025-01-02 11:57:01.400 | INFO     | __main__:export_dataframes_to_csv:35 - ✅ DataFrame 'healthcare_data' exporté avec succès : data\processed\healthcare_data.csv
-2025-01-02 11:57:01.402 | INFO     | __main__:<module>:43 - ----------
-2025-01-02 11:57:01.402 | INFO     | __main__:<module>:44 - Fin de l'exportation des DataFrames en fichiers CSV
-2025-01-02 11:57:01.403 | INFO     | __main__:<module>:45 - ============================================================
-2025-01-02 11:57:01.414 | INFO     | __main__:<module>:5 - Connexion à MongoDB établie avec succès.
-2025-01-02 11:57:02.664 | INFO     | __main__:<module>:17 - 54966 documents insérés avec succès dans MongoDB.
-2025-01-02 11:57:02.751 | INFO     | __main__:<module>:23 - Nombre total de documents dans la collection : 220932
-2025-01-02 11:57:02.752 | INFO     | __main__:<module>:27 - Échantillon des documents insérés dans MongoDB :
-2025-01-02 11:57:02.753 | INFO     | __main__:<module>:29 - {'_id': ObjectId('6773f09fa3b984f50bff90ea'), 'Name': 'Bobby JacksOn', 'Age': 30, 'Gender': 'Male', 'Blood Type': 'B-', 'Medical Condition': 'Cancer', 'Date of Admission': '2024-01-31', 'Doctor': 'Matthew Smith', 'Hospital': 'Sons and Miller', 'Insurance Provider': 'Blue Cross', 'Billing Amount': 18856.281305978155, 'Room Number': 328, 'Admission Type': 'Urgent', 'Discharge Date': '2024-02-02', 'Medication': 'Paracetamol', 'Test Results': 'Normal'}
-2025-01-02 11:57:02.755 | INFO     | __main__:<module>:29 - {'_id': ObjectId('6773f09fa3b984f50bff90eb'), 'Name': 'LesLie TErRy', 'Age': 62, 'Gender': 'Male', 'Blood Type': 'A+', 'Medical Condition': 'Obesity', 'Date of Admission': '2019-08-20', 'Doctor': 'Samantha Davies', 'Hospital': 'Kim Inc', 'Insurance Provider': 'Medicare', 'Billing Amount': 33643.327286577885, 'Room Number': 265, 'Admission Type': 'Emergency', 'Discharge Date': '2019-08-26', 'Medication': 'Ibuprofen', 'Test Results': 'Inconclusive'}
-2025-01-02 11:57:02.755 | INFO     | __main__:<module>:29 - {'_id': ObjectId('6773f09fa3b984f50bff90ec'), 'Name': 'DaNnY sMitH', 'Age': 76, 'Gender': 'Female', 'Blood Type': 'A-', 'Medical Condition': 'Obesity', 'Date of Admission': '2022-09-22', 'Doctor': 'Tiffany Mitchell', 'Hospital': 'Cook PLC', 'Insurance Provider': 'Aetna', 'Billing Amount': 27955.096078842456, 'Room Number': 205, 'Admission Type': 'Emergency', 'Discharge Date': '2022-10-07', 'Medication': 'Aspirin', 'Test Results': 'Normal'}
-2025-01-02 11:57:02.756 | INFO     | __main__:<module>:29 - {'_id': ObjectId('6773f09fa3b984f50bff90ed'), 'Name': 'andrEw waTtS', 'Age': 28, 'Gender': 'Female', 'Blood Type': 'O+', 'Medical Condition': 'Diabetes', 'Date of Admission': '2020-11-18', 'Doctor': 'Kevin Wells', 'Hospital': 'Hernandez Rogers and Vang,', 'Insurance Provider': 'Medicare', 'Billing Amount': 37909.78240987528, 'Room Number': 450, 'Admission Type': 'Elective', 'Discharge Date': '2020-12-18', 'Medication': 'Ibuprofen', 'Test Results': 'Abnormal'}
-2025-01-02 11:57:02.758 | INFO     | __main__:<module>:29 - {'_id': ObjectId('6773f09fa3b984f50bff90ee'), 'Name': 'adrIENNE bEll', 'Age': 43, 'Gender': 'Female', 'Blood Type': 'AB+', 'Medical Condition': 'Cancer', 'Date of Admission': '2022-09-19', 'Doctor': 'Kathleen Hanna', 'Hospital': 'White-White', 'Insurance Provider': 'Aetna', 'Billing Amount': 14238.317813937623, 'Room Number': 458, 'Admission Type': 'Urgent', 'Discharge Date': '2022-10-09', 'Medication': 'Penicillin', 'Test Results': 'Abnormal'}
+2025-01-02 13:33:02.326 | INFO     | __main__:<module>:2 - ============================================================
+2025-01-02 13:33:02.328 | INFO     | __main__:<module>:3 - Début de l'exportation des DataFrames en fichiers CSV
+2025-01-02 13:33:02.329 | INFO     | __main__:<module>:4 - ----------
+2025-01-02 13:33:02.565 | INFO     | __main__:export_dataframes_to_csv:35 - ✅ DataFrame 'healthcare_data' exporté avec succès : data\processed\healthcare_data.csv
+2025-01-02 13:33:02.567 | INFO     | __main__:<module>:9 - ----------
+2025-01-02 13:33:02.567 | INFO     | __main__:<module>:10 - Fin de l'exportation des DataFrames en fichiers CSV
+2025-01-02 13:33:02.568 | INFO     | __main__:<module>:11 - ============================================================
+2025-01-02 13:33:02.581 | INFO     | mongodb_crud:connect_to_mongodb:19 - Connecté à MongoDB, base de données : healthcare_database
+2025-01-02 13:33:03.663 | INFO     | mongodb_crud:insert_records:35 - 55500 documents insérés avec succès.
+2025-01-02 13:33:03.676 | INFO     | __main__:<module>:2 - Lecture d'un échantillon des données insérées :
+2025-01-02 13:33:03.679 | INFO     | mongodb_crud:read_records:52 - 5 documents récupérés avec la requête : {}
+2025-01-02 13:33:03.695 | INFO     | __main__:<module>:2 - Lecture des patients ayant un âge supérieur à 50 :
+2025-01-02 13:33:03.696 | INFO     | mongodb_crud:read_records:52 - 5 documents récupérés avec la requête : {'Age': {'$gt': 50}}
+2025-01-02 13:33:03.939 | INFO     | __main__:<module>:2 - Mise à jour des documents pour les patients de plus de 50 ans.
+2025-01-02 13:33:05.235 | INFO     | mongodb_crud:update_records:69 - 28667 documents mis à jour avec succès.
+2025-01-02 13:33:05.236 | INFO     | __main__:<module>:6 - Nombre de documents mis à jour : 28667
+2025-01-02 13:33:05.244 | INFO     | __main__:<module>:2 - Vérification des documents mis à jour :
+2025-01-02 13:33:05.246 | INFO     | mongodb_crud:read_records:52 - 5 documents récupérés avec la requête : {'Status': 'Senior'}
+2025-01-02 13:33:05.472 | INFO     | __main__:<module>:2 - Suppression des documents ayant le statut 'Senior'.
+2025-01-02 13:33:06.157 | INFO     | mongodb_crud:delete_records:85 - 28667 documents supprimés avec succès.
+2025-01-02 13:33:06.159 | INFO     | __main__:<module>:5 - Nombre de documents supprimés : 28667
+2025-01-02 13:33:06.159 | INFO     | __main__:<module>:8 - Vérification après suppression :
+2025-01-02 13:33:06.161 | INFO     | mongodb_crud:read_records:52 - 5 documents récupérés avec la requête : {}
