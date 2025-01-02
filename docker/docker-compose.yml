@@ -1,0 +1,27 @@
+version: '3.9'  # Version de la syntaxe Docker Compose. La version 3.9 est compatible avec Docker Engine 20.10 et versions ultérieures.
+
+services:  # Définit les services à orchestrer (MongoDB et l'application Python).
+  
+  mongodb:  # Nom du service MongoDB.
+    image: mongo:5.0  # Utilise l'image officielle MongoDB, version 5.0.
+    container_name: mongodb_container  # Définit un nom pour le conteneur MongoDB.
+    ports:
+      - "27017:27017"  # Expose le port 27017 du conteneur (par défaut pour MongoDB) sur le port 27017 de la machine hôte.
+    volumes:
+      - mongodb_data:/data/db  # Monte un volume nommé "mongodb_data" pour persister les données MongoDB.
+
+  app:  # Nom du service pour l'application Python.
+    build:
+      context: .  # Indique que Docker doit utiliser le Dockerfile situé dans le répertoire courant pour construire l'image.
+    container_name: python_app  # Définit un nom pour le conteneur de l'application Python.
+    depends_on:
+      - mongodb  # Ce service dépend de MongoDB. MongoDB sera démarré avant ce conteneur.
+    volumes:
+      - .:/app  # Monte le répertoire courant (projet) sur le répertoire `/app` dans le conteneur.
+    ports:
+      - "5000:5000"  # Expose le port 5000 du conteneur sur le port 5000 de la machine hôte. (Changer ce port si nécessaire pour votre application.)
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017  # Définit une variable d'environnement pour l'URI de connexion MongoDB. Le service "mongodb" est utilisé comme hôte.
+
+volumes:  # Définit les volumes persistants pour stocker les données.
+  mongodb_data:  # Volume nommé "mongodb_data" pour persister les données MongoDB au-delà du cycle de vie des conteneurs.
