@@ -1,0 +1,4 @@
+# Dépendances Python nécessaires pour le projet
+pandas
+loguru
+pymongo
