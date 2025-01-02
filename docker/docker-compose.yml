@@ -12,12 +12,12 @@ services:  # Définit les services à orchestrer (MongoDB et l'application Pytho
 
   app:  # Nom du service pour l'application Python.
     build:
-      context: .  # Indique que Docker doit utiliser le Dockerfile situé dans le répertoire courant pour construire l'image.
+      context: ..  # Indique que Docker doit utiliser le Dockerfile situé dans le répertoire courant pour construire l'image.
     container_name: python_app  # Définit un nom pour le conteneur de l'application Python.
     depends_on:
       - mongodb  # Ce service dépend de MongoDB. MongoDB sera démarré avant ce conteneur.
     volumes:
-      - .:/app  # Monte le répertoire courant (projet) sur le répertoire `/app` dans le conteneur.
+      -..:/app  # Monte le répertoire courant (projet) sur le répertoire `/app` dans le conteneur.
     ports:
       - "5000:5000"  # Expose le port 5000 du conteneur sur le port 5000 de la machine hôte. (Changer ce port si nécessaire pour votre application.)
     environment:
