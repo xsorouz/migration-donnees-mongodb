@@ -75,45 +75,63 @@ Le notebook effectue les étapes suivantes :
 
 ---
 
+## **Schéma de la Base de Données**
+
+La base de données MongoDB contient une collection principale appelée `patients_data`. Voici le schéma des documents de cette collection :
+
+| **Champ**             | **Type**          | **Description**                                                                 |
+|------------------------|-------------------|---------------------------------------------------------------------------------|
+| `_id`                 | `ObjectId`        | Identifiant unique généré automatiquement par MongoDB.                         |
+| `Name`                | `String`          | Nom complet du patient.                                                        |
+| `Age`                 | `Integer`         | Âge du patient.                                                                |
+| `Gender`              | `String`          | Genre du patient (`Male` ou `Female`).                                         |
+| `Blood Type`          | `String`          | Groupe sanguin du patient (ex. : `A+`, `O-`).                                  |
+| `Medical Condition`   | `String`          | Condition médicale principale du patient (ex. : `Diabetes`, `Cancer`).         |
+| `Date of Admission`   | `Date`            | Date d'admission à l'hôpital.                                                  |
+| `Doctor`              | `String`          | Nom du médecin traitant.                                                       |
+| `Hospital`            | `String`          | Nom de l'hôpital où le patient a été admis.                                    |
+| `Insurance Provider`  | `String`          | Fournisseur d'assurance du patient.                                            |
+| `Billing Amount`      | `Float`           | Montant facturé au patient (en USD).                                           |
+| `Room Number`         | `Integer`         | Numéro de la chambre d'hôpital.                                               |
+| `Admission Type`      | `String`          | Type d'admission (ex. : `Urgent`, `Elective`).                                 |
+| `Discharge Date`      | `Date`            | Date de sortie de l'hôpital (si applicable).                                   |
+| `Medication`          | `String`          | Médicaments prescrits.                                                         |
+| `Test Results`        | `String`          | Résultats des tests médicaux (ex. : `Normal`, `Abnormal`).                     |
+| `Status`              | `String` (optionnel) | Statut ajouté par l'application (ex. : `Senior` pour les patients > 50 ans).   |
+
+---
+
 ## **Configuration des utilisateurs MongoDB**
 
-Le script `setup_users.py` configure les utilisateurs suivants :
+Trois rôles principaux ont été configurés dans la base de données MongoDB pour sécuriser l'accès et gérer les permissions :
 
-- **`admin_user`** :
-  - **Rôle** : `root`
-  - **Base** : `admin`
-  - Utilisé pour administrer MongoDB.
+| **Utilisateur** | **Mot de Passe**   | **Rôle**            | **Base de Données**      | **Description**                                                                                                                                   |
+|------------------|--------------------|----------------------|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| `admin_user`     | `admin_password`  | `root`               | `admin`                  | Administrateur complet. Accès à toutes les bases de données et fonctionnalités de MongoDB.                                                       |
+| `editor_user`    | `editor_password` | `readWrite`          | `healthcare_database`    | Accès en lecture et écriture à la base `healthcare_database`. Peut insérer, lire, mettre à jour et supprimer des documents.                       |
+| `reader_user`    | `reader_password` | `read`               | `healthcare_database`    | Accès en lecture seule à la base `healthcare_database`. Ne peut ni insérer, ni mettre à jour, ni supprimer des documents.                         |
 
-- **`editor_user`** :
-  - **Rôle** : `readWrite`
-  - **Base** : `healthcare_database`
-  - Utilisé pour insérer, lire, mettre à jour et supprimer des données.
+### **Configuration des utilisateurs**
+Ces utilisateurs ont été créés automatiquement grâce au script `setup_users.py`.
 
-- **`reader_user`** :
-  - **Rôle** : `read`
-  - **Base** : `healthcare_database`
-  - Utilisé pour lire des données uniquement.
-
-### Créer les utilisateurs
-
-Exécutez le script pour créer les utilisateurs :
 ```bash
 python scripts/setup_users.py
 ```
 
-### Vérifier les utilisateurs
+### **Vérification des utilisateurs**
+Vous pouvez vérifier les utilisateurs avec les commandes suivantes dans MongoDB :
 
-- Lister les utilisateurs dans la base `admin` :
-  ```javascript
-  use admin
-  db.getUsers()
-  ```
+1. **Lister les utilisateurs dans la base `admin` :**
+   ```javascript
+   use admin
+   db.getUsers()
+   ```
 
-- Lister les utilisateurs dans la base `healthcare_database` :
-  ```javascript
-  use healthcare_database
-  db.getUsers()
-  ```
+2. **Lister les utilisateurs dans la base `healthcare_database` :**
+   ```javascript
+   use healthcare_database
+   db.getUsers()
+   ```
 
 ---
 
