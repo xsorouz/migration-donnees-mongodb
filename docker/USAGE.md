@@ -126,6 +126,20 @@ volumes:
 
 ---
 
+## **Ajout d'un fichier `.dockerignore`**
+### Exemple de contenu du fichier `.dockerignore` :
+```plaintext
+__pycache__/
+*.pyc
+*.pyo
+.git/
+data/raw/
+logs/
+```
+- Empêche l'inclusion de fichiers inutiles ou volumineux lors de la construction de l'image Docker.
+
+---
+
 ## 💠 **Tester les conteneurs**
 
 ### Construire et exécuter :
@@ -145,6 +159,29 @@ docker-compose down
 
 ---
 
+## **Vérifications et Tests**
+
+### Vérifier les conteneurs en cours d'exécution
+```bash
+docker ps
+```
+- Affiche les conteneurs en cours d'exécution avec leurs informations (ports, ID, etc.).
+
+### Accéder au shell MongoDB depuis un conteneur
+```bash
+docker exec -it mongodb_container mongosh
+```
+- Permet d'interagir directement avec MongoDB à partir du conteneur.
+
+### Consulter les logs des conteneurs
+```bash
+docker logs mongodb_container
+docker logs python_app
+```
+- Vérifiez les journaux pour déboguer ou surveiller les services.
+
+---
+
 ## 🗂 **Structure du projet avec Docker**
 ```plaintext
 project/
@@ -161,5 +198,34 @@ project/
 
 ---
 
-Avec ce guide, vous pouvez gérer Docker et Docker Compose efficacement pour ce projet. Si vous avez des questions, n'hésitez pas à demander !
+## Nettoyage des ressources inutilisées
 
+### Supprimer les volumes non utilisés
+```bash
+docker volume prune -f
+```
+- Libère de l'espace en supprimant les volumes inutilisés.
+
+### Supprimer les images non utilisées
+```bash
+docker system prune -f
+```
+- Nettoie les images inutiles, les conteneurs arrêtés et les réseaux non utilisés.
+
+---
+
+## Validation de la connexion MongoDB
+
+### Tester la connexion depuis Python
+Ajoutez ce code pour vérifier que l'application Python peut se connecter à MongoDB :
+```python
+from pymongo import MongoClient
+
+client = MongoClient("mongodb://mongodb:27017/")
+db = client["healthcare_database"]
+print(db.list_collection_names())
+```
+- Si tout fonctionne, la liste des collections s'affichera.
+
+---
+ 
