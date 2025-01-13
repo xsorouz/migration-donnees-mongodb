@@ -5,13 +5,14 @@ __pycache__/              # Dossier des fichiers Python compilés
 *.pyc                     # Fichiers Python compilés
 *.pyo                     # Fichiers Python optimisés
 *.log                     # Fichiers journaux
-
+docker-compose.override.yml
 # Répertoires spécifiques au projet
 logs/                     # Répertoire des fichiers journaux
 env/                      # Environnements virtuels Python
 venv/                     # Autre dossier d'environnements virtuels
 node_modules/             # Si le projet inclut des dépendances Node.js
 .old/                     # Tout dossier que vous avez défini comme archive ou ancien
+data/raw/
 
 # Fichiers sensibles ou inutiles
 .env                      # Fichier d'environnement contenant des variables sensibles

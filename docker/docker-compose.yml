@@ -1,27 +1,35 @@
-version: '3.9'  # Version de la syntaxe Docker Compose. Compatible avec Docker Engine 20.10 et versions ultérieures.
+version: '3.8'
 
-services:  # Définit les services à orchestrer (MongoDB et l'application Python).
-
-  mongodb_service:  # Service pour MongoDB
-    image: mongo:5.0  # Utilise l'image officielle MongoDB, version 5.0.
-    container_name: mongodb_service_container  # Nom plus explicite pour le conteneur MongoDB.
+services:
+  # Service MongoDB
+  mongodb_service:
+    image: mongo:5.0
+    container_name: mongodb_service_container
     ports:
-      - "27017:27017"  # Expose le port 27017 du conteneur (par défaut pour MongoDB) sur le port 27017 de la machine hôte.
+      - "27017:27017"
     volumes:
-      - mongodb_data:/data/db  # Monte un volume nommé "mongodb_data" pour persister les données MongoDB.
+      - mongodb_data:/data/db
+    networks:
+      - custom_network
 
-  python_application:  # Service pour l'application Python
+  # Service Python pour exécuter mongodb_crud.py
+  python_application:
     build:
-      context: ..  # Indique que Docker doit utiliser le Dockerfile situé dans le répertoire parent pour construire l'image.
-    container_name: python_application_container  # Nom plus explicite pour le conteneur Python.
+      context: ../  # Remonter d'un répertoire pour accéder au Dockerfile
+      dockerfile: docker/Dockerfile
+    container_name: python_application_container
     depends_on:
-      - mongodb_service  # Ce service dépend de MongoDB : MongoDB sera démarré avant ce conteneur.
+      - mongodb_service
     volumes:
-      - ../:/app  # Monte le répertoire parent (projet) dans le conteneur sur /app.
-    ports:
-      - "5000:5000"  # Expose le port 5000 du conteneur sur le port 5000 de la machine hôte.
-    environment:
-      - MONGO_URI=mongodb://mongodb_service:27017  # Variable d'environnement pour l'URI de connexion à MongoDB.
+      - ../scripts:/app/scripts  # Volume pour mapper les scripts
+      - ../data:/app/data  # Volume pour mapper les données
+    networks:
+      - custom_network
 
-volumes:  # Définit les volumes persistants pour stocker les données.
-  mongodb_data:  # Volume nommé "mongodb_data" pour persister les données MongoDB au-delà du cycle de vie des conteneurs.
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  custom_network:
+    driver: bridge
