@@ -2,7 +2,6 @@
 from pymongo import MongoClient  # Pour interagir avec MongoDB
 from loguru import logger  # Pour la gestion des logs
 
-
 def configure_users():
     """
     Configure les utilisateurs MongoDB et leurs rôles.
@@ -22,7 +21,7 @@ def configure_users():
         logger.info("Début de la configuration des utilisateurs MongoDB...")
 
         # Connexion initiale à MongoDB sans authentification
-        client = MongoClient("mongodb://localhost:27017/")  # Connexion à MongoDB local
+        client = MongoClient("mongodb://mongodb_service_container:27017/")  # Connexion à MongoDB via le service Docker
         admin_db = client.admin  # Accès à la base de données "admin"
 
         # Étape 1 : Création de l'utilisateur administrateur
@@ -39,7 +38,7 @@ def configure_users():
 
         # Étape 2 : Connexion avec les permissions de l'utilisateur administrateur
         logger.info("Connexion avec l'utilisateur 'admin_user' pour configurer les autres utilisateurs...")
-        client = MongoClient("mongodb://admin_user:secure_password@localhost:27017/")
+        client = MongoClient("mongodb://admin_user:secure_password@mongodb_service_container:27017/")
         healthcare_db = client["healthcare_database"]  # Accès à la base de données cible
 
         # Étape 3 : Création de l'utilisateur reader_user

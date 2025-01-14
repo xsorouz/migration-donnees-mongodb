@@ -1,231 +1,249 @@
 # Guide d'utilisation de Docker pour le projet
 
-Ce document explique comment utiliser Docker pour gérer MongoDB et l'application Python de ce projet. Vous trouverez des explications détaillées sur les fichiers Docker ainsi que les étapes pour les utiliser efficacement.
+Ce document explique comment utiliser Docker pour gérer MongoDB et l'application Python associée à ce projet. Il contient des détails sur la configuration, les commandes utiles et les tests d'usage avec Docker.
 
 ---
 
-## 📋 **Fichier Dockerfile**
-
-### Détails des sections
-#### `FROM`
-```Dockerfile
-FROM python:3.12-slim
-```
-- **`FROM`** : Définit l'image de base pour construire le conteneur.
-- **`python:3.12-slim`** : Utilise une version légère de Python 3.12, ce qui réduit la taille de l'image.
-
-#### `WORKDIR`
-```Dockerfile
-WORKDIR /app
-```
-- **`WORKDIR`** : Définit le répertoire de travail dans le conteneur. Toutes les commandes suivantes s'exécutent depuis `/app`.
-
-#### `COPY requirements.txt .`
-```Dockerfile
-COPY requirements.txt .
-```
-- **`COPY`** : Copie le fichier `requirements.txt` de votre machine locale dans le répertoire `/app` du conteneur.
-
-#### `RUN`
-```Dockerfile
-RUN pip install --no-cache-dir -r requirements.txt
-```
-- **`RUN`** : Exécute des commandes pendant la construction de l'image.
-- Installe les dépendances Python listées dans `requirements.txt`.
-- **`--no-cache-dir`** : Empêche `pip` de stocker les fichiers temporaires, réduisant ainsi la taille finale de l'image.
-
-#### `COPY . .`
-```Dockerfile
-COPY . .
-```
-- Copie tous les fichiers du projet dans le répertoire `/app` du conteneur.
-
-#### `CMD`
-```Dockerfile
-CMD ["python", "scripts/mongodb_crud.py"]
-```
-- **`CMD`** : Définit la commande à exécuter lorsque le conteneur démarre.
-- Ici, cela lance le script principal `mongodb_crud.py`.
+## **Introduction**
+Docker est utilisé dans ce projet pour :
+- Garantir la portabilité et la reproductibilité de l'environnement.
+- Simplifier la configuration des services MongoDB et Python.
+- Fournir un environnement isolé pour l'exécution des scripts et des opérations CRUD.
 
 ---
 
-## 📚 **Comment fonctionne ce Dockerfile ?**
-1. **Image de base** : L'image légère `python:3.12-slim` garantit un environnement minimal.
-2. **Installation des dépendances** : Les bibliothèques nécessaires (comme `pymongo`) sont installées avec `pip`.
-3. **Ajout des fichiers** : Tout le projet est copié dans le conteneur, rendant l'application autonome.
-4. **Exécution** : Lorsque le conteneur démarre, il exécute le script Python principal.
+## **Structure des fichiers Docker**
 
----
+### **Dockerfile**
+Le fichier `Dockerfile` définit l'image pour l'application Python. Voici un résumé de ses étapes principales :
 
-## 📋 **Fichier docker-compose.yml**
-
-### Détails des sections
-#### `version`
-```yaml
-version: '3.9'
-```
-- Spécifie la version de syntaxe Docker Compose. La version `3.9` est compatible avec les dernières fonctionnalités de Docker.
-
-#### `services`
-```yaml
-services:
-```
-- Définit les services gérés par Docker Compose. Ici, nous avons deux services :
-  - **`mongodb`** pour la base de données.
-  - **`app`** pour l'application Python.
-
-#### `mongodb`
-```yaml
-  mongodb:
-    image: mongo:5.0
-    container_name: mongodb_container
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb_data:/data/db
-```
-- **`image`** : Utilise l'image officielle MongoDB, version 5.0.
-- **`container_name`** : Définit un nom pour ce conteneur MongoDB.
-- **`ports`** : Expose le port MongoDB sur la machine hôte (`localhost:27017`).
-- **`volumes`** : Monte un volume pour persister les données MongoDB.
-
-#### `app`
-```yaml
-  app:
-    build:
-      context: .
-    container_name: python_app
-    depends_on:
-      - mongodb
-    volumes:
-      - .:/app
-    ports:
-      - "5000:5000"
-    environment:
-      - MONGO_URI=mongodb://mongodb:27017
-```
-- **`build`** : Construit l'image Docker en utilisant le fichier `Dockerfile`.
-- **`depends_on`** : Assure que MongoDB démarre avant ce service.
-- **`volumes`** : Monte le répertoire local dans le conteneur pour synchroniser les fichiers.
-- **`environment`** : Définit l'URI pour connecter l'application à MongoDB.
-
-#### `volumes`
-```yaml
-volumes:
-  mongodb_data:
-```
-- Définit un volume nommé `mongodb_data` pour persister les données de la base de données.
-
----
-
-## 🔍 **Pourquoi ces options ?**
-- **`ports`** : Vous permet d'accéder aux services depuis votre machine hôte.
-- **`volumes`** : Garantit que les données MongoDB ne sont pas perdues entre les cycles de conteneurs.
-- **`depends_on`** : Assure que MongoDB est prêt avant le démarrage de l'application Python.
-- **`environment`** : Simplifie la configuration en passant des variables d'environnement.
-
----
-
-## **Ajout d'un fichier `.dockerignore`**
-### Exemple de contenu du fichier `.dockerignore` :
-```plaintext
-__pycache__/
-*.pyc
-*.pyo
-.git/
-data/raw/
-logs/
-```
-- Empêche l'inclusion de fichiers inutiles ou volumineux lors de la construction de l'image Docker.
-
----
-
-## 💠 **Tester les conteneurs**
-
-### Construire et exécuter :
-1. Construire l'image :
-   ```bash
-   docker build -t python-mongodb-app .
+1. **Image de base :**
+   ```Dockerfile
+   FROM python:3.12-slim
    ```
-2. Lancer MongoDB et l'application ensemble :
+   - Utilise une image légère de Python 3.12.
+
+2. **Installation des dépendances :**
+   ```Dockerfile
+   RUN pip install --no-cache-dir -r requirements.txt
+   ```
+   - Installe les bibliothèques nécessaires depuis `requirements.txt`.
+
+3. **Copie des fichiers dans le conteneur :**
+   ```Dockerfile
+   COPY scripts /app/scripts
+   COPY data /app/data
+   COPY outputs /app/outputs
+   ```
+   - Copie les scripts, les données et le répertoire de sortie.
+
+4. **Commandes exécutées par défaut :**
+   ```Dockerfile
+   CMD ["bash", "-c", "python /app/setup_users.py && python /app/initialize_users.py && python /app/main.py /app/data/processed/healthcare_data_cleaned.csv"]
+   ```
+   - Configure les utilisateurs MongoDB, initialise les données et lance l'interface CLI.
+
+---
+
+### **docker-compose.yml**
+Le fichier `docker-compose.yml` orchestre les services nécessaires :
+
+1. **Service MongoDB :**
+   ```yaml
+   mongodb_service:
+     image: mongo:5.0
+     container_name: mongodb_service_container
+     ports:
+       - "27017:27017"
+     volumes:
+       - mongodb_data:/data/db
+   ```
+   - Utilise MongoDB version 5.0.
+   - Monte un volume pour persister les données.
+
+2. **Service Application Python :**
+   ```yaml
+   python_application:
+     build:
+       context: ../
+       dockerfile: docker/Dockerfile
+     container_name: python_application_container
+     depends_on:
+       - mongodb_service
+     volumes:
+       - ../:/app
+     stdin_open: true
+     tty: true
+   ```
+   - Dépend du service MongoDB.
+   - Monte le répertoire de travail local dans le conteneur.
+
+3. **Volumes partagés :**
+   ```yaml
+   volumes:
+     mongodb_data:
+       driver: local
+   ```
+   - Assure la persistance des données MongoDB.
+
+---
+
+## **Commandes Docker**
+
+### **Construire et exécuter les conteneurs**
+
+1. Construire et démarrer les services définis dans `docker-compose.yml` :
    ```bash
-   docker-compose -f docker/docker-compose.yml up --build
+   docker-compose up --build -d
    ```
 
-### Arrêter les conteneurs :
-```bash
-docker-compose down
-```
+2. Arrêter et supprimer les conteneurs :
+   ```bash
+   docker-compose down
+   ```
+
+3. Nettoyer les volumes inutilisés :
+   ```bash
+   docker volume prune -f
+   ```
 
 ---
 
-## **Vérifications et Tests**
+## **Accès à l'interface CLI**
 
-### Vérifier les conteneurs en cours d'exécution
-```bash
-docker ps
-```
-- Affiche les conteneurs en cours d'exécution avec leurs informations (ports, ID, etc.).
+### **Accéder au conteneur Python**
 
-### Accéder au shell MongoDB depuis un conteneur
-```bash
-docker exec -it mongodb_container mongosh
-```
-- Permet d'interagir directement avec MongoDB à partir du conteneur.
+Pour accéder à l'interface CLI via le conteneur Python :
 
-### Consulter les logs des conteneurs
-```bash
-docker logs mongodb_container
-docker logs python_app
-```
-- Vérifiez les journaux pour déboguer ou surveiller les services.
+1. Ouvrir un terminal interactif dans le conteneur :
+   ```bash
+   docker exec -it python_application_container bash
+   ```
+
+2. Lancer l'interface CLI :
+   ```bash
+   python /app/main.py /app/data/processed/healthcare_data_cleaned.csv
+   ```
 
 ---
 
-## 🗂 **Structure du projet avec Docker**
-```plaintext
-project/
-├── docker/
-│   ├── Dockerfile           # Définit l'image Docker
-│   ├── docker-compose.yml   # Orchestration entre MongoDB et l'application
-│   ├── USAGE.md             # Ce guide d'utilisation
-│   ├── .dockerignore        # Exclut certains fichiers inutiles
-├── scripts/
-│   ├── mongodb_crud.py      # Script principal
-├── requirements.txt         # Dépendances Python
-└── data/                    # Données pour le projet
-```
+### **Exemples de commandes CLI**
+
+1. **Afficher des documents (READ)**
+   - Choix : `1`
+   - Affiche un aperçu des documents présents dans MongoDB.
+
+2. **Insérer un document (CREATE)**
+   - Choix : `2`
+   - Exemple d'entrée :
+     ```
+     Entrez le nom : John Doe
+     Entrez l'âge : 45
+     ```
+
+3. **Mettre à jour un document (UPDATE)**
+   - Choix : `3`
+   - Exemple d'entrée :
+     ```
+     Entrez le nom du document à mettre à jour : John Doe
+     Entrez le nouvel âge : 50
+     ```
+
+4. **Exporter des données dans un fichier CSV (EXPORT)**
+   - Choix : `5`
+   - Exemple d'entrée :
+     ```
+     Entrez le nom du fichier CSV : export_test
+     ```
+   - Le fichier sera enregistré dans le répertoire `outputs/` avec l'extension `.csv`.
+
+5. **Quitter**
+   - Choix : `6`
 
 ---
 
-## Nettoyage des ressources inutilisées
+## **Vérification de MongoDB**
 
-### Supprimer les volumes non utilisés
+### **Accéder au shell MongoDB**
+Pour interagir avec MongoDB directement :
 ```bash
-docker volume prune -f
+docker exec -it mongodb_service_container mongosh
 ```
-- Libère de l'espace en supprimant les volumes inutilisés.
 
-### Supprimer les images non utilisées
-```bash
-docker system prune -f
-```
-- Nettoie les images inutiles, les conteneurs arrêtés et les réseaux non utilisés.
+### **Vérifier les collections**
+1. Passer à la base de données :
+   ```javascript
+   use healthcare_database
+   ```
+
+2. Lister les collections :
+   ```javascript
+   show collections
+   ```
+
+3. Afficher les documents :
+   ```javascript
+   db.patients_data.find().pretty()
+   ```
 
 ---
 
-## Validation de la connexion MongoDB
+## **Tests d'usage pour les rôles MongoDB**
 
-### Tester la connexion depuis Python
-Ajoutez ce code pour vérifier que l'application Python peut se connecter à MongoDB :
-```python
-from pymongo import MongoClient
+### **Tests avec l'utilisateur `admin_user`**
 
-client = MongoClient("mongodb://mongodb:27017/")
-db = client["healthcare_database"]
-print(db.list_collection_names())
-```
-- Si tout fonctionne, la liste des collections s'affichera.
+- Connexion :
+  ```bash
+  mongosh --username admin_user --password admin_password --authenticationDatabase admin
+  ```
+- Droits :
+  - Lecture, écriture et administration complète.
+
+### **Tests avec l'utilisateur `editor_user`**
+
+- Connexion :
+  ```bash
+  mongosh --username editor_user --password editor_password --authenticationDatabase healthcare_database
+  ```
+- Droits :
+  - Lecture et écriture uniquement sur `healthcare_database`.
+
+### **Tests avec l'utilisateur `reader_user`**
+
+- Connexion :
+  ```bash
+  mongosh --username reader_user --password reader_password --authenticationDatabase healthcare_database
+  ```
+- Droits :
+  - Lecture seule sur `healthcare_database`.
+  - Toute tentative d'écriture ou de suppression sera refusée.
 
 ---
- 
+
+## **Gestion des erreurs et logs**
+
+- Les journaux des erreurs et des opérations sont enregistrés dans le conteneur dans le répertoire `/app/logs`.
+- Pour consulter les logs :
+  ```bash
+  docker logs python_application_container
+  ```
+
+---
+
+## **Nettoyage final**
+
+Pour libérer de l'espace disque :
+
+1. Supprimer les volumes inutilisés :
+   ```bash
+   docker volume prune -f
+   ```
+
+2. Supprimer les images inutilisées :
+   ```bash
+   docker system prune -f
+   ```
+
+---
+
+**Ce guide est conçu pour assurer une utilisation fluide et sans erreur de Docker pour ce projet. Si vous rencontrez des problèmes, vérifiez les logs ou contactez un administrateur.**
