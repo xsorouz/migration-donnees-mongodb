@@ -1,0 +1,61 @@
+2025-01-17 16:58:26.395 | INFO     | __main__:<module>:36 - Connexion à MongoDB en cours...
+2025-01-17 16:58:26.396 | INFO     | utils:wait_for_mongodb:39 - Tentative de connexion à MongoDB (mongodb://mongodb_service_container:27017/).
+2025-01-17 16:58:26.408 | SUCCESS  | utils:wait_for_mongodb:45 - Connexion à MongoDB réussie.
+2025-01-17 16:58:26.409 | INFO     | utils:connect_to_mongodb:74 - Connexion réussie à la base 'healthcare_database'.
+2025-01-17 16:58:26.410 | INFO     | __main__:<module>:40 - === Authentification requise ===
+2025-01-17 16:59:07.756 | INFO     | __main__:<module>:36 - Connexion à MongoDB en cours...
+2025-01-17 16:59:07.806 | INFO     | utils:wait_for_mongodb:39 - Tentative de connexion à MongoDB (mongodb://mongodb_service_container:27017/).
+2025-01-17 16:59:07.820 | SUCCESS  | utils:wait_for_mongodb:45 - Connexion à MongoDB réussie.
+2025-01-17 16:59:07.820 | INFO     | utils:connect_to_mongodb:74 - Connexion réussie à la base 'healthcare_database'.
+2025-01-17 16:59:07.821 | INFO     | __main__:<module>:40 - === Authentification requise ===
+2025-01-17 16:59:16.667 | SUCCESS  | auth:authenticate_user:29 - Authentification réussie pour l'utilisateur 'admin'.
+2025-01-17 16:59:16.669 | INFO     | __main__:<module>:51 - Authentification réussie. Rôle détecté : admin_user
+2025-01-17 16:59:16.670 | INFO     | __main__:<module>:54 - Tentative de chargement des données depuis : /app/data/processed/healthcare_dataset_cleaned.csv
+2025-01-17 16:59:16.671 | INFO     | utils:load_data:97 - Tentative de chargement du fichier CSV : /app/data/processed/healthcare_dataset_cleaned.csv
+2025-01-17 16:59:16.868 | INFO     | utils:load_data:100 - Données chargées : 54860 lignes, 15 colonnes.
+2025-01-17 16:59:17.220 | INFO     | __main__:<module>:62 - La collection est vide. Insertion des données...
+2025-01-17 16:59:17.683 | INFO     | crud:insert_records:30 - 54860 documents insérés avec succès.
+2025-01-17 16:59:17.685 | INFO     | crud:insert_records:33 - Exemple de documents insérés :
+2025-01-17 16:59:17.686 | INFO     | crud:insert_records:35 - {'name': 'Bobby Jackson', 'age': 30, 'gender': 'Male', 'blood_type': 'B-', 'medical_condition': 'Cancer', 'date_of_admission': '2024-01-31', 'doctor': 'Matthew Smith', 'hospital': 'Sons And Miller', 'insurance_provider': 'Blue Cross', 'billing_amount': 18856.281305978155, 'room_number': 328, 'admission_type': 'Urgent', 'discharge_date': '2024-02-02', 'medication': 'Paracetamol', 'test_results': 'Normal', '_id': ObjectId('678a8c6532a97d2f36092227')}
+2025-01-17 16:59:17.687 | INFO     | crud:insert_records:35 - {'name': 'Leslie Terry', 'age': 62, 'gender': 'Male', 'blood_type': 'A+', 'medical_condition': 'Obesity', 'date_of_admission': '2019-08-20', 'doctor': 'Samantha Davies', 'hospital': 'Kim Inc', 'insurance_provider': 'Medicare', 'billing_amount': 33643.327286577885, 'room_number': 265, 'admission_type': 'Emergency', 'discharge_date': '2019-08-26', 'medication': 'Ibuprofen', 'test_results': 'Inconclusive', '_id': ObjectId('678a8c6532a97d2f36092228')}
+2025-01-17 16:59:17.689 | INFO     | crud:insert_records:35 - {'name': 'Danny Smith', 'age': 76, 'gender': 'Female', 'blood_type': 'A-', 'medical_condition': 'Obesity', 'date_of_admission': '2022-09-22', 'doctor': 'Tiffany Mitchell', 'hospital': 'Cook Plc', 'insurance_provider': 'Aetna', 'billing_amount': 27955.096078842456, 'room_number': 205, 'admission_type': 'Emergency', 'discharge_date': '2022-10-07', 'medication': 'Aspirin', 'test_results': 'Normal', '_id': ObjectId('678a8c6532a97d2f36092229')}
+2025-01-17 16:59:17.690 | INFO     | crud:insert_records:35 - {'name': 'Andrew Watts', 'age': 28, 'gender': 'Female', 'blood_type': 'O+', 'medical_condition': 'Diabetes', 'date_of_admission': '2020-11-18', 'doctor': 'Kevin Wells', 'hospital': 'Hernandez Rogers And Vang,', 'insurance_provider': 'Medicare', 'billing_amount': 37909.78240987528, 'room_number': 450, 'admission_type': 'Elective', 'discharge_date': '2020-12-18', 'medication': 'Ibuprofen', 'test_results': 'Abnormal', '_id': ObjectId('678a8c6532a97d2f3609222a')}
+2025-01-17 16:59:17.691 | INFO     | crud:insert_records:35 - {'name': 'Adrienne Bell', 'age': 43, 'gender': 'Female', 'blood_type': 'AB+', 'medical_condition': 'Cancer', 'date_of_admission': '2022-09-19', 'doctor': 'Kathleen Hanna', 'hospital': 'White-White', 'insurance_provider': 'Aetna', 'billing_amount': 14238.317813937623, 'room_number': 458, 'admission_type': 'Urgent', 'discharge_date': '2022-10-09', 'medication': 'Penicillin', 'test_results': 'Abnormal', '_id': ObjectId('678a8c6532a97d2f3609222b')}
+2025-01-17 16:59:17.692 | INFO     | __main__:<module>:64 - 54860 documents insérés depuis le fichier /app/data/processed/healthcare_dataset_cleaned.csv.
+2025-01-17 16:59:17.693 | INFO     | __main__:<module>:69 - Création des index pour optimiser les requêtes.
+2025-01-17 16:59:17.694 | INFO     | utils:create_indexes:120 - Ajout des index dans la collection MongoDB...
+2025-01-17 16:59:17.747 | INFO     | utils:create_indexes:129 - Index créé : age (1). Nom de l'index : age_1
+2025-01-17 16:59:17.802 | INFO     | utils:create_indexes:129 - Index créé : name (1). Nom de l'index : name_1
+2025-01-17 16:59:17.852 | INFO     | utils:create_indexes:129 - Index créé : gender (1). Nom de l'index : gender_1
+2025-01-17 16:59:17.910 | INFO     | utils:create_indexes:129 - Index créé : date_of_admission (-1). Nom de l'index : date_of_admission_-1
+2025-01-17 16:59:17.911 | SUCCESS  | utils:create_indexes:131 - Tous les index ont été créés avec succès.
+2025-01-17 16:59:17.912 | INFO     | __main__:<module>:73 - === Début des tests CRUD ===
+2025-01-17 16:59:17.912 | INFO     | __main__:<module>:85 - Exécution du test : Insertion de documents
+2025-01-17 16:59:17.913 | INFO     | test:test_insert_records:44 - === Test : Insertion de documents ===
+2025-01-17 16:59:17.916 | INFO     | crud:insert_records:30 - 4 documents insérés avec succès.
+2025-01-17 16:59:17.917 | INFO     | crud:insert_records:33 - Exemple de documents insérés :
+2025-01-17 16:59:17.917 | INFO     | crud:insert_records:35 - {'_id': 'test1_id_1', 'name': 'Alice In Wonderland', 'age': 40, 'gender': 'Female'}
+2025-01-17 16:59:17.918 | INFO     | crud:insert_records:35 - {'_id': 'test1_id_2', 'name': 'John Garry Smith', 'age': 30, 'gender': 'Male'}
+2025-01-17 16:59:17.918 | INFO     | crud:insert_records:35 - {'_id': 'test1_id_3', 'name': 'Partial User Test', 'age': 25}
+2025-01-17 16:59:17.919 | INFO     | crud:insert_records:35 - {'_id': 'test1_id_4', 'name': 'Complex Case', 'age': 50, 'gender': 'Non-Binary'}
+2025-01-17 16:59:17.920 | SUCCESS  | __main__:<module>:87 - Test réussi : Insertion de documents
+2025-01-17 16:59:17.920 | INFO     | __main__:<module>:85 - Exécution du test : Lecture de documents
+2025-01-17 16:59:17.921 | INFO     | test:test_read_records:62 - === Test : Lecture de documents ===
+2025-01-17 16:59:17.922 | INFO     | crud:read_records:65 - 1 documents récupérés (après application de la limite).
+2025-01-17 16:59:17.923 | SUCCESS  | __main__:<module>:87 - Test réussi : Lecture de documents
+2025-01-17 16:59:17.924 | INFO     | __main__:<module>:85 - Exécution du test : Mise à jour de documents
+2025-01-17 16:59:17.924 | INFO     | test:test_update_records:78 - === Test : Mise à jour de documents ===
+2025-01-17 16:59:17.926 | INFO     | crud:update_records:96 - 1 documents mis à jour avec succès.
+2025-01-17 16:59:17.927 | SUCCESS  | __main__:<module>:87 - Test réussi : Mise à jour de documents
+2025-01-17 16:59:17.927 | INFO     | __main__:<module>:85 - Exécution du test : Suppression de documents
+2025-01-17 16:59:17.928 | INFO     | test:test_delete_records:93 - === Test : Suppression de documents ===
+2025-01-17 16:59:17.929 | INFO     | crud:delete_records:130 - 1 documents supprimés de la collection MongoDB.
+2025-01-17 16:59:17.931 | SUCCESS  | __main__:<module>:87 - Test réussi : Suppression de documents
+2025-01-17 16:59:17.931 | INFO     | __main__:<module>:85 - Exécution du test : Exportation de documents
+2025-01-17 16:59:17.932 | INFO     | test:test_export_to_csv:108 - === Test : Exportation de documents ===
+2025-01-17 16:59:18.514 | INFO     | crud:export_to_csv:179 - Données exportées avec succès dans le fichier : outputs/test_export.csv
+2025-01-17 16:59:18.554 | SUCCESS  | __main__:<module>:87 - Test réussi : Exportation de documents
+2025-01-17 16:59:18.555 | INFO     | __main__:<module>:93 - === Résumé des tests CRUD ===
+2025-01-17 16:59:18.556 | INFO     | __main__:<module>:94 - Tests réussis : 5
+2025-01-17 16:59:18.556 | INFO     | __main__:<module>:95 - Tests échoués : 0
+2025-01-17 16:59:18.557 | INFO     | __main__:<module>:99 - Tous les tests ont été validés. Lancement de l'interface CLI.

@@ -4,6 +4,7 @@ from hashlib import sha256  # Pour hacher les mots de passe
 from loguru import logger  # Pour gérer les logs
 from time import sleep  # Pour insérer des délais
 import pandas as pd  # Pour manipuler les données tabulaires
+from pymongo import ASCENDING, DESCENDING  # Import des constantes pour les index
 
 # === Fonction de hachage ===
 
@@ -104,4 +105,30 @@ def load_data(file_path):
         raise
     except Exception as e:
         logger.error(f"Erreur lors du chargement : {e}")
+        raise
+
+# === Fonction pour créer les index ===
+
+def create_indexes(collection):
+    """
+    Ajoute des index à une collection MongoDB pour optimiser les requêtes.
+
+    Args:
+        collection (pymongo.collection.Collection): Collection MongoDB.
+    """
+    try:
+        logger.info("Ajout des index dans la collection MongoDB...")
+        index_fields = [
+            ("age", ASCENDING),  # Index sur 'age' pour les recherches par âge
+            ("name", ASCENDING),  # Index sur 'name' pour les recherches par nom
+            ("gender", ASCENDING),  # Index sur 'gender' pour filtrer les genres
+            ("date_of_admission", DESCENDING),  # Index sur 'date_of_admission' pour les tris décroissants
+        ]
+        for field, direction in index_fields:
+            index_name = collection.create_index([(field, direction)])
+            logger.info(f"Index créé : {field} ({direction}). Nom de l'index : {index_name}")
+
+        logger.success("Tous les index ont été créés avec succès.")
+    except Exception as e:
+        logger.error(f"Erreur lors de la création des index : {e}")
         raise

@@ -1,136 +1,105 @@
 # Importation des bibliothèques et modules nécessaires
-from utils import connect_to_mongodb, load_data  # Fonctions utilitaires pour MongoDB et chargement de données
+from utils import connect_to_mongodb, load_data, create_indexes  # Fonctions utilitaires pour MongoDB et chargement de données
 from auth import authenticate_user  # Fonction pour authentifier un utilisateur
 from crud import insert_records, read_records, update_records, delete_records, export_to_csv  # Opérations CRUD
+from interactive_cli import interactive_menu  # Importation du menu interactif
+from test import (
+    test_insert_records,
+    test_read_records,
+    test_update_records,
+    test_delete_records,
+    test_export_to_csv,
+)  # Importation des tests CRUD
 from argparse import ArgumentParser  # Analyse des arguments en ligne de commande
 from getpass import getpass  # Saisie sécurisée des mots de passe
 from loguru import logger  # Gestion avancée des logs
+import os  # Manipulation des chemins et variables d'environnement
+import sys  # Interactions système
+
+# Configuration de Loguru pour éviter les doublons
+if not logger._core.handlers:
+    logger.add(sys.stdout, level="INFO")
+
+# === Configuration des logs ===
+LOG_FILE = "logs/main.log"  # Chemin du fichier de log
+logger.add(LOG_FILE, level="INFO", rotation="1 MB", compression="zip")
 
 # === Bloc principal ===
 if __name__ == "__main__":
     try:
-        # Étape 1 : Analyse des arguments en ligne de commande
-        # Permet à l'utilisateur de spécifier un fichier CSV à charger lors de l'exécution du script.
+        # === Étape 1 : Analyse des arguments en ligne de commande ===
         parser = ArgumentParser(description="Interface CLI CRUD pour MongoDB")
         parser.add_argument("file_path", help="Chemin complet du fichier CSV contenant les données à charger.")
         args = parser.parse_args()  # Analyse les arguments fournis en ligne de commande
 
-        # Étape 2 : Connexion à MongoDB
-        # Utilise la fonction connect_to_mongodb depuis le module utils.
+        # === Étape 2 : Connexion à MongoDB ===
+        logger.info("Connexion à MongoDB en cours...")
         db = connect_to_mongodb("mongodb://mongodb_service_container:27017/")
 
-        # Étape 3 : Authentification de l'utilisateur
+        # === Étape 3 : Authentification de l'utilisateur ===
         logger.info("=== Authentification requise ===")
         username = input("Entrez votre nom d'utilisateur : ").strip()  # Demande le nom d'utilisateur
         password = getpass("Entrez votre mot de passe : ").strip()  # Demande le mot de passe en mode sécurisé
-        user = authenticate_user(username, password, db)  # Appelle la fonction d'authentification
+        user = authenticate_user(username, password, db)
 
-        # Si l'authentification échoue, le script s'arrête.
         if not user:
             logger.error("Authentification échouée. Fin du script.")
             exit(1)
 
-        # Étape 4 : Identification du rôle
-        # Le rôle de l'utilisateur détermine les actions disponibles dans l'interface CLI.
+        # === Étape 4 : Identification du rôle de l'utilisateur ===
         role = user["role"]
         logger.info(f"Authentification réussie. Rôle détecté : {role}")
 
-        # Étape 5 : Chargement des données depuis le fichier CSV
-        # Utilise la fonction load_data pour transformer le fichier CSV en une liste de dictionnaires.
+        # === Étape 5 : Chargement des données depuis le fichier CSV ===
         logger.info(f"Tentative de chargement des données depuis : {args.file_path}")
         records = load_data(args.file_path)
 
-        # Étape 6 : Accès à la collection MongoDB
-        # Permet d'insérer ou manipuler des données dans la collection principale.
+        # === Étape 6 : Accès à la collection MongoDB ===
         collection = db["patients_data"]
 
-        # Aperçu initial de la base pour tous les utilisateurs
-        logger.info("=== Aperçu initial de la base de données ===")
-        initial_docs = read_records(collection, {}, limit=5)
-        if initial_docs:
-            logger.info("Documents initiaux dans la base :")
-            for doc in initial_docs:
-                print(doc)
+        # === Étape 7 : Vérification et insertion des données ===
+        if not collection.count_documents({}):  # Si la collection est vide
+            logger.info("La collection est vide. Insertion des données...")
+            inserted_count = insert_records(collection, records)
+            logger.info(f"{inserted_count} documents insérés depuis le fichier {args.file_path}.")
         else:
-            logger.warning("La base est vide avant insertion des données.")
+            logger.info("La collection contient déjà des données. Aucune insertion nécessaire.")
 
+        # === Étape 8 : Création des index dans MongoDB ===
+        logger.info("Création des index pour optimiser les requêtes.")
+        create_indexes(collection)
 
-        # Étape 7 : Insertion initiale des données
-        # Insère les données chargées dans la collection MongoDB.
-        inserted_count = insert_records(collection, records)
-        logger.info(f"{inserted_count} documents insérés depuis le fichier {args.file_path}.")
+# === Étape 9 : Exécution des tests unitaires ===
+        logger.info("=== Début des tests CRUD ===")
+        test_results = {"success": 0, "failure": 0}  # Initialisation des compteurs de tests
+        test_functions = [
+            ("Insertion de documents", test_insert_records),
+            ("Lecture de documents", test_read_records),
+            ("Mise à jour de documents", test_update_records),
+            ("Suppression de documents", test_delete_records),
+            ("Exportation de documents", test_export_to_csv),
+        ]
 
-        # Étape 8 : Interface utilisateur CLI
-        # Propose un menu interactif pour effectuer des opérations CRUD.
-        while True:
-            print("\n=== Menu CRUD ===")
-            print("1. Afficher des documents (READ)")
-            if role in ["admin_user", "editor_user"]:  # Vérifie les permissions pour les opérations CREATE et UPDATE
-                print("2. Insérer un document (CREATE)")
-                print("3. Mettre à jour un document (UPDATE)")
-            if role == "admin_user":  # Seul l'administrateur peut effectuer des suppressions
-                print("4. Supprimer un document (DELETE)")
-            print("5. Exporter les données dans un fichier CSV")
-            print("6. Quitter")
+        for test_name, test_function in test_functions:
+            try:
+                logger.info(f"Exécution du test : {test_name}")
+                test_function(collection)
+                logger.success(f"Test réussi : {test_name}")
+                test_results["success"] += 1
+            except AssertionError as e:
+                logger.error(f"Échec du test : {test_name}. Détails : {e}")
+                test_results["failure"] += 1
 
-            # Lecture du choix utilisateur
-            choice = input("Votre choix : ").strip()
+        logger.info("=== Résumé des tests CRUD ===")
+        logger.info(f"Tests réussis : {test_results['success']}")
+        logger.info(f"Tests échoués : {test_results['failure']}")
 
-            # Option 1 : Lecture de documents (READ)
-            if choice == "1":
-                logger.info("=== READ : Lecture des documents ===")
-                docs = read_records(collection, {}, limit=10)
-                if docs:
-                    logger.info("Documents lus avec succès :")
-                    for doc in docs:
-                        print(doc)
-                else:
-                    logger.warning("Aucun document trouvé.")
-
-            # Option 2 : Insertion de documents (CREATE)
-            elif choice == "2" and role in ["admin_user", "editor_user"]:
-                logger.info("=== CREATE : Insertion de documents ===")
-                try:
-                    name = input("Entrez le nom : ").strip()
-                    age = int(input("Entrez l'âge : ").strip())
-                    insert_records(collection, [{"Name": name, "Age": age}])
-                except ValueError:
-                    logger.error("Erreur : L'âge doit être un nombre entier.")
-
-            # Option 3 : Mise à jour de documents (UPDATE)
-            elif choice == "3" and role in ["admin_user", "editor_user"]:
-                logger.info("=== UPDATE : Mise à jour de documents ===")
-                try:
-                    name = input("Entrez le nom du document à mettre à jour : ").strip()
-                    new_age = int(input("Entrez le nouvel âge : ").strip())
-                    update_records(collection, {"Name": name}, {"$set": {"Age": new_age}})
-                except ValueError:
-                    logger.error("Erreur : L'âge doit être un nombre entier.")
-
-            # Option 4 : Suppression de documents (DELETE)
-            elif choice == "4" and role == "admin_user":
-                logger.info("=== DELETE : Suppression de documents ===")
-                name = input("Entrez le nom du document à supprimer : ").strip()
-                delete_records(collection, {"Name": name})
-
-            # Option 5 : Exportation des données dans un fichier CSV
-            elif choice == "5":
-                logger.info("=== EXPORT : Exporter les données ===")
-                file_name = input("Entrez le nom du fichier CSV (sans extension) : ").strip()
-                exported_count = export_to_csv(collection, file_name)
-                if exported_count > 0:
-                    logger.info(f"{exported_count} documents exportés avec succès dans 'outputs/{file_name}.csv'.")
-                else:
-                    logger.warning("Aucun document n'a été exporté.")
-
-            # Option 6 : Quitter
-            elif choice == "6":
-                logger.info("Fermeture de l'interface MongoDB CRUD.")
-                break
-
-            # Option invalide
-            else:
-                logger.warning("Option invalide ou accès refusé pour votre rôle.")
+        # === Étape 10 : Lancer l'interface utilisateur CLI ===
+        if test_results["failure"] == 0:
+            logger.info("Tous les tests ont été validés. Lancement de l'interface CLI.")
+            interactive_menu(role, collection)
+        else:
+            logger.warning("Certains tests ont échoué. Vérifiez les logs avant de continuer.")
 
     except Exception as e:
         logger.error(f"Erreur lors de l'exécution du script : {e}")

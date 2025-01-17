@@ -1,11 +1,15 @@
 from loguru import logger  # Gestion avancée des logs
 import pandas as pd  # Manipulation de données tabulaires
-import os
+import os  # Gestion des interactions avec le système de fichiers
 
 # === Fonction d'insertion de documents dans MongoDB ===
 def insert_records(collection, records):
     """
     Insère une liste de documents dans une collection MongoDB.
+
+    Cette fonction permet d'ajouter plusieurs documents (sous forme de dictionnaires Python)
+    dans une collection MongoDB. Elle gère également les erreurs potentielles pendant
+    l'opération d'insertion.
 
     Args:
         collection (Collection): Collection cible dans MongoDB.
@@ -17,23 +21,32 @@ def insert_records(collection, records):
     Raises:
         Exception: En cas d'erreur lors de l'insertion.
     """
-    if not records:  # Si la liste est vide, prévenir l'utilisateur
+    if not records:  # Si la liste de documents à insérer est vide
         logger.warning("Aucune donnée à insérer.")
         return 0
     try:
-        result = collection.insert_many(records) # Insère plusieurs documents
-        logger.info(f"{len(result.inserted_ids)} documents insérés.")
-        # Afficher les documents insérés
-        for record in records:
-            print(record)
+        # Insérer les documents dans la collection MongoDB
+        result = collection.insert_many(records)
+        logger.info(f"{len(result.inserted_ids)} documents insérés avec succès.")
+
+        # Exemple : Afficher uniquement un échantillon de 5 documents
+        logger.info("Exemple de documents insérés :")
+        for record in records[:5]:  # Limité à 5 documents
+            logger.info(record)
+
         return len(result.inserted_ids)
     except Exception as e:
+        # Gérer et enregistrer les erreurs
         logger.error(f"Erreur lors de l'insertion : {e}")
         raise
+
 # === Fonction de lecture de documents dans MongoDB ===
 def read_records(collection, query={}, limit=5):
     """
     Lit des documents depuis une collection MongoDB avec des filtres et une limite.
+
+    Cette fonction permet de lire un nombre limité de documents depuis une collection,
+    en appliquant un filtre optionnel pour restreindre les résultats.
 
     Args:
         collection (Collection): Collection cible dans MongoDB.
@@ -47,10 +60,14 @@ def read_records(collection, query={}, limit=5):
         Exception: En cas d'erreur lors de la lecture.
     """
     try:
-        records = collection.find(query).limit(limit)  # Applique le filtre et limite les résultats
-        logger.info(f"{limit} documents lus.")
+        # Lire les documents depuis MongoDB avec un filtre et une limite
+        records = collection.find(query).limit(limit)
+        logger.info(f"{len(list(records))} documents récupérés (après application de la limite).")
+        records.rewind()  # Remet l'état du curseur pour pouvoir réutiliser `records`
+         # Retourner les documents sous forme de liste
         return list(records)
     except Exception as e:
+        # Gérer les erreurs potentielles
         logger.error(f"Erreur lors de la lecture : {e}")
         raise
 
@@ -58,6 +75,9 @@ def read_records(collection, query={}, limit=5):
 def update_records(collection, filter_query, update_query):
     """
     Met à jour les documents correspondant à un filtre dans MongoDB.
+
+    Cette fonction applique une mise à jour aux documents qui correspondent à un filtre
+    spécifique. Elle retourne le nombre de documents modifiés.
 
     Args:
         collection (Collection): Collection cible dans MongoDB.
@@ -71,14 +91,18 @@ def update_records(collection, filter_query, update_query):
         Exception: En cas d'erreur lors de la mise à jour.
     """
     try:
-        result = collection.update_many(filter_query, update_query) # Met à jour plusieurs documents
-        logger.info(f"{result.modified_count} documents mis à jour.")
-        # Afficher les documents après mise à jour
+        # Appliquer la mise à jour aux documents correspondants
+        result = collection.update_many(filter_query, update_query)
+        logger.info(f"{result.modified_count} documents mis à jour avec succès.")
+
+        # Afficher les documents mis à jour pour confirmation
         updated_docs = collection.find(filter_query)
         for doc in updated_docs:
             print(doc)
+
         return result.modified_count
     except Exception as e:
+        # Gérer les erreurs potentielles
         logger.error(f"Erreur lors de la mise à jour : {e}")
         raise
 
@@ -86,6 +110,9 @@ def update_records(collection, filter_query, update_query):
 def delete_records(collection, filter_query):
     """
     Supprime les documents correspondant à un filtre dans MongoDB.
+
+    Cette fonction supprime tous les documents qui correspondent au filtre fourni et
+    retourne le nombre de documents supprimés.
 
     Args:
         collection (Collection): Collection cible dans MongoDB.
@@ -98,10 +125,13 @@ def delete_records(collection, filter_query):
         Exception: En cas d'erreur lors de la suppression.
     """
     try:
-        result = collection.delete_many(filter_query)  # Supprime plusieurs documents
-        logger.info(f"{result.deleted_count} documents supprimés.")
+        # Supprimer les documents qui correspondent au filtre
+        result = collection.delete_many(filter_query)
+        logger.info(f"{result.deleted_count} documents supprimés de la collection MongoDB.")
+
         return result.deleted_count
     except Exception as e:
+        # Gérer les erreurs potentielles
         logger.error(f"Erreur lors de la suppression : {e}")
         raise
 
@@ -109,6 +139,9 @@ def delete_records(collection, filter_query):
 def export_to_csv(collection, file_name):
     """
     Exporte les documents d'une collection MongoDB vers un fichier CSV.
+
+    Cette fonction lit tous les documents d'une collection MongoDB, les transforme
+    en un DataFrame Pandas, puis les exporte dans un fichier CSV.
 
     Args:
         collection (Collection): Collection cible.
@@ -121,27 +154,32 @@ def export_to_csv(collection, file_name):
         # Définir le répertoire d'exportation
         output_dir = "outputs"
         if not os.path.exists(output_dir):
-            os.makedirs(output_dir)  # Créer le répertoire si inexistant
+            # Créer le répertoire si inexistant
+            os.makedirs(output_dir)
             logger.info(f"Répertoire créé : {output_dir}")
-        
-        # Ajouter l'extension .csv au nom du fichier
+
+        # Construire le chemin complet du fichier CSV
         output_file = os.path.join(output_dir, f"{file_name}.csv")
-        
-        # Récupérer les documents de MongoDB
+
+        # Récupérer tous les documents de la collection MongoDB
         records = list(collection.find())
         if not records:
-            logger.warning("Aucun document à exporter.")
+            # Avertir si la collection est vide
+            logger.warning("Aucun document à exporter. La collection est vide.")
             return 0
-        
-        # Convertir en DataFrame et supprimer la colonne "_id"
+
+        # Convertir les documents en DataFrame Pandas
         df = pd.DataFrame(records)
         if "_id" in df.columns:
+            # Supprimer la colonne MongoDB _id pour l'exportation
             df.drop(columns=["_id"], inplace=True)
-        
-        # Exporter en CSV
+
+        # Exporter les données en fichier CSV
         df.to_csv(output_file, index=False)
-        logger.info(f"Données exportées dans le fichier : {output_file}")
+        logger.info(f"Données exportées avec succès dans le fichier : {output_file}")
+
         return len(df)
     except Exception as e:
+        # Gérer les erreurs potentielles
         logger.error(f"Erreur lors de l'exportation : {e}")
         raise

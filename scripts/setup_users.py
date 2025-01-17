@@ -26,16 +26,15 @@ def configure_users():
 
         # Étape 1 : Création de l'utilisateur administrateur
         logger.info("Vérification de l'existence de l'utilisateur 'admin_user'...")
-        existing_admin = admin_db.command("usersInfo", "admin_user")
-        if existing_admin.get("users"):
-            logger.info("L'utilisateur 'admin_user' existe déjà.")
-        else:
-            logger.info("Création de l'utilisateur 'admin_user' avec les permissions root...")
-            admin_db.command(
-                "createUser", "admin_user", pwd="secure_password", roles=["root"]
-            )
-            logger.success("Utilisateur 'admin_user' créé avec succès.")
-
+        try:
+            existing_admin = admin_db.command("usersInfo", "admin_user")
+            if not existing_admin.get("users"):
+                admin_db.command(
+                    "createUser", "admin_user", pwd="secure_password", roles=["root"]
+                )
+        except Exception as e:
+            logger.error(f"Erreur lors de la création de l'utilisateur admin : {e}")
+            raise
         # Étape 2 : Connexion avec les permissions de l'utilisateur administrateur
         logger.info("Connexion avec l'utilisateur 'admin_user' pour configurer les autres utilisateurs...")
         client = MongoClient("mongodb://admin_user:secure_password@mongodb_service_container:27017/")
