@@ -172,12 +172,12 @@ def test_delete_records(collection):
 
 def test_export_to_csv(collection):
     """
-    Teste l'exportation des données MongoDB vers un fichier CSV.
+    Teste l'exportation des documents MongoDB vers un fichier CSV.
     Vérifie que le fichier est créé et contient les données exportées.
     """
     # Obtention de la collection MongoDB temporaire et de la fonction de nettoyage
     collection, cleanup = get_mongodb_client()
-    
+
     try:
         # Nettoyage explicite de la collection avant le test
         collection.delete_many({"_id": {"$regex": "^test"}})
@@ -190,18 +190,21 @@ def test_export_to_csv(collection):
             {"_id": "test5_id_1", "name": "Alice In Wonderland", "age": 40},
         ])
 
-        # Définir un chemin de sortie correct
-        output_file = os.path.join("test_export.csv")
+        # Définir le nom du fichier sans chemin ni extension
+        file_name = "test_export"
 
         try:
-            # Création du répertoire cible si nécessaire
-            os.makedirs(os.path.dirname(output_file), exist_ok=True)
+            # Appel de la fonction d'exportation, en respectant son contrat
+            exported_count = export_to_csv(collection, file_name)
 
-            # Appel de la fonction d'exportation, qui écrit directement le fichier
-            export_to_csv(collection, output_file)
+            # Vérification du nombre de documents exportés
+            assert exported_count > 0, "Erreur : Aucun document exporté."
+
+            # Construire le chemin complet pour vérifier le fichier
+            output_file = os.path.join("outputs", f"{file_name}.csv")
 
             # Vérification que le fichier CSV a été créé
-            assert os.path.exists(output_file), "Erreur : Le fichier CSV n'a pas été créé."
+            assert os.path.exists(output_file), f"Erreur : Le fichier {output_file} n'a pas été créé."
 
             # Chargement et vérification du contenu du fichier CSV
             with open(output_file, "r", encoding="utf-8") as csv_file:
@@ -219,4 +222,5 @@ def test_export_to_csv(collection):
         cleanup()
 
     logger.info(f"=== Fin du test : {test_export_to_csv.__name__} ===")
+
 
