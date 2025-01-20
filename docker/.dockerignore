@@ -12,7 +12,7 @@ env/                      # Environnements virtuels Python
 venv/                     # Autre dossier d'environnements virtuels
 node_modules/             # Si le projet inclut des dépendances Node.js
 .old/                     # Tout dossier que vous avez défini comme archive ou ancien
-data/raw/
+ 
 
 # Fichiers sensibles ou inutiles
 .env                      # Fichier d'environnement contenant des variables sensibles
