@@ -72,7 +72,7 @@ services:
     networks:
       - custom_network # Connecte le service au réseau partagé
 
- # =============================
+  # =============================
   # Service pour les tests
   # =============================
   test_service:
@@ -82,9 +82,11 @@ services:
     container_name: test_service_container  # Nom explicite pour le conteneur
     depends_on:  # S'assure que MongoDB est prêt avant l'exécution des tests
       - mongodb_service
-    command: ["pytest", "/app/scripts/test.py"]  # Exécute les tests avec pytest
+    command: ["python", "/app/scripts/test.py"]  # Exécute le fichier test.py avec Python
+    environment:
+      - OUTPUT_DIR=/app/outputs
     volumes:
-      - ../data:/app/data # Inclut les fichiers de données nécessaires
+      - ../data:/app/data  # Inclut les fichiers de données nécessaires
       - ../scripts:/app/scripts  # Monte les scripts nécessaires pour les tests
       - ../outputs:/app/outputs  # Monte le répertoire pour les fichiers de sortie
       - ../logs:/app/logs  # Monte le répertoire des logs
@@ -112,6 +114,7 @@ services:
       - ../scripts:/app/scripts  # Monte les scripts nécessaires dans le conteneur
       - ../data:/app/data  # Monte les données dans le conteneur
       - ../logs:/app/logs  # Monte le répertoire des logs
+      - ../outputs:/app/outputs  # Monte le répertoire pour les fichiers de sortie
     stdin_open: true  # Permet d'interagir avec le terminal
     tty: true  # Active un terminal interactif
     networks:

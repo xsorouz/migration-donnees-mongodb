@@ -23,7 +23,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 
 # Installer les dépendances listées dans requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt \
+    && pip cache purge
 
 # === Étape 5 : Copier les scripts Python du projet ===
 # Importer les scripts Python nécessaires
@@ -36,10 +37,12 @@ ENV PYTHONPATH=/app/scripts
 # Importation des répertoires contenant les fichiers de données et les logs
 COPY data /app/data
 COPY logs /app/logs
+COPY outputs /app/outputs
+RUN chmod -R 755 /app/logs /app/outputs
 
 # === Étape 7 : Créer les répertoires de sortie ===
 # Création d'un répertoire pour stocker les fichiers générés pendant l'exécution
-RUN mkdir -p /app/data/raw /app/data/processed /app/outputs
+RUN mkdir -p /app/data/raw /app/data/processed 
 
 # === Étape 8 : Appliquer les permissions d'exécution ===
 # S'assurer que les scripts Python sont exécutables
@@ -55,6 +58,7 @@ RUN chmod +x /app/scripts/*.py
 ENV RAW_DIR=/app/data/raw
 ENV PROCESSED_DIR=/app/data/processed
 ENV LOG_DIR=/app/logs
+ENV OUTPUT_DIR=/app/outputs
 
 # === Étape 11 : Spécifier la commande par défaut ===
 # Définir les scripts à exécuter automatiquement au démarrage du conteneur

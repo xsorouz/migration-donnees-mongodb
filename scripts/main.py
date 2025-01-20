@@ -9,6 +9,7 @@ from test import (
     test_update_records,
     test_delete_records,
     test_export_to_csv,
+    get_mongodb_client,  # Fonction pour obtenir une base MongoDB temporaire
 )  # Importation des tests CRUD
 from argparse import ArgumentParser  # Analyse des arguments en ligne de commande
 from getpass import getpass  # Saisie sécurisée des mots de passe
@@ -32,6 +33,10 @@ if __name__ == "__main__":
         parser.add_argument("file_path", help="Chemin complet du fichier CSV contenant les données à charger.")
         args = parser.parse_args()  # Analyse les arguments fournis en ligne de commande
 
+        if not os.path.exists(args.file_path):
+            logger.error(f"Fichier introuvable : {args.file_path}")
+            exit(1)
+        
         # === Étape 2 : Connexion à MongoDB ===
         logger.info("Connexion à MongoDB en cours...")
         db = connect_to_mongodb("mongodb://mongodb_service_container:27017/")
@@ -57,19 +62,24 @@ if __name__ == "__main__":
         # === Étape 6 : Accès à la collection MongoDB ===
         collection = db["patients_data"]
 
+        # Nettoyage explicite de la collection principale
+        logger.info("Nettoyage de la collection principale avant les tests...")
+        collection.delete_many({})
+        assert collection.count_documents({}) == 0, "La collection principale n'est pas vide après le nettoyage."
+
         # === Étape 7 : Vérification et insertion des données ===
-        if not collection.count_documents({}):  # Si la collection est vide
+        if collection.count_documents({}) > 0:  # Si la collection contient déjà des données
+            logger.info("Collection déjà remplie. Aucune nouvelle insertion.")
+        else:
             logger.info("La collection est vide. Insertion des données...")
             inserted_count = insert_records(collection, records)
             logger.info(f"{inserted_count} documents insérés depuis le fichier {args.file_path}.")
-        else:
-            logger.info("La collection contient déjà des données. Aucune insertion nécessaire.")
 
         # === Étape 8 : Création des index dans MongoDB ===
         logger.info("Création des index pour optimiser les requêtes.")
         create_indexes(collection)
 
-# === Étape 9 : Exécution des tests unitaires ===
+        # === Étape 9 : Exécution des tests unitaires ===
         logger.info("=== Début des tests CRUD ===")
         test_results = {"success": 0, "failure": 0}  # Initialisation des compteurs de tests
         test_functions = [
@@ -81,14 +91,18 @@ if __name__ == "__main__":
         ]
 
         for test_name, test_function in test_functions:
+            # Utilisation explicite de la base MongoDB temporaire
+            test_collection, cleanup = get_mongodb_client()
             try:
                 logger.info(f"Exécution du test : {test_name}")
-                test_function(collection)
+                test_function(test_collection)  # Passez la collection temporaire au test
                 logger.success(f"Test réussi : {test_name}")
                 test_results["success"] += 1
             except AssertionError as e:
                 logger.error(f"Échec du test : {test_name}. Détails : {e}")
                 test_results["failure"] += 1
+            finally:
+                cleanup()  # Nettoyage explicite de la base MongoDB temporaire
 
         logger.info("=== Résumé des tests CRUD ===")
         logger.info(f"Tests réussis : {test_results['success']}")

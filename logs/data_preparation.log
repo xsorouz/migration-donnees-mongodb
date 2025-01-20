@@ -1,10 +1,10 @@
-2025-01-17 16:58:25.209 | INFO     | __main__:data_processing:25 - Téléchargement des données depuis Kaggle : prasad22/healthcare-dataset...
-2025-01-17 16:58:27.212 | SUCCESS  | __main__:data_processing:29 - Dataset téléchargé avec succès dans : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2
-2025-01-17 16:58:27.213 | INFO     | __main__:data_processing:36 - Fichier localisé pour traitement : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2/healthcare_dataset.csv
-2025-01-17 16:58:27.214 | INFO     | __main__:data_processing:42 - Chargement des données depuis : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2/healthcare_dataset.csv
-2025-01-17 16:58:27.340 | INFO     | __main__:data_processing:45 - Données chargées : 55500 lignes, 15 colonnes.
-2025-01-17 16:58:27.341 | INFO     | __main__:data_processing:46 - Colonnes disponibles : ['Name', 'Age', 'Gender', 'Blood Type', 'Medical Condition', 'Date of Admission', 'Doctor', 'Hospital', 'Insurance Provider', 'Billing Amount', 'Room Number', 'Admission Type', 'Discharge Date', 'Medication', 'Test Results']
-2025-01-17 16:58:27.342 | INFO     | __main__:data_processing:47 - Types des colonnes avant nettoyage :
+2025-01-20 16:45:14.102 | INFO     | __main__:data_processing:25 - Téléchargement des données depuis Kaggle : prasad22/healthcare-dataset...
+2025-01-20 16:45:16.056 | SUCCESS  | __main__:data_processing:29 - Dataset téléchargé avec succès dans : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2
+2025-01-20 16:45:16.057 | INFO     | __main__:data_processing:36 - Fichier localisé pour traitement : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2/healthcare_dataset.csv
+2025-01-20 16:45:16.058 | INFO     | __main__:data_processing:42 - Chargement des données depuis : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2/healthcare_dataset.csv
+2025-01-20 16:45:16.207 | INFO     | __main__:data_processing:45 - Données chargées : 55500 lignes, 15 colonnes.
+2025-01-20 16:45:16.208 | INFO     | __main__:data_processing:46 - Colonnes disponibles : ['Name', 'Age', 'Gender', 'Blood Type', 'Medical Condition', 'Date of Admission', 'Doctor', 'Hospital', 'Insurance Provider', 'Billing Amount', 'Room Number', 'Admission Type', 'Discharge Date', 'Medication', 'Test Results']
+2025-01-20 16:45:16.209 | INFO     | __main__:data_processing:47 - Types des colonnes avant nettoyage :
 Name                   object
 Age                     int64
 Gender                 object
@@ -21,7 +21,7 @@ Discharge Date         object
 Medication             object
 Test Results           object
 dtype: object
-2025-01-17 16:58:27.351 | INFO     | __main__:data_processing:50 - Aperçu des premières lignes des données brutes :
+2025-01-20 16:45:16.217 | INFO     | __main__:data_processing:50 - Aperçu des premières lignes des données brutes :
             Name  Age  Gender  ... Discharge Date   Medication  Test Results
 0  Bobby JacksOn   30    Male  ...     2024-02-02  Paracetamol        Normal
 1   LesLie TErRy   62    Male  ...     2019-08-26    Ibuprofen  Inconclusive
@@ -30,23 +30,23 @@ dtype: object
 4  adrIENNE bEll   43  Female  ...     2022-10-09   Penicillin      Abnormal
 
 [5 rows x 15 columns]
-2025-01-17 16:58:27.351 | INFO     | __main__:data_processing:56 - Début du nettoyage des données...
-2025-01-17 16:58:27.395 | INFO     | __main__:data_processing:61 - Doublons supprimés : 534 lignes.
-2025-01-17 16:58:27.397 | INFO     | __main__:data_processing:73 - Colonne 'Age' convertie avec succès en <class 'int'>.
-2025-01-17 16:58:27.403 | INFO     | __main__:data_processing:83 - Valeurs aberrantes supprimées pour 'Age' : 0 lignes supprimées.
-2025-01-17 16:58:27.404 | INFO     | __main__:data_processing:73 - Colonne 'Billing Amount' convertie avec succès en <class 'float'>.
-2025-01-17 16:58:27.412 | INFO     | __main__:data_processing:83 - Valeurs aberrantes supprimées pour 'Billing Amount' : 106 lignes supprimées.
-2025-01-17 16:58:27.419 | INFO     | __main__:data_processing:91 - Colonne 'Date of Admission' : 0 valeurs invalides après conversion.
-2025-01-17 16:58:27.425 | INFO     | __main__:data_processing:91 - Colonne 'Discharge Date' : 0 valeurs invalides après conversion.
-2025-01-17 16:58:27.425 | INFO     | __main__:data_processing:95 - Colonnes renommées pour standardisation.
-2025-01-17 16:58:27.443 | INFO     | __main__:data_processing:115 - Colonne 'doctor' nettoyée : suppression des espaces et mise en forme standardisée.
-2025-01-17 16:58:27.460 | INFO     | __main__:data_processing:115 - Colonne 'hospital' nettoyée : suppression des espaces et mise en forme standardisée.
-2025-01-17 16:58:27.473 | INFO     | __main__:data_processing:115 - Colonne 'medical_condition' nettoyée : suppression des espaces et mise en forme standardisée.
-2025-01-17 16:58:27.486 | INFO     | __main__:data_processing:115 - Colonne 'insurance_provider' nettoyée : suppression des espaces et mise en forme standardisée.
-2025-01-17 16:58:27.499 | INFO     | __main__:data_processing:115 - Colonne 'medication' nettoyée : suppression des espaces et mise en forme standardisée.
-2025-01-17 16:58:27.512 | INFO     | __main__:data_processing:115 - Colonne 'test_results' nettoyée : suppression des espaces et mise en forme standardisée.
-2025-01-17 16:58:27.528 | INFO     | __main__:data_processing:120 - Colonne 'name' formatée avec une majuscule pour chaque mot.
-2025-01-17 16:58:27.536 | INFO     | __main__:data_processing:123 - Aperçu des premières lignes des données nettoyées :
+2025-01-20 16:45:16.218 | INFO     | __main__:data_processing:56 - Début du nettoyage des données...
+2025-01-20 16:45:16.262 | INFO     | __main__:data_processing:61 - Doublons supprimés : 534 lignes.
+2025-01-20 16:45:16.264 | INFO     | __main__:data_processing:73 - Colonne 'Age' convertie avec succès en <class 'int'>.
+2025-01-20 16:45:16.271 | INFO     | __main__:data_processing:83 - Valeurs aberrantes supprimées pour 'Age' : 0 lignes supprimées.
+2025-01-20 16:45:16.272 | INFO     | __main__:data_processing:73 - Colonne 'Billing Amount' convertie avec succès en <class 'float'>.
+2025-01-20 16:45:16.280 | INFO     | __main__:data_processing:83 - Valeurs aberrantes supprimées pour 'Billing Amount' : 106 lignes supprimées.
+2025-01-20 16:45:16.287 | INFO     | __main__:data_processing:91 - Colonne 'Date of Admission' : 0 valeurs invalides après conversion.
+2025-01-20 16:45:16.294 | INFO     | __main__:data_processing:91 - Colonne 'Discharge Date' : 0 valeurs invalides après conversion.
+2025-01-20 16:45:16.295 | INFO     | __main__:data_processing:95 - Colonnes renommées pour standardisation.
+2025-01-20 16:45:16.313 | INFO     | __main__:data_processing:115 - Colonne 'doctor' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 16:45:16.331 | INFO     | __main__:data_processing:115 - Colonne 'hospital' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 16:45:16.344 | INFO     | __main__:data_processing:115 - Colonne 'medical_condition' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 16:45:16.357 | INFO     | __main__:data_processing:115 - Colonne 'insurance_provider' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 16:45:16.370 | INFO     | __main__:data_processing:115 - Colonne 'medication' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 16:45:16.383 | INFO     | __main__:data_processing:115 - Colonne 'test_results' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 16:45:16.398 | INFO     | __main__:data_processing:120 - Colonne 'name' formatée avec une majuscule pour chaque mot.
+2025-01-20 16:45:16.407 | INFO     | __main__:data_processing:123 - Aperçu des premières lignes des données nettoyées :
             name  age  gender  ... discharge_date   medication  test_results
 0  Bobby Jackson   30    Male  ...     2024-02-02  Paracetamol        Normal
 1   Leslie Terry   62    Male  ...     2019-08-26    Ibuprofen  Inconclusive
@@ -55,7 +55,7 @@ dtype: object
 4  Adrienne Bell   43  Female  ...     2022-10-09   Penicillin      Abnormal
 
 [5 rows x 15 columns]
-2025-01-17 16:58:27.538 | INFO     | __main__:data_processing:124 - Types des colonnes après nettoyage :
+2025-01-20 16:45:16.408 | INFO     | __main__:data_processing:124 - Types des colonnes après nettoyage :
 name                          object
 age                            int64
 gender                        object
@@ -72,16 +72,16 @@ discharge_date        datetime64[ns]
 medication                    object
 test_results                  object
 dtype: object
-2025-01-17 16:58:27.538 | SUCCESS  | __main__:data_processing:126 - Nettoyage des données terminé.
-2025-01-17 16:58:27.539 | INFO     | __main__:data_processing:129 - Sauvegarde des données nettoyées dans : data/processed/healthcare_dataset_cleaned.csv
-2025-01-17 16:58:28.085 | SUCCESS  | __main__:data_processing:133 - Fichier nettoyé sauvegardé avec succès dans : data/processed/healthcare_dataset_cleaned.csv
-2025-01-20 08:16:45.089 | INFO     | __main__:data_processing:25 - Téléchargement des données depuis Kaggle : prasad22/healthcare-dataset...
-2025-01-20 08:16:45.542 | SUCCESS  | __main__:data_processing:29 - Dataset téléchargé avec succès dans : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2
-2025-01-20 08:16:45.543 | INFO     | __main__:data_processing:36 - Fichier localisé pour traitement : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2/healthcare_dataset.csv
-2025-01-20 08:16:45.543 | INFO     | __main__:data_processing:42 - Chargement des données depuis : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2/healthcare_dataset.csv
-2025-01-20 08:16:45.663 | INFO     | __main__:data_processing:45 - Données chargées : 55500 lignes, 15 colonnes.
-2025-01-20 08:16:45.664 | INFO     | __main__:data_processing:46 - Colonnes disponibles : ['Name', 'Age', 'Gender', 'Blood Type', 'Medical Condition', 'Date of Admission', 'Doctor', 'Hospital', 'Insurance Provider', 'Billing Amount', 'Room Number', 'Admission Type', 'Discharge Date', 'Medication', 'Test Results']
-2025-01-20 08:16:45.666 | INFO     | __main__:data_processing:47 - Types des colonnes avant nettoyage :
+2025-01-20 16:45:16.409 | SUCCESS  | __main__:data_processing:126 - Nettoyage des données terminé.
+2025-01-20 16:45:16.410 | INFO     | __main__:data_processing:129 - Sauvegarde des données nettoyées dans : data/processed/healthcare_dataset_cleaned.csv
+2025-01-20 16:45:16.815 | SUCCESS  | __main__:data_processing:133 - Fichier nettoyé sauvegardé avec succès dans : data/processed/healthcare_dataset_cleaned.csv
+2025-01-20 16:58:06.911 | INFO     | __main__:data_processing:25 - Téléchargement des données depuis Kaggle : prasad22/healthcare-dataset...
+2025-01-20 16:58:08.679 | SUCCESS  | __main__:data_processing:29 - Dataset téléchargé avec succès dans : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2
+2025-01-20 16:58:08.680 | INFO     | __main__:data_processing:36 - Fichier localisé pour traitement : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2/healthcare_dataset.csv
+2025-01-20 16:58:08.680 | INFO     | __main__:data_processing:42 - Chargement des données depuis : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2/healthcare_dataset.csv
+2025-01-20 16:58:08.803 | INFO     | __main__:data_processing:45 - Données chargées : 55500 lignes, 15 colonnes.
+2025-01-20 16:58:08.804 | INFO     | __main__:data_processing:46 - Colonnes disponibles : ['Name', 'Age', 'Gender', 'Blood Type', 'Medical Condition', 'Date of Admission', 'Doctor', 'Hospital', 'Insurance Provider', 'Billing Amount', 'Room Number', 'Admission Type', 'Discharge Date', 'Medication', 'Test Results']
+2025-01-20 16:58:08.805 | INFO     | __main__:data_processing:47 - Types des colonnes avant nettoyage :
 Name                   object
 Age                     int64
 Gender                 object
@@ -98,7 +98,7 @@ Discharge Date         object
 Medication             object
 Test Results           object
 dtype: object
-2025-01-20 08:16:45.677 | INFO     | __main__:data_processing:50 - Aperçu des premières lignes des données brutes :
+2025-01-20 16:58:08.813 | INFO     | __main__:data_processing:50 - Aperçu des premières lignes des données brutes :
             Name  Age  Gender  ... Discharge Date   Medication  Test Results
 0  Bobby JacksOn   30    Male  ...     2024-02-02  Paracetamol        Normal
 1   LesLie TErRy   62    Male  ...     2019-08-26    Ibuprofen  Inconclusive
@@ -107,23 +107,23 @@ dtype: object
 4  adrIENNE bEll   43  Female  ...     2022-10-09   Penicillin      Abnormal
 
 [5 rows x 15 columns]
-2025-01-20 08:16:45.677 | INFO     | __main__:data_processing:56 - Début du nettoyage des données...
-2025-01-20 08:16:45.727 | INFO     | __main__:data_processing:61 - Doublons supprimés : 534 lignes.
-2025-01-20 08:16:45.729 | INFO     | __main__:data_processing:73 - Colonne 'Age' convertie avec succès en <class 'int'>.
-2025-01-20 08:16:45.735 | INFO     | __main__:data_processing:83 - Valeurs aberrantes supprimées pour 'Age' : 0 lignes supprimées.
-2025-01-20 08:16:45.736 | INFO     | __main__:data_processing:73 - Colonne 'Billing Amount' convertie avec succès en <class 'float'>.
-2025-01-20 08:16:45.745 | INFO     | __main__:data_processing:83 - Valeurs aberrantes supprimées pour 'Billing Amount' : 106 lignes supprimées.
-2025-01-20 08:16:45.752 | INFO     | __main__:data_processing:91 - Colonne 'Date of Admission' : 0 valeurs invalides après conversion.
-2025-01-20 08:16:45.758 | INFO     | __main__:data_processing:91 - Colonne 'Discharge Date' : 0 valeurs invalides après conversion.
-2025-01-20 08:16:45.759 | INFO     | __main__:data_processing:95 - Colonnes renommées pour standardisation.
-2025-01-20 08:16:45.780 | INFO     | __main__:data_processing:115 - Colonne 'doctor' nettoyée : suppression des espaces et mise en forme standardisée.
-2025-01-20 08:16:45.800 | INFO     | __main__:data_processing:115 - Colonne 'hospital' nettoyée : suppression des espaces et mise en forme standardisée.
-2025-01-20 08:16:45.813 | INFO     | __main__:data_processing:115 - Colonne 'medical_condition' nettoyée : suppression des espaces et mise en forme standardisée.
-2025-01-20 08:16:45.827 | INFO     | __main__:data_processing:115 - Colonne 'insurance_provider' nettoyée : suppression des espaces et mise en forme standardisée.
-2025-01-20 08:16:45.840 | INFO     | __main__:data_processing:115 - Colonne 'medication' nettoyée : suppression des espaces et mise en forme standardisée.
-2025-01-20 08:16:45.854 | INFO     | __main__:data_processing:115 - Colonne 'test_results' nettoyée : suppression des espaces et mise en forme standardisée.
-2025-01-20 08:16:45.870 | INFO     | __main__:data_processing:120 - Colonne 'name' formatée avec une majuscule pour chaque mot.
-2025-01-20 08:16:45.880 | INFO     | __main__:data_processing:123 - Aperçu des premières lignes des données nettoyées :
+2025-01-20 16:58:08.813 | INFO     | __main__:data_processing:56 - Début du nettoyage des données...
+2025-01-20 16:58:08.861 | INFO     | __main__:data_processing:61 - Doublons supprimés : 534 lignes.
+2025-01-20 16:58:08.862 | INFO     | __main__:data_processing:73 - Colonne 'Age' convertie avec succès en <class 'int'>.
+2025-01-20 16:58:08.868 | INFO     | __main__:data_processing:83 - Valeurs aberrantes supprimées pour 'Age' : 0 lignes supprimées.
+2025-01-20 16:58:08.870 | INFO     | __main__:data_processing:73 - Colonne 'Billing Amount' convertie avec succès en <class 'float'>.
+2025-01-20 16:58:08.878 | INFO     | __main__:data_processing:83 - Valeurs aberrantes supprimées pour 'Billing Amount' : 106 lignes supprimées.
+2025-01-20 16:58:08.886 | INFO     | __main__:data_processing:91 - Colonne 'Date of Admission' : 0 valeurs invalides après conversion.
+2025-01-20 16:58:08.892 | INFO     | __main__:data_processing:91 - Colonne 'Discharge Date' : 0 valeurs invalides après conversion.
+2025-01-20 16:58:08.893 | INFO     | __main__:data_processing:95 - Colonnes renommées pour standardisation.
+2025-01-20 16:58:08.911 | INFO     | __main__:data_processing:115 - Colonne 'doctor' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 16:58:08.928 | INFO     | __main__:data_processing:115 - Colonne 'hospital' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 16:58:08.941 | INFO     | __main__:data_processing:115 - Colonne 'medical_condition' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 16:58:08.955 | INFO     | __main__:data_processing:115 - Colonne 'insurance_provider' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 16:58:08.969 | INFO     | __main__:data_processing:115 - Colonne 'medication' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 16:58:08.986 | INFO     | __main__:data_processing:115 - Colonne 'test_results' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 16:58:09.002 | INFO     | __main__:data_processing:120 - Colonne 'name' formatée avec une majuscule pour chaque mot.
+2025-01-20 16:58:09.012 | INFO     | __main__:data_processing:123 - Aperçu des premières lignes des données nettoyées :
             name  age  gender  ... discharge_date   medication  test_results
 0  Bobby Jackson   30    Male  ...     2024-02-02  Paracetamol        Normal
 1   Leslie Terry   62    Male  ...     2019-08-26    Ibuprofen  Inconclusive
@@ -132,7 +132,7 @@ dtype: object
 4  Adrienne Bell   43  Female  ...     2022-10-09   Penicillin      Abnormal
 
 [5 rows x 15 columns]
-2025-01-20 08:16:45.881 | INFO     | __main__:data_processing:124 - Types des colonnes après nettoyage :
+2025-01-20 16:58:09.015 | INFO     | __main__:data_processing:124 - Types des colonnes après nettoyage :
 name                          object
 age                            int64
 gender                        object
@@ -149,16 +149,16 @@ discharge_date        datetime64[ns]
 medication                    object
 test_results                  object
 dtype: object
-2025-01-20 08:16:45.882 | SUCCESS  | __main__:data_processing:126 - Nettoyage des données terminé.
-2025-01-20 08:16:45.882 | INFO     | __main__:data_processing:129 - Sauvegarde des données nettoyées dans : data/processed/healthcare_dataset_cleaned.csv
-2025-01-20 08:16:46.446 | SUCCESS  | __main__:data_processing:133 - Fichier nettoyé sauvegardé avec succès dans : data/processed/healthcare_dataset_cleaned.csv
-2025-01-20 10:15:25.460 | INFO     | __main__:data_processing:25 - Téléchargement des données depuis Kaggle : prasad22/healthcare-dataset...
-2025-01-20 10:15:27.280 | SUCCESS  | __main__:data_processing:29 - Dataset téléchargé avec succès dans : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2
-2025-01-20 10:15:27.281 | INFO     | __main__:data_processing:36 - Fichier localisé pour traitement : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2/healthcare_dataset.csv
-2025-01-20 10:15:27.282 | INFO     | __main__:data_processing:42 - Chargement des données depuis : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2/healthcare_dataset.csv
-2025-01-20 10:15:27.389 | INFO     | __main__:data_processing:45 - Données chargées : 55500 lignes, 15 colonnes.
-2025-01-20 10:15:27.390 | INFO     | __main__:data_processing:46 - Colonnes disponibles : ['Name', 'Age', 'Gender', 'Blood Type', 'Medical Condition', 'Date of Admission', 'Doctor', 'Hospital', 'Insurance Provider', 'Billing Amount', 'Room Number', 'Admission Type', 'Discharge Date', 'Medication', 'Test Results']
-2025-01-20 10:15:27.392 | INFO     | __main__:data_processing:47 - Types des colonnes avant nettoyage :
+2025-01-20 16:58:09.016 | SUCCESS  | __main__:data_processing:126 - Nettoyage des données terminé.
+2025-01-20 16:58:09.017 | INFO     | __main__:data_processing:129 - Sauvegarde des données nettoyées dans : data/processed/healthcare_dataset_cleaned.csv
+2025-01-20 16:58:09.734 | SUCCESS  | __main__:data_processing:133 - Fichier nettoyé sauvegardé avec succès dans : data/processed/healthcare_dataset_cleaned.csv
+2025-01-20 17:13:04.972 | INFO     | __main__:data_processing:25 - Téléchargement des données depuis Kaggle : prasad22/healthcare-dataset...
+2025-01-20 17:13:07.504 | SUCCESS  | __main__:data_processing:29 - Dataset téléchargé avec succès dans : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2
+2025-01-20 17:13:07.505 | INFO     | __main__:data_processing:36 - Fichier localisé pour traitement : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2/healthcare_dataset.csv
+2025-01-20 17:13:07.506 | INFO     | __main__:data_processing:42 - Chargement des données depuis : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2/healthcare_dataset.csv
+2025-01-20 17:13:07.619 | INFO     | __main__:data_processing:45 - Données chargées : 55500 lignes, 15 colonnes.
+2025-01-20 17:13:07.620 | INFO     | __main__:data_processing:46 - Colonnes disponibles : ['Name', 'Age', 'Gender', 'Blood Type', 'Medical Condition', 'Date of Admission', 'Doctor', 'Hospital', 'Insurance Provider', 'Billing Amount', 'Room Number', 'Admission Type', 'Discharge Date', 'Medication', 'Test Results']
+2025-01-20 17:13:07.622 | INFO     | __main__:data_processing:47 - Types des colonnes avant nettoyage :
 Name                   object
 Age                     int64
 Gender                 object
@@ -175,7 +175,7 @@ Discharge Date         object
 Medication             object
 Test Results           object
 dtype: object
-2025-01-20 10:15:27.400 | INFO     | __main__:data_processing:50 - Aperçu des premières lignes des données brutes :
+2025-01-20 17:13:07.631 | INFO     | __main__:data_processing:50 - Aperçu des premières lignes des données brutes :
             Name  Age  Gender  ... Discharge Date   Medication  Test Results
 0  Bobby JacksOn   30    Male  ...     2024-02-02  Paracetamol        Normal
 1   LesLie TErRy   62    Male  ...     2019-08-26    Ibuprofen  Inconclusive
@@ -184,23 +184,23 @@ dtype: object
 4  adrIENNE bEll   43  Female  ...     2022-10-09   Penicillin      Abnormal
 
 [5 rows x 15 columns]
-2025-01-20 10:15:27.401 | INFO     | __main__:data_processing:56 - Début du nettoyage des données...
-2025-01-20 10:15:27.446 | INFO     | __main__:data_processing:61 - Doublons supprimés : 534 lignes.
-2025-01-20 10:15:27.447 | INFO     | __main__:data_processing:73 - Colonne 'Age' convertie avec succès en <class 'int'>.
-2025-01-20 10:15:27.454 | INFO     | __main__:data_processing:83 - Valeurs aberrantes supprimées pour 'Age' : 0 lignes supprimées.
-2025-01-20 10:15:27.456 | INFO     | __main__:data_processing:73 - Colonne 'Billing Amount' convertie avec succès en <class 'float'>.
-2025-01-20 10:15:27.464 | INFO     | __main__:data_processing:83 - Valeurs aberrantes supprimées pour 'Billing Amount' : 106 lignes supprimées.
-2025-01-20 10:15:27.476 | INFO     | __main__:data_processing:91 - Colonne 'Date of Admission' : 0 valeurs invalides après conversion.
-2025-01-20 10:15:27.487 | INFO     | __main__:data_processing:91 - Colonne 'Discharge Date' : 0 valeurs invalides après conversion.
-2025-01-20 10:15:27.488 | INFO     | __main__:data_processing:95 - Colonnes renommées pour standardisation.
-2025-01-20 10:15:27.508 | INFO     | __main__:data_processing:115 - Colonne 'doctor' nettoyée : suppression des espaces et mise en forme standardisée.
-2025-01-20 10:15:27.526 | INFO     | __main__:data_processing:115 - Colonne 'hospital' nettoyée : suppression des espaces et mise en forme standardisée.
-2025-01-20 10:15:27.540 | INFO     | __main__:data_processing:115 - Colonne 'medical_condition' nettoyée : suppression des espaces et mise en forme standardisée.
-2025-01-20 10:15:27.553 | INFO     | __main__:data_processing:115 - Colonne 'insurance_provider' nettoyée : suppression des espaces et mise en forme standardisée.
-2025-01-20 10:15:27.566 | INFO     | __main__:data_processing:115 - Colonne 'medication' nettoyée : suppression des espaces et mise en forme standardisée.
-2025-01-20 10:15:27.580 | INFO     | __main__:data_processing:115 - Colonne 'test_results' nettoyée : suppression des espaces et mise en forme standardisée.
-2025-01-20 10:15:27.596 | INFO     | __main__:data_processing:120 - Colonne 'name' formatée avec une majuscule pour chaque mot.
-2025-01-20 10:15:27.606 | INFO     | __main__:data_processing:123 - Aperçu des premières lignes des données nettoyées :
+2025-01-20 17:13:07.632 | INFO     | __main__:data_processing:56 - Début du nettoyage des données...
+2025-01-20 17:13:07.675 | INFO     | __main__:data_processing:61 - Doublons supprimés : 534 lignes.
+2025-01-20 17:13:07.677 | INFO     | __main__:data_processing:73 - Colonne 'Age' convertie avec succès en <class 'int'>.
+2025-01-20 17:13:07.684 | INFO     | __main__:data_processing:83 - Valeurs aberrantes supprimées pour 'Age' : 0 lignes supprimées.
+2025-01-20 17:13:07.685 | INFO     | __main__:data_processing:73 - Colonne 'Billing Amount' convertie avec succès en <class 'float'>.
+2025-01-20 17:13:07.692 | INFO     | __main__:data_processing:83 - Valeurs aberrantes supprimées pour 'Billing Amount' : 106 lignes supprimées.
+2025-01-20 17:13:07.700 | INFO     | __main__:data_processing:91 - Colonne 'Date of Admission' : 0 valeurs invalides après conversion.
+2025-01-20 17:13:07.706 | INFO     | __main__:data_processing:91 - Colonne 'Discharge Date' : 0 valeurs invalides après conversion.
+2025-01-20 17:13:07.706 | INFO     | __main__:data_processing:95 - Colonnes renommées pour standardisation.
+2025-01-20 17:13:07.724 | INFO     | __main__:data_processing:115 - Colonne 'doctor' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 17:13:07.741 | INFO     | __main__:data_processing:115 - Colonne 'hospital' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 17:13:07.754 | INFO     | __main__:data_processing:115 - Colonne 'medical_condition' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 17:13:07.769 | INFO     | __main__:data_processing:115 - Colonne 'insurance_provider' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 17:13:07.783 | INFO     | __main__:data_processing:115 - Colonne 'medication' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 17:13:07.795 | INFO     | __main__:data_processing:115 - Colonne 'test_results' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 17:13:07.811 | INFO     | __main__:data_processing:120 - Colonne 'name' formatée avec une majuscule pour chaque mot.
+2025-01-20 17:13:07.820 | INFO     | __main__:data_processing:123 - Aperçu des premières lignes des données nettoyées :
             name  age  gender  ... discharge_date   medication  test_results
 0  Bobby Jackson   30    Male  ...     2024-02-02  Paracetamol        Normal
 1   Leslie Terry   62    Male  ...     2019-08-26    Ibuprofen  Inconclusive
@@ -209,7 +209,7 @@ dtype: object
 4  Adrienne Bell   43  Female  ...     2022-10-09   Penicillin      Abnormal
 
 [5 rows x 15 columns]
-2025-01-20 10:15:27.607 | INFO     | __main__:data_processing:124 - Types des colonnes après nettoyage :
+2025-01-20 17:13:07.821 | INFO     | __main__:data_processing:124 - Types des colonnes après nettoyage :
 name                          object
 age                            int64
 gender                        object
@@ -226,6 +226,160 @@ discharge_date        datetime64[ns]
 medication                    object
 test_results                  object
 dtype: object
-2025-01-20 10:15:27.608 | SUCCESS  | __main__:data_processing:126 - Nettoyage des données terminé.
-2025-01-20 10:15:27.609 | INFO     | __main__:data_processing:129 - Sauvegarde des données nettoyées dans : data/processed/healthcare_dataset_cleaned.csv
-2025-01-20 10:15:28.323 | SUCCESS  | __main__:data_processing:133 - Fichier nettoyé sauvegardé avec succès dans : data/processed/healthcare_dataset_cleaned.csv
+2025-01-20 17:13:07.822 | SUCCESS  | __main__:data_processing:126 - Nettoyage des données terminé.
+2025-01-20 17:13:07.823 | INFO     | __main__:data_processing:129 - Sauvegarde des données nettoyées dans : data/processed/healthcare_dataset_cleaned.csv
+2025-01-20 17:13:08.698 | SUCCESS  | __main__:data_processing:133 - Fichier nettoyé sauvegardé avec succès dans : data/processed/healthcare_dataset_cleaned.csv
+2025-01-20 17:30:35.380 | INFO     | __main__:data_processing:25 - Téléchargement des données depuis Kaggle : prasad22/healthcare-dataset...
+2025-01-20 17:30:37.241 | SUCCESS  | __main__:data_processing:29 - Dataset téléchargé avec succès dans : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2
+2025-01-20 17:30:37.243 | INFO     | __main__:data_processing:36 - Fichier localisé pour traitement : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2/healthcare_dataset.csv
+2025-01-20 17:30:37.247 | INFO     | __main__:data_processing:42 - Chargement des données depuis : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2/healthcare_dataset.csv
+2025-01-20 17:30:37.367 | INFO     | __main__:data_processing:45 - Données chargées : 55500 lignes, 15 colonnes.
+2025-01-20 17:30:37.368 | INFO     | __main__:data_processing:46 - Colonnes disponibles : ['Name', 'Age', 'Gender', 'Blood Type', 'Medical Condition', 'Date of Admission', 'Doctor', 'Hospital', 'Insurance Provider', 'Billing Amount', 'Room Number', 'Admission Type', 'Discharge Date', 'Medication', 'Test Results']
+2025-01-20 17:30:37.369 | INFO     | __main__:data_processing:47 - Types des colonnes avant nettoyage :
+Name                   object
+Age                     int64
+Gender                 object
+Blood Type             object
+Medical Condition      object
+Date of Admission      object
+Doctor                 object
+Hospital               object
+Insurance Provider     object
+Billing Amount        float64
+Room Number             int64
+Admission Type         object
+Discharge Date         object
+Medication             object
+Test Results           object
+dtype: object
+2025-01-20 17:30:37.378 | INFO     | __main__:data_processing:50 - Aperçu des premières lignes des données brutes :
+            Name  Age  Gender  ... Discharge Date   Medication  Test Results
+0  Bobby JacksOn   30    Male  ...     2024-02-02  Paracetamol        Normal
+1   LesLie TErRy   62    Male  ...     2019-08-26    Ibuprofen  Inconclusive
+2    DaNnY sMitH   76  Female  ...     2022-10-07      Aspirin        Normal
+3   andrEw waTtS   28  Female  ...     2020-12-18    Ibuprofen      Abnormal
+4  adrIENNE bEll   43  Female  ...     2022-10-09   Penicillin      Abnormal
+
+[5 rows x 15 columns]
+2025-01-20 17:30:37.378 | INFO     | __main__:data_processing:56 - Début du nettoyage des données...
+2025-01-20 17:30:37.421 | INFO     | __main__:data_processing:61 - Doublons supprimés : 534 lignes.
+2025-01-20 17:30:37.422 | INFO     | __main__:data_processing:73 - Colonne 'Age' convertie avec succès en <class 'int'>.
+2025-01-20 17:30:37.428 | INFO     | __main__:data_processing:83 - Valeurs aberrantes supprimées pour 'Age' : 0 lignes supprimées.
+2025-01-20 17:30:37.429 | INFO     | __main__:data_processing:73 - Colonne 'Billing Amount' convertie avec succès en <class 'float'>.
+2025-01-20 17:30:37.437 | INFO     | __main__:data_processing:83 - Valeurs aberrantes supprimées pour 'Billing Amount' : 106 lignes supprimées.
+2025-01-20 17:30:37.444 | INFO     | __main__:data_processing:91 - Colonne 'Date of Admission' : 0 valeurs invalides après conversion.
+2025-01-20 17:30:37.450 | INFO     | __main__:data_processing:91 - Colonne 'Discharge Date' : 0 valeurs invalides après conversion.
+2025-01-20 17:30:37.450 | INFO     | __main__:data_processing:95 - Colonnes renommées pour standardisation.
+2025-01-20 17:30:37.467 | INFO     | __main__:data_processing:115 - Colonne 'doctor' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 17:30:37.484 | INFO     | __main__:data_processing:115 - Colonne 'hospital' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 17:30:37.497 | INFO     | __main__:data_processing:115 - Colonne 'medical_condition' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 17:30:37.510 | INFO     | __main__:data_processing:115 - Colonne 'insurance_provider' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 17:30:37.523 | INFO     | __main__:data_processing:115 - Colonne 'medication' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 17:30:37.537 | INFO     | __main__:data_processing:115 - Colonne 'test_results' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 17:30:37.552 | INFO     | __main__:data_processing:120 - Colonne 'name' formatée avec une majuscule pour chaque mot.
+2025-01-20 17:30:37.561 | INFO     | __main__:data_processing:123 - Aperçu des premières lignes des données nettoyées :
+            name  age  gender  ... discharge_date   medication  test_results
+0  Bobby Jackson   30    Male  ...     2024-02-02  Paracetamol        Normal
+1   Leslie Terry   62    Male  ...     2019-08-26    Ibuprofen  Inconclusive
+2    Danny Smith   76  Female  ...     2022-10-07      Aspirin        Normal
+3   Andrew Watts   28  Female  ...     2020-12-18    Ibuprofen      Abnormal
+4  Adrienne Bell   43  Female  ...     2022-10-09   Penicillin      Abnormal
+
+[5 rows x 15 columns]
+2025-01-20 17:30:37.562 | INFO     | __main__:data_processing:124 - Types des colonnes après nettoyage :
+name                          object
+age                            int64
+gender                        object
+blood_type                    object
+medical_condition             object
+date_of_admission     datetime64[ns]
+doctor                        object
+hospital                      object
+insurance_provider            object
+billing_amount               float64
+room_number                    int64
+admission_type                object
+discharge_date        datetime64[ns]
+medication                    object
+test_results                  object
+dtype: object
+2025-01-20 17:30:37.562 | SUCCESS  | __main__:data_processing:126 - Nettoyage des données terminé.
+2025-01-20 17:30:37.563 | INFO     | __main__:data_processing:129 - Sauvegarde des données nettoyées dans : data/processed/healthcare_dataset_cleaned.csv
+2025-01-20 17:30:38.037 | SUCCESS  | __main__:data_processing:133 - Fichier nettoyé sauvegardé avec succès dans : data/processed/healthcare_dataset_cleaned.csv
+2025-01-20 17:42:59.622 | INFO     | __main__:data_processing:25 - Téléchargement des données depuis Kaggle : prasad22/healthcare-dataset...
+2025-01-20 17:43:01.481 | SUCCESS  | __main__:data_processing:29 - Dataset téléchargé avec succès dans : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2
+2025-01-20 17:43:01.481 | INFO     | __main__:data_processing:36 - Fichier localisé pour traitement : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2/healthcare_dataset.csv
+2025-01-20 17:43:01.482 | INFO     | __main__:data_processing:42 - Chargement des données depuis : /root/.cache/kagglehub/datasets/prasad22/healthcare-dataset/versions/2/healthcare_dataset.csv
+2025-01-20 17:43:01.598 | INFO     | __main__:data_processing:45 - Données chargées : 55500 lignes, 15 colonnes.
+2025-01-20 17:43:01.599 | INFO     | __main__:data_processing:46 - Colonnes disponibles : ['Name', 'Age', 'Gender', 'Blood Type', 'Medical Condition', 'Date of Admission', 'Doctor', 'Hospital', 'Insurance Provider', 'Billing Amount', 'Room Number', 'Admission Type', 'Discharge Date', 'Medication', 'Test Results']
+2025-01-20 17:43:01.600 | INFO     | __main__:data_processing:47 - Types des colonnes avant nettoyage :
+Name                   object
+Age                     int64
+Gender                 object
+Blood Type             object
+Medical Condition      object
+Date of Admission      object
+Doctor                 object
+Hospital               object
+Insurance Provider     object
+Billing Amount        float64
+Room Number             int64
+Admission Type         object
+Discharge Date         object
+Medication             object
+Test Results           object
+dtype: object
+2025-01-20 17:43:01.608 | INFO     | __main__:data_processing:50 - Aperçu des premières lignes des données brutes :
+            Name  Age  Gender  ... Discharge Date   Medication  Test Results
+0  Bobby JacksOn   30    Male  ...     2024-02-02  Paracetamol        Normal
+1   LesLie TErRy   62    Male  ...     2019-08-26    Ibuprofen  Inconclusive
+2    DaNnY sMitH   76  Female  ...     2022-10-07      Aspirin        Normal
+3   andrEw waTtS   28  Female  ...     2020-12-18    Ibuprofen      Abnormal
+4  adrIENNE bEll   43  Female  ...     2022-10-09   Penicillin      Abnormal
+
+[5 rows x 15 columns]
+2025-01-20 17:43:01.609 | INFO     | __main__:data_processing:56 - Début du nettoyage des données...
+2025-01-20 17:43:01.651 | INFO     | __main__:data_processing:61 - Doublons supprimés : 534 lignes.
+2025-01-20 17:43:01.652 | INFO     | __main__:data_processing:73 - Colonne 'Age' convertie avec succès en <class 'int'>.
+2025-01-20 17:43:01.659 | INFO     | __main__:data_processing:83 - Valeurs aberrantes supprimées pour 'Age' : 0 lignes supprimées.
+2025-01-20 17:43:01.660 | INFO     | __main__:data_processing:73 - Colonne 'Billing Amount' convertie avec succès en <class 'float'>.
+2025-01-20 17:43:01.668 | INFO     | __main__:data_processing:83 - Valeurs aberrantes supprimées pour 'Billing Amount' : 106 lignes supprimées.
+2025-01-20 17:43:01.675 | INFO     | __main__:data_processing:91 - Colonne 'Date of Admission' : 0 valeurs invalides après conversion.
+2025-01-20 17:43:01.681 | INFO     | __main__:data_processing:91 - Colonne 'Discharge Date' : 0 valeurs invalides après conversion.
+2025-01-20 17:43:01.682 | INFO     | __main__:data_processing:95 - Colonnes renommées pour standardisation.
+2025-01-20 17:43:01.701 | INFO     | __main__:data_processing:115 - Colonne 'doctor' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 17:43:01.719 | INFO     | __main__:data_processing:115 - Colonne 'hospital' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 17:43:01.733 | INFO     | __main__:data_processing:115 - Colonne 'medical_condition' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 17:43:01.747 | INFO     | __main__:data_processing:115 - Colonne 'insurance_provider' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 17:43:01.760 | INFO     | __main__:data_processing:115 - Colonne 'medication' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 17:43:01.774 | INFO     | __main__:data_processing:115 - Colonne 'test_results' nettoyée : suppression des espaces et mise en forme standardisée.
+2025-01-20 17:43:01.790 | INFO     | __main__:data_processing:120 - Colonne 'name' formatée avec une majuscule pour chaque mot.
+2025-01-20 17:43:01.799 | INFO     | __main__:data_processing:123 - Aperçu des premières lignes des données nettoyées :
+            name  age  gender  ... discharge_date   medication  test_results
+0  Bobby Jackson   30    Male  ...     2024-02-02  Paracetamol        Normal
+1   Leslie Terry   62    Male  ...     2019-08-26    Ibuprofen  Inconclusive
+2    Danny Smith   76  Female  ...     2022-10-07      Aspirin        Normal
+3   Andrew Watts   28  Female  ...     2020-12-18    Ibuprofen      Abnormal
+4  Adrienne Bell   43  Female  ...     2022-10-09   Penicillin      Abnormal
+
+[5 rows x 15 columns]
+2025-01-20 17:43:01.801 | INFO     | __main__:data_processing:124 - Types des colonnes après nettoyage :
+name                          object
+age                            int64
+gender                        object
+blood_type                    object
+medical_condition             object
+date_of_admission     datetime64[ns]
+doctor                        object
+hospital                      object
+insurance_provider            object
+billing_amount               float64
+room_number                    int64
+admission_type                object
+discharge_date        datetime64[ns]
+medication                    object
+test_results                  object
+dtype: object
+2025-01-20 17:43:01.801 | SUCCESS  | __main__:data_processing:126 - Nettoyage des données terminé.
+2025-01-20 17:43:01.802 | INFO     | __main__:data_processing:129 - Sauvegarde des données nettoyées dans : data/processed/healthcare_dataset_cleaned.csv
+2025-01-20 17:43:02.392 | SUCCESS  | __main__:data_processing:133 - Fichier nettoyé sauvegardé avec succès dans : data/processed/healthcare_dataset_cleaned.csv
