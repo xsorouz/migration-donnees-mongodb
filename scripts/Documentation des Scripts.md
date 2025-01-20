@@ -1368,41 +1368,43 @@ Le script **`interactive_cli.py`** est un outil puissant et flexible pour intera
 
 ## **Objectif principal**
 
-Le script **`test.py`** utilise **`pytest`** pour tester les fonctionnalités CRUD et d’exportation définies dans le module **`crud.py`**. Il vérifie que les opérations fonctionnent correctement avec MongoDB, identifie les erreurs potentielles et garantit la stabilité du projet.
+Le script **`test.py`** est conçu pour valider les fonctionnalités principales du module **`crud.py`**, notamment les opérations CRUD (Create, Read, Update, Delete) et l'exportation de données depuis MongoDB vers un fichier CSV. Chaque test est isolé grâce à l'utilisation de bases de données temporaires et garantit que les fonctions fonctionnent comme prévu.
 
 ---
 
-## **Configuration et Préparation**
+## **Structure et Configuration**
 
 ### **1. Configuration des logs**
 
 - **Fichier de log** : `logs/test.log`.
-- **Niveau** : INFO.
-- **Rotation des logs** : Compression automatique des fichiers dépassant 1 Mo.
+- **Niveau de log** : INFO.
+- **Rotation** : Les fichiers de log sont compressés automatiquement lorsqu'ils atteignent 1 Mo.
 
-### **2. Fixture `mongodb_client`**
+---
+
+### **2. Fonction utilitaire : `get_mongodb_client()`**
 
 ### **Rôle**
 
-- Configure une base MongoDB temporaire pour les tests.
+- Configure une base de données MongoDB temporaire pour chaque test.
+- Retourne une collection MongoDB prête à l'emploi et une fonction de nettoyage associée.
 
 ### **Étapes principales**
 
-1. Connexion à MongoDB via **`MongoClient`**.
-2. Création d'une base de données temporaire **`test_healthcare_database`**.
-3. Création d'une collection **`patients_data`**.
-4. Nettoyage initial des données avant chaque test.
-5. Suppression de la base temporaire après les tests.
+1. Crée une base de données temporaire avec un nom unique pour éviter les conflits.
+2. Connecte à MongoDB via **`MongoClient`**.
+3. Crée une collection temporaire : `test_patients_data`.
+4. Définit une fonction interne **`cleanup()`** pour supprimer la base de données temporaire et fermer la connexion après chaque test.
 
 ### **Retour**
 
-- Une collection MongoDB prête pour les tests.
+- Une collection MongoDB et une fonction de nettoyage à appeler après chaque test.
 
 ---
 
 ## **Détails des tests**
 
-### **1. Test : `test_insert_records`**
+### **1. Test : `test_insert_records()`**
 
 ### **Rôle**
 
@@ -1410,17 +1412,18 @@ Le script **`test.py`** utilise **`pytest`** pour tester les fonctionnalités CR
 
 ### **Étapes principales**
 
-1. Prépare une liste de documents avec des champs variés.
-2. Utilise **`insert_records`** pour insérer les documents.
+1. Prépare une liste de documents avec des identifiants uniques.
+2. Insère les documents via **`insert_records()`**.
 3. Vérifie que le nombre de documents insérés correspond au nombre attendu.
 
-### **Assertion**
+### **Assertions**
 
-- Compare le nombre de documents insérés avec la liste initiale.
+- Le nombre de documents insérés doit être exact.
+- Les documents insérés doivent correspondre aux données initiales.
 
 ---
 
-### **2. Test : `test_read_records`**
+### **2. Test : `test_read_records()`**
 
 ### **Rôle**
 
@@ -1428,53 +1431,55 @@ Le script **`test.py`** utilise **`pytest`** pour tester les fonctionnalités CR
 
 ### **Étapes principales**
 
-1. Insère des documents dans la collection.
-2. Utilise **`read_records`** pour récupérer les documents avec un filtre spécifique.
-3. Vérifie que les résultats correspondent au filtre.
+1. Insère des documents dans la collection temporaire.
+2. Utilise **`read_records()`** pour lire les documents avec un filtre spécifique.
+3. Vérifie que les résultats correspondent au filtre appliqué.
 
-### **Assertion**
+### **Assertions**
 
-- Confirme que le filtre retourne exactement les résultats attendus.
+- Le filtre doit retourner exactement les résultats attendus.
 
 ---
 
-### **3. Test : `test_update_records`**
+### **3. Test : `test_update_records()`**
 
 ### **Rôle**
 
-- Vérifie que les documents MongoDB peuvent être mis à jour.
+- Vérifie que les documents MongoDB peuvent être mis à jour correctement.
 
 ### **Étapes principales**
 
-1. Insère un document avec des valeurs initiales.
-2. Applique une mise à jour via **`update_records`**.
-3. Vérifie que le champ mis à jour correspond à la nouvelle valeur.
+1. Insère un document initial avec des valeurs définies.
+2. Met à jour un champ du document via **`update_records()`**.
+3. Vérifie que la mise à jour est appliquée correctement.
 
-### **Assertion**
+### **Assertions**
 
-- Vérifie que le nombre de documents mis à jour est correct.
+- Le nombre de documents mis à jour doit être exact.
+- La valeur mise à jour doit correspondre à la nouvelle valeur.
 
 ---
 
-### **4. Test : `test_delete_records`**
+### **4. Test : `test_delete_records()`**
 
 ### **Rôle**
 
-- Vérifie que les documents sont supprimés correctement.
+- Vérifie que les documents peuvent être supprimés correctement.
 
 ### **Étapes principales**
 
-1. Insère des documents dans la collection.
-2. Supprime des documents spécifiques via **`delete_records`**.
-3. Vérifie que les documents supprimés ne sont plus présents.
+1. Insère un ou plusieurs documents dans la collection.
+2. Supprime un document spécifique via **`delete_records()`**.
+3. Vérifie que le document supprimé n'existe plus.
 
-### **Assertion**
+### **Assertions**
 
-- Confirme que le nombre de documents supprimés est exact.
+- Le nombre de documents supprimés doit être exact.
+- La collection doit être vide après la suppression si tous les documents ont été supprimés.
 
 ---
 
-### **5. Test : `test_export_to_csv`**
+### **5. Test : `test_export_to_csv()`**
 
 ### **Rôle**
 
@@ -1482,15 +1487,23 @@ Le script **`test.py`** utilise **`pytest`** pour tester les fonctionnalités CR
 
 ### **Étapes principales**
 
-1. Insère des documents dans la collection.
-2. Utilise **`export_to_csv`** pour générer un fichier CSV.
-3. Vérifie que le fichier CSV est créé.
-4. Vérifie que les données exportées correspondent aux documents insérés.
-5. Supprime le fichier CSV après le test.
+1. Insère des documents dans la collection temporaire.
+2. Utilise **`export_to_csv()`** pour générer un fichier CSV.
+3. Vérifie que :
+    - Le fichier CSV est créé.
+    - Le contenu du fichier correspond aux données insérées.
+4. Supprime le fichier CSV après le test.
 
-### **Assertion**
+### **Améliorations par rapport à la version précédente**
 
-- Vérifie que le fichier CSV existe et que son contenu est correct.
+- Ajout d'une étape explicite pour créer le répertoire cible avant l'exportation.
+- Utilisation de `os.makedirs()` pour s'assurer que le chemin cible existe.
+- Log détaillé des premières lignes du fichier CSV exporté pour validation.
+
+### **Assertions**
+
+- Le fichier CSV doit exister après l'exportation.
+- Le contenu du fichier doit correspondre aux documents insérés.
 
 ---
 
@@ -1498,39 +1511,42 @@ Le script **`test.py`** utilise **`pytest`** pour tester les fonctionnalités CR
 
 ### **1. Validation fonctionnelle**
 
-- Vérifie que toutes les fonctionnalités CRUD et d'exportation fonctionnent comme prévu.
+- Garantit que toutes les opérations CRUD et d'exportation fonctionnent comme prévu.
 
 ### **2. Détection des erreurs**
 
-- Identifie rapidement les erreurs dans les modules ou fonctions testées.
+- Identifie rapidement les anomalies ou régressions dans les fonctions CRUD.
 
 ### **3. Automatisation**
 
-- Facilite la vérification continue lors des modifications du code.
+- Peut être intégré dans une pipeline CI/CD pour des tests automatisés.
 
 ---
 
 ## **Dépendances**
 
-1. **`pytest`** : Pour exécuter les tests et générer des rapports.
-2. **`pymongo`** : Pour interagir avec MongoDB pendant les tests.
-3. **`crud.py`** : Contient les fonctions CRUD testées.
-4. **`os`** : Utilisé pour gérer les fichiers exportés (CSV).
-5. **`loguru`** : Gère les logs d'événements et d'erreurs.
+1. **`pymongo`** : Interagit avec MongoDB.
+2. **`crud.py`** : Fournit les fonctions CRUD testées.
+3. **`loguru`** : Gère les logs d'événements et d'erreurs.
+4. **`os`** : Gère les fichiers exportés (CSV).
+5. **`uuid`** : Génère des identifiants uniques pour les bases de données temporaires.
 
 ---
 
 ## **Améliorations suggérées**
 
-### **1. Étendre les tests**
+### **1. Couverture des cas limites**
 
-- Ajouter des tests pour les cas suivants :
-    - Tentative d’insertion avec des documents invalides.
-    - Exportation avec une collection vide.
+- Tester l'insertion de documents invalides.
+- Exportation avec une collection vide.
 
-### **2. Paramétrage des bases**
+### **2. Paramètres dynamiques**
 
-- Tester dynamiquement différentes bases ou collections via des paramètres.
+- Tester différentes bases ou collections via des paramètres.
+
+### **3. Documentation**
+
+- Inclure des exemples d'utilisation pour chaque test.
 
 ---
 
