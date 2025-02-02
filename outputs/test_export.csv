@@ -1,0 +1,7 @@
+name,age,gender,blood_type,medical_condition,date_of_admission,doctor,hospital,insurance_provider,billing_amount,room_number,admission_type,discharge_date,medication,test_results
+Clara Martinez,29,Female,B+,Asthma,2023-12-01,Dr. Gomez,Northwest Medical,United Health,2000.0,303,Routine,2023-12-05,Inhaler,Stable
+Sophia White,38,Non-Binary,O+,Arthritis,2023-09-10,Dr. Ford,Green Valley Hospital,Aetna,2500.0,505,Routine,2023-09-15,Ibuprofen,Stable
+Liam Green,48,Male,AB+,High Cholesterol,2023-07-22,Dr. Watson,Sunnyvale Medical,United Health,3200.0,707,Routine,2023-07-27,Statins,Improving
+Emma Wilson,41,Female,AB+,Severe Migraine,2023-10-08,Dr. Bell,Hilltop Hospital,Cigna,2800.0,808,Emergency,2023-10-11,Sumatriptan,Stable
+William Scott,50,Male,O-,Kidney Stones,2024-01-15,Dr. Collins,Lakeside Hospital,Medicare,6200.0,909,Emergency,2024-01-20,Painkillers,Improving
+Isabella Moore,37,Female,A+,Anemia,2023-05-10,Dr. Wright,Riverside Clinic,Blue Cross,3100.0,1010,Routine,2023-05-15,Iron Supplements,Stable

@@ -1,0 +1,135 @@
+# === docker-compose.yml ===
+ 
+services:
+  # =============================
+  # Service MongoDB
+  # =============================
+  mongodb_service:
+    image: mongo:5.0  # Utilise l'image officielle MongoDB version 5.0
+    container_name: mongodb_service_container  # Nom explicite pour le conteneur MongoDB
+    ports:
+      - "27017:27017"  # Expose MongoDB sur le port 27017 (local -> conteneur)
+    volumes:
+      - mongodb_data:/data/db  # Monte un volume pour persister les données MongoDB
+    networks:
+      - custom_network  # Partage le réseau entre les services
+    logging:  # Configuration des logs pour éviter une surcharge
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+   # =============================
+  # Service de traitement des données
+  # =============================
+  data_processing:
+    build:  # Construit une image personnalisée à partir du Dockerfile
+      context: ../  # Le contexte de construction est le répertoire parent
+      dockerfile: docker/Dockerfile  # Spécifie le Dockerfile utilisé pour ce service
+    container_name: data_processing_container  # Nom explicite pour ce conteneur
+    command: ["python", "/app/scripts/data_processing.py"]  # Exécute le script pour nettoyer les données
+    environment:
+      - RAW_DIR=/app/data/raw  # Répertoire pour les données brutes dans le conteneur
+      - PROCESSED_DIR=/app/data/processed  # Répertoire pour les données nettoyées
+    volumes:  # Monte les répertoires nécessaires pour les scripts et les logs
+      - ../data:/app/data
+      - ../logs:/app/logs
+      - ../scripts:/app/scripts
+    networks:
+      - custom_network  # Connecte le service au réseau partagé
+
+  # =============================
+  # Service pour configurer les utilisateurs MongoDB
+  # =============================
+  setup_users:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    container_name: setup_users_container  # Nom explicite pour le conteneur
+    depends_on:  # S'assure que MongoDB est prêt avant l'exécution de ce service
+      - mongodb_service
+    command: ["python", "/app/scripts/setup_users.py"]  # Exécute le script de configuration des utilisateurs
+    volumes:  # Monte les scripts nécessaires
+      - ../scripts:/app/scripts
+    networks:
+      - custom_network  # Connecte le service au réseau partagé
+
+  # =============================
+  # Service pour initialiser les données utilisateur
+  # =============================
+  initialize_users:
+    build:
+      context: ../  # Remonte d'un répertoire pour accéder au Dockerfile
+      dockerfile: docker/Dockerfile
+    container_name: initialize_users_container # Nom explicite pour le conteneur
+    depends_on: # S'assure que la configuration des utilisateurs est terminée avant l'exécution
+      - mongodb_service
+      - setup_users  # Exécute après la configuration des utilisateurs
+    command: ["python", "/app/scripts/initialize_users.py"]  # Commande pour initialiser les utilisateurs
+    volumes:
+      - ../scripts:/app/scripts  # Monte les scripts nécessaires dans le conteneur
+      - ../data:/app/data  # Inclut les fichiers de données nécessaires
+    networks:
+      - custom_network # Connecte le service au réseau partagé
+
+  # =============================
+  # Service pour les tests
+  # =============================
+  test_service:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    container_name: test_service_container  # Nom explicite pour le conteneur
+    depends_on:  # S'assure que MongoDB est prêt avant l'exécution des tests
+      - mongodb_service
+    command: ["python", "/app/scripts/test.py"]  # Exécute le fichier test.py avec Python
+    environment:
+      - OUTPUT_DIR=/app/outputs
+    volumes:
+      - ../data:/app/data  # Inclut les fichiers de données nécessaires
+      - ../scripts:/app/scripts  # Monte les scripts nécessaires pour les tests
+      - ../outputs:/app/outputs  # Monte le répertoire pour les fichiers de sortie
+      - ../logs:/app/logs  # Monte le répertoire des logs
+    networks:
+      - custom_network  # Connecte le service au réseau partagé
+    logging:  # Configure les logs pour ce service
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # =============================
+  # Service principal pour exécuter les commandes CRUD
+  # =============================
+  python_application:
+    build:
+      context: ../  # Remonte d'un répertoire pour accéder au Dockerfile
+      dockerfile: docker/Dockerfile
+    container_name: python_application_container
+    depends_on:
+      - mongodb_service
+      - initialize_users  # S'assure que les utilisateurs sont initialisés avant
+    command: ["python", "/app/scripts/main.py", "/app/data/processed/healthcare_dataset_cleaned.csv"]  # Commande principale CRUD
+    volumes:
+      - ../scripts:/app/scripts  # Monte les scripts nécessaires dans le conteneur
+      - ../data:/app/data  # Monte les données dans le conteneur
+      - ../logs:/app/logs  # Monte le répertoire des logs
+      - ../outputs:/app/outputs  # Monte le répertoire pour les fichiers de sortie
+    stdin_open: true  # Permet d'interagir avec le terminal
+    tty: true  # Active un terminal interactif
+    networks:
+      - custom_network # Connecte le service au réseau partagé
+
+# =============================
+# Définition des volumes
+# =============================
+volumes:
+  mongodb_data:  # Volume pour persister les données MongoDB
+    driver: local
+
+# =============================
+# Définition des réseaux
+# =============================
+networks:
+  custom_network:  # Réseau partagé entre les services
+    driver: bridge

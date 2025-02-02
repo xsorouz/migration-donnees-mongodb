@@ -1,0 +1,705 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Déploiement de votre projet sur Google Cloud Platform</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="182e449d-9ee7-8090-861c-c546b7e1bc40" class="page sans"><header><h1 class="page-title">Déploiement de votre projet sur Google Cloud Platform</h1><p class="page-description"></p></header><div class="page-body"><h3 id="182e449d-9ee7-80e2-b4eb-cd1f318449e0" class="">Guide complet : </h3><p id="182e449d-9ee7-807e-b6bb-de5c083035c8" class="">Ce guide vous accompagne pas à pas pour installer, configurer et déployer un projet Python avec Docker et MongoDB sur une machine virtuelle (VM) Google Cloud Platform (GCP).</p><hr id="182e449d-9ee7-80d4-9883-fbbcaee91c6e"/><h2 id="182e449d-9ee7-8016-8e3e-ec157881429a" class=""><strong>Étape 1 : Créer et accéder à une VM sur GCP</strong></h2><ol type="1" id="182e449d-9ee7-80e1-8524-f8d588a9138d" class="numbered-list" start="1"><li>Connectez-vous à votre compte GCP et allez dans <strong>Compute Engine &gt; VM Instances</strong>.</li></ol><ol type="1" id="182e449d-9ee7-80c8-9f63-ecf1751af55e" class="numbered-list" start="2"><li>Cliquez sur <strong>Créer une instance</strong> et configurez :<ul id="182e449d-9ee7-8066-b386-ea37b0577174" class="bulleted-list"><li style="list-style-type:disc">Nom : <code>vm-mongo-migration</code>.</li></ul><ul id="182e449d-9ee7-8055-acea-f89614e76990" class="bulleted-list"><li style="list-style-type:disc">Type de machine : <code>e2-medium</code> (2 vCPU, 4 Go de RAM).</li></ul><ul id="182e449d-9ee7-802f-a9b1-ccabe76b06a2" class="bulleted-list"><li style="list-style-type:disc">Système d&#x27;exploitation : <strong>Ubuntu 20.04</strong>.</li></ul><ul id="182e449d-9ee7-80c2-bf32-ca21adbbee88" class="bulleted-list"><li style="list-style-type:disc">Autorisez le trafic HTTP et HTTPS.</li></ul></li></ol><ol type="1" id="182e449d-9ee7-80d6-ab6f-fed1a444536c" class="numbered-list" start="3"><li>Cliquez sur <strong>Démarrer</strong>.</li></ol><ol type="1" id="182e449d-9ee7-80e7-a615-cc4f16f9c036" class="numbered-list" start="4"><li>Une fois la VM créée, accédez-y en cliquant sur le bouton <strong>SSH</strong>.</li></ol><hr id="182e449d-9ee7-8073-98bd-cb432538a365"/><h2 id="182e449d-9ee7-8078-bda0-e0f07ef24b76" class=""><strong>Étape 2 : Préparer la VM</strong></h2><h3 id="182e449d-9ee7-8011-a555-c0d23afd35ec" class="">Installer les outils essentiels</h3><ol type="1" id="182e449d-9ee7-80e2-b317-ef0bdfa4eca4" class="numbered-list" start="1"><li><strong>Mettre à jour la machine</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8045-a8e0-cfe2df6e2dce" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">sudo apt update &amp;&amp; sudo apt upgrade -y</code></pre></li></ol><ol type="1" id="182e449d-9ee7-80a1-bd69-cc27d866f858" class="numbered-list" start="2"><li><strong>Installer Git</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-802c-9a67-d36145e844da" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">sudo apt install -y git</code></pre><ul id="182e449d-9ee7-80d8-ba7d-f7f6f0f0003b" class="bulleted-list"><li style="list-style-type:disc">Vérifiez l&#x27;installation :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8038-9a02-f8c58e8e8065" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">git --version</code></pre></li></ul></li></ol><ol type="1" id="182e449d-9ee7-80fd-871c-c5b00238c19e" class="numbered-list" start="3"><li><strong>Installer Python et pip</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80a4-ba29-ce9e1e067388" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">sudo apt install -y python3 python3-pip</code></pre></li></ol><ol type="1" id="182e449d-9ee7-80f0-b5b6-c840e816c312" class="numbered-list" start="4"><li><strong>Configurer les règles de pare-feu pour MongoDB</strong> :<ul id="182e449d-9ee7-80a7-acde-d91e39f6d505" class="bulleted-list"><li style="list-style-type:disc">Accédez à <strong>VPC Network &gt; Règles de pare-feu</strong> dans le menu GCP.</li></ul><ul id="182e449d-9ee7-8009-8dd1-ea8f288a5fcd" class="bulleted-list"><li style="list-style-type:disc">Cliquez sur <strong>Créer une règle de pare-feu</strong> et configurez :<ul id="182e449d-9ee7-807b-a185-f7ce5b7ad536" class="bulleted-list"><li style="list-style-type:circle"><strong>Nom</strong> : <code>allow-mongodb</code>.</li></ul><ul id="182e449d-9ee7-80b6-a432-fdf732311ccc" class="bulleted-list"><li style="list-style-type:circle"><strong>Réseau</strong> : Par défaut (ou celui de votre VM).</li></ul><ul id="182e449d-9ee7-8014-b9c5-dcff04a20b53" class="bulleted-list"><li style="list-style-type:circle"><strong>Cibles</strong> : Toutes les instances ou spécifiez votre VM.</li></ul><ul id="182e449d-9ee7-8020-ba7e-e65bcb5ac14c" class="bulleted-list"><li style="list-style-type:circle"><strong>Filtres IP source</strong> : Limitez l&#x27;accès à une plage IP (par exemple, uniquement votre IP publique).</li></ul><ul id="182e449d-9ee7-80a0-b20c-def42e857411" class="bulleted-list"><li style="list-style-type:circle"><strong>Protocoles et ports</strong> : TCP, port <strong>27017</strong>.</li></ul></li></ul><ul id="182e449d-9ee7-80fa-8d1b-e436792acc02" class="bulleted-list"><li style="list-style-type:disc">Enregistrez la règle et vérifiez qu&#x27;elle est appliquée.</li></ul></li></ol><ol type="1" id="182e449d-9ee7-8081-bc14-f5b558c28639" class="numbered-list" start="5"><li><strong>Installer Docker</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8084-9c7c-f76b184c030e" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">sudo apt install -y docker.io
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER</code></pre><ul id="182e449d-9ee7-80c2-88cc-e2434b242a53" class="bulleted-list"><li style="list-style-type:disc"><strong>Redémarrez votre session SSH</strong> pour appliquer les changements.</li></ul></li></ol><ol type="1" id="182e449d-9ee7-8099-b38f-fbc972c51ca3" class="numbered-list" start="6"><li><strong>Installer Docker Compose</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80a2-885f-dac99e8de64c" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">sudo curl -L &quot;https://github.com/docker/compose/releases/download/v2.22.0/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose</code></pre><ul id="182e449d-9ee7-808a-a3d9-d59c165716cc" class="bulleted-list"><li style="list-style-type:disc">Vérifiez l&#x27;installation :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80c3-b2b0-c043f07002ca" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">docker-compose --version</code></pre></li></ul></li></ol><h3 id="182e449d-9ee7-8065-989b-c2fbc6e1f2ac" class="">Installer les outils essentiels</h3><ol type="1" id="182e449d-9ee7-80bf-9bb6-cf4ef1fdc2df" class="numbered-list" start="1"><li><strong>Mettre à jour la machine</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8092-8025-d0deb0abd77c" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">sudo apt update &amp;&amp; sudo apt upgrade -y</code></pre></li></ol><ol type="1" id="182e449d-9ee7-8051-aee2-d864819e1066" class="numbered-list" start="2"><li><strong>Installer Git</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80ad-9f43-e95032993d5f" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">sudo apt install -y git</code></pre><ul id="182e449d-9ee7-800e-b948-f3f2f7e157cd" class="bulleted-list"><li style="list-style-type:disc">Vérifiez l&#x27;installation :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8023-9d62-d83864887e75" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">git --version
+</code></pre></li></ul></li></ol><ol type="1" id="182e449d-9ee7-80c4-8e65-e38262c00dad" class="numbered-list" start="3"><li><strong>Installer Python et pip</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-803c-bac7-ef6f4f223eec" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">sudo apt install -y python3 python3-pip</code></pre></li></ol><ol type="1" id="182e449d-9ee7-8041-9eb4-f4b327bf1955" class="numbered-list" start="4"><li><strong>Installer Docker</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-808b-8cda-e2220f11117a" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">sudo apt install -y docker.io
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER</code></pre><ul id="182e449d-9ee7-804b-8f9f-f74e9dd808c9" class="bulleted-list"><li style="list-style-type:disc"><strong>Redémarrez votre session SSH</strong> pour appliquer les changements.</li></ul></li></ol><ol type="1" id="182e449d-9ee7-8017-a0db-e3ed26fcbf64" class="numbered-list" start="5"><li><strong>Installer Docker Compose</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8032-ba76-ebbaf6238445" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">sudo curl -L &quot;https://github.com/docker/compose/releases/download/v2.22.0/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose</code></pre><ul id="182e449d-9ee7-80ed-a9d2-dc90e2774ed5" class="bulleted-list"><li style="list-style-type:disc">Vérifiez l&#x27;installation :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8024-8d58-fc46396be4ba" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">docker-compose --version</code></pre></li></ul></li></ol><hr id="182e449d-9ee7-80d1-81a6-eb5e1c8af135"/><h2 id="182e449d-9ee7-809e-bba7-ea20bdfe412b" class=""><strong>Étape 3 : Cloner votre projet GitHub</strong></h2><ol type="1" id="182e449d-9ee7-8021-a685-cfbac15629cb" class="numbered-list" start="1"><li><strong>Configurer une clé SSH dans GitHub</strong> :<ul id="182e449d-9ee7-8014-afa7-d0662a0d7cf0" class="bulleted-list"><li style="list-style-type:disc">Si votre dépôt est privé, configurez une clé SSH pour éviter de saisir vos identifiants à chaque clonage.</li></ul><ul id="182e449d-9ee7-8089-b452-f70717e5753a" class="bulleted-list"><li style="list-style-type:disc"><strong>Générer une clé SSH</strong> :<br/><br/>Appuyez sur Entrée pour accepter les chemins par défaut et choisissez un mot de passe si souhaité.<br/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8083-affc-e38e1dd66e6f" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">ssh-keygen -t ed25519 -C &quot;votre-email@example.com&quot;</code></pre></li></ul><ul id="182e449d-9ee7-8090-918e-d8f37e2f5714" class="bulleted-list"><li style="list-style-type:disc"><strong>Afficher la clé publique</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-800a-8b95-c77e56ac3b9c" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">cat ~/.ssh/id_ed25519.pub</code></pre></li></ul><ul id="182e449d-9ee7-808b-8bf4-f66dc6d45ba0" class="bulleted-list"><li style="list-style-type:disc">Copiez la clé affichée et ajoutez-la dans votre compte GitHub :<ul id="182e449d-9ee7-80c6-9529-d65ec907b721" class="bulleted-list"><li style="list-style-type:circle">Allez sur GitHub, cliquez sur votre photo de profil &gt; <strong>Settings</strong> &gt; <strong>SSH and GPG keys</strong>.</li></ul><ul id="182e449d-9ee7-8051-ad4d-c0cb7ea749fe" class="bulleted-list"><li style="list-style-type:circle">Cliquez sur <strong>New SSH key</strong>, collez la clé, donnez-lui un nom et sauvegardez.</li></ul></li></ul></li></ol><ol type="1" id="182e449d-9ee7-80a5-b996-cba84091b80b" class="numbered-list" start="2"><li><strong>Cloner le dépôt</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80a4-97d5-f63a599ddd1a" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">git clone git@github.com:xsorouz/migration-donnees-mongodb.git
+cd migration-donnees-mongodb</code></pre></li></ol><ol type="1" id="182e449d-9ee7-80f3-9922-fc8674a49d4c" class="numbered-list" start="3"><li><strong>Vérifier les fichiers</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80ef-a097-c97808b0489b" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">ls</code></pre><ul id="182e449d-9ee7-80db-90aa-e28268d9dec3" class="bulleted-list"><li style="list-style-type:disc">Vous devriez voir des fichiers comme <code>docker-compose.yml</code> et <code>main.py</code>.</li></ul></li></ol><ol type="1" id="182e449d-9ee7-80fd-b1df-f8be841e93f4" class="numbered-list" start="4"><li><strong>Cloner le dépôt</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80d1-87de-e1b5daf136db" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">git clone https://github.com/xsorouz/migration-donnees-mongodb.git
+cd migration-donnees-mongodb</code></pre></li></ol><ol type="1" id="182e449d-9ee7-804d-aa07-d74233a465ee" class="numbered-list" start="5"><li><strong>Vérifier les fichiers</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8012-b124-df557cf26fa1" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">ls</code></pre><ul id="182e449d-9ee7-8081-b78b-f347fd1ca4f1" class="bulleted-list"><li style="list-style-type:disc">Vous devriez voir des fichiers comme <code>docker-compose.yml</code> et <code>main.py</code>.</li></ul></li></ol><hr id="182e449d-9ee7-80da-bcc3-c18872e2eb71"/><h2 id="182e449d-9ee7-802a-84c8-e32b01b04148" class=""><strong>Étape 4 : Configurer un environnement virtuel Python</strong></h2><ol type="1" id="182e449d-9ee7-809f-bc11-e936b707e44c" class="numbered-list" start="1"><li><strong>Vérifier la version de Python installée</strong> :<ul id="182e449d-9ee7-8001-a9e3-fe5aebb05a81" class="bulleted-list"><li style="list-style-type:disc">Assurez-vous que Python 3.6 ou une version ultérieure est disponible sur votre système :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8012-8752-e6225397218b" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">python3 --version</code></pre></li></ul><ul id="182e449d-9ee7-8085-aa2a-f0581b249c80" class="bulleted-list"><li style="list-style-type:disc">Si Python n’est pas installé, suivez les étapes dans la section précédente pour l’installer.</li></ul></li></ol><ol type="1" id="182e449d-9ee7-80f8-8ab1-e96aa3cb01dc" class="numbered-list" start="2"><li><strong>Installer le package </strong><code><strong>python3-venv</strong></code> :<ul id="182e449d-9ee7-80b3-a18b-c4772aad90b0" class="bulleted-list"><li style="list-style-type:disc">Ce package est nécessaire pour créer des environnements virtuels. Installez-le avec :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-808f-8a12-dfa573d606f0" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">sudo apt install -y python3-venv</code></pre></li></ul><ul id="182e449d-9ee7-80e6-951f-f1b43a4ac5f2" class="bulleted-list"><li style="list-style-type:disc">Si vous rencontrez une erreur, assurez-vous que le système est bien mis à jour et que Python est correctement configuré.</li></ul></li></ol><ol type="1" id="182e449d-9ee7-80a9-98df-ea0bd2595964" class="numbered-list" start="3"><li><strong>Créer un environnement virtuel</strong> :<ul id="182e449d-9ee7-80e5-9a11-f3a0a260f2c5" class="bulleted-list"><li style="list-style-type:disc">Naviguez dans le répertoire de votre projet :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8029-97de-f1a3847043b6" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">cd ~/migration-donnees-mongodb</code></pre></li></ul><ul id="182e449d-9ee7-805a-8689-d1c56032a4b3" class="bulleted-list"><li style="list-style-type:disc">Créez un environnement virtuel :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8013-97ba-ce9266588e92" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">python3 -m venv venv</code></pre></li></ul><ul id="182e449d-9ee7-80a4-ba74-ed33d4541fb0" class="bulleted-list"><li style="list-style-type:disc">Si une erreur indique que le module <code>venv</code> est manquant, assurez-vous que <code>python3-venv</code> est bien installé.</li></ul></li></ol><ol type="1" id="182e449d-9ee7-800f-883f-e4b33a1b5a14" class="numbered-list" start="4"><li><strong>Activer l&#x27;environnement virtuel</strong> :<ul id="182e449d-9ee7-80d1-9765-d18afec82f20" class="bulleted-list"><li style="list-style-type:disc">Activez l&#x27;environnement avec :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8016-856a-cb36d13e48bb" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">source venv/bin/activate</code></pre></li></ul><ul id="182e449d-9ee7-8074-bcff-c72aad051d00" class="bulleted-list"><li style="list-style-type:disc">Une fois activé, vous devriez voir <code>(venv)</code> apparaître au début de votre ligne de commande.</li></ul></li></ol><ol type="1" id="182e449d-9ee7-8009-867c-e0236eb3f148" class="numbered-list" start="5"><li><strong>Installer les dépendances</strong> :<ul id="182e449d-9ee7-80b2-bbfa-e45db0b893c8" class="bulleted-list"><li style="list-style-type:disc">Installez les bibliothèques nécessaires listées dans le fichier <code>requirements.txt</code> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8014-b9e1-f53ec606c2b7" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">pip install -r requirements.txt</code></pre></li></ul><ul id="182e449d-9ee7-80ed-9183-f33f4a382947" class="bulleted-list"><li style="list-style-type:disc">Si une erreur survient, vérifiez que votre environnement est bien activé et que <code>pip</code> est à jour :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-809a-a502-e6accb81ceda" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">pip install --upgrade pip</code></pre></li></ul></li></ol><ol type="1" id="182e449d-9ee7-8023-91b5-f049ea670cab" class="numbered-list" start="6"><li><strong>Installer le package </strong><code><strong>python3-venv</strong></code><ul id="182e449d-9ee7-8020-8adc-c0b0e99c8463" class="bulleted-list"><li style="list-style-type:disc">Vérifiez d&#x27;abord la version de Python disponible sur la VM pour vous assurer qu&#x27;elle est compatible avec <code>venv</code> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80ad-8713-c2488276f6e2" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">python3 --version</code></pre><ul id="182e449d-9ee7-8070-adce-c219cec7b38d" class="bulleted-list"><li style="list-style-type:circle">Python 3.6 ou une version ultérieure est requise.</li></ul></li></ul><ul id="182e449d-9ee7-80b8-8568-f688c4415844" class="bulleted-list"><li style="list-style-type:disc">Installez le package <code>python3-venv</code> avec la commande suivante :</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8080-bc15-c97de11ad188" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">sudo apt install -y python3-venv</code></pre></li></ol><ol type="1" id="182e449d-9ee7-806c-a8c8-cddb8698dd7b" class="numbered-list" start="7"><li><strong>Créer un environnement virtuel</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-808f-a593-f4242f148577" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">python3 -m venv venv</code></pre></li></ol><ol type="1" id="182e449d-9ee7-80de-b65f-dd79b7623a93" class="numbered-list" start="8"><li><strong>Activer l&#x27;environnement virtuel</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-805c-aa78-f6e20a56bb8b" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">source venv/bin/activate</code></pre><ul id="182e449d-9ee7-8043-a256-d3929d699872" class="bulleted-list"><li style="list-style-type:disc">Vous devriez voir <code>(venv)</code> au début de votre ligne de commande.</li></ul></li></ol><ol type="1" id="182e449d-9ee7-8056-9b2f-c75e1687cc66" class="numbered-list" start="9"><li><strong>Installer les dépendances</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-803b-9415-ccd8412d9b2b" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">pip install -r requirements.txt</code></pre></li></ol><hr id="182e449d-9ee7-80b6-996b-dd0c3eeddcc2"/><h2 id="182e449d-9ee7-80d0-a7fb-ec81a1f4fd92" class=""><strong>Étape 5 : Lancer MongoDB avec Docker Compose</strong></h2><ol type="1" id="182e449d-9ee7-80c3-ac4a-cdb0b9596d25" class="numbered-list" start="1"><li><strong>Vérifier la présence du fichier </strong><code><strong>docker-compose.yml</strong></code> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8078-b552-f3e0a4077ea2" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">ls</code></pre><ul id="182e449d-9ee7-80a9-9cc5-ec8ced5bb683" class="bulleted-list"><li style="list-style-type:disc">Assurez-vous que <code>docker-compose.yml</code> est dans le répertoire courant.</li></ul></li></ol><ol type="1" id="182e449d-9ee7-804d-97e9-d77f9e3e42eb" class="numbered-list" start="2"><li><strong>Lancer Docker Compose</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8076-a3a8-d7f1e1d81ad0" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">docker-compose up -d</code></pre><ul id="182e449d-9ee7-8023-8545-c33421084665" class="bulleted-list"><li style="list-style-type:disc">Pour vérifier les conteneurs en cours d&#x27;exécution :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-803d-8141-f7790e07ac88" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">docker ps</code></pre></li></ul></li></ol><ol type="1" id="182e449d-9ee7-8093-a754-ef3168b764e7" class="numbered-list" start="3"><li><strong>Dépanner les problèmes de permissions Docker</strong> :<ul id="182e449d-9ee7-80f7-b292-fb7342fe6aaa" class="bulleted-list"><li style="list-style-type:disc">Si vous rencontrez une erreur comme &quot;permission denied&quot;, ajoutez votre utilisateur au groupe Docker :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80be-9ae4-e16d1ba54acc" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">sudo usermod -aG docker $USER</code></pre><ul id="182e449d-9ee7-805a-baee-ed8c9c23a0e1" class="bulleted-list"><li style="list-style-type:circle">Déconnectez-vous et reconnectez-vous pour appliquer les changements.</li></ul></li></ul><ul id="182e449d-9ee7-80f4-80aa-ef36ee80380b" class="bulleted-list"><li style="list-style-type:disc">Vérifiez que le groupe Docker a les bonnes permissions sur le socket Docker :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80d6-82cd-f5d3300080ed" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">ls -l /var/run/docker.sock</code></pre><ul id="182e449d-9ee7-807f-b38e-c93d3d67a88e" class="bulleted-list"><li style="list-style-type:circle">Si nécessaire, corrigez-les :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80d3-85ed-f251fb5f7c3e" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">sudo chown root:docker /var/run/docker.sock
+sudo chmod 660 /var/run/docker.sock</code></pre></li></ul></li></ul></li></ol><ol type="1" id="182e449d-9ee7-8060-9851-c9cf1f1bb5d0" class="numbered-list" start="4"><li><strong>Vérifier la présence du fichier </strong><code><strong>docker-compose.yml</strong></code> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-800c-b3a7-da29020a05e5" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">ls</code></pre><ul id="182e449d-9ee7-806e-85c4-dbe653024880" class="bulleted-list"><li style="list-style-type:disc">Assurez-vous que <code>docker-compose.yml</code> est dans le répertoire courant.</li></ul></li></ol><ol type="1" id="182e449d-9ee7-80de-a922-e92293bc31a1" class="numbered-list" start="5"><li><strong>Lancer Docker Compose</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80e3-8cd7-fde70dab17a9" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">docker-compose up -d</code></pre><ul id="182e449d-9ee7-800a-a6df-db8464cf4330" class="bulleted-list"><li style="list-style-type:disc">Pour vérifier les conteneurs en cours d&#x27;exécution :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80e6-848a-fb68bface554" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">docker ps</code></pre></li></ul></li></ol><hr id="182e449d-9ee7-8023-8b65-c9acb33df02e"/><h2 id="182e449d-9ee7-8048-9191-d928fb7bd48c" class=""><strong>Étape 6 : Exécuter le projet</strong></h2><ol type="1" id="182e449d-9ee7-80ba-ac33-f26782f483af" class="numbered-list" start="1"><li><strong>Vérifier que les fichiers requis sont présents dans le conteneur</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8021-a619-ccc7b527bbbf" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">docker exec -it &lt;nom_du_conteneur&gt; ls /app/scripts
+docker exec -it &lt;nom_du_conteneur&gt; ls /app/data/processed</code></pre></li></ol><ol type="1" id="182e449d-9ee7-80f9-b3bc-fb0825f177ab" class="numbered-list" start="2"><li><strong>Exécuter le script Python dans le conteneur</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-806e-9ed8-e2ecd1fac9a6" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">docker exec -it python_application_container python /app/scripts/main.py /app/data/processed/healthcare_dataset_cleaned.csv</code></pre></li></ol><hr id="182e449d-9ee7-808c-a2e3-eba852fa6db6"/><h2 id="182e449d-9ee7-80e2-bc61-c58088b218a8" class=""><strong>Étape 7 : Sauvegarder et éteindre la VM</strong></h2><ol type="1" id="182e449d-9ee7-80da-a573-f4e4cc605da8" class="numbered-list" start="1"><li><strong>Sauvegarder les modifications sur GitHub</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80d7-ba81-e9849b02548e" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">git add .
+git commit -m &quot;Modifications&quot;
+git push</code></pre></li></ol><ol type="1" id="182e449d-9ee7-80c7-8d7f-f57a8822b631" class="numbered-list" start="2"><li><strong>Arrêter la VM pour économiser des coûts</strong> :<ul id="182e449d-9ee7-8021-a428-c2c0d1e1c1ab" class="bulleted-list"><li style="list-style-type:disc">Depuis la console GCP, allez dans <strong>Compute Engine &gt; VM Instances</strong>.</li></ul><ul id="182e449d-9ee7-8023-a868-ee9d04568bbc" class="bulleted-list"><li style="list-style-type:disc">Cliquez sur <strong>Arrêter</strong> à côté de votre VM.</li></ul></li></ol><hr id="182e449d-9ee7-80a6-9e14-e5258f067418"/><p id="182e449d-9ee7-805b-b567-fb9890194034" class="">Ce guide est détaillé pour éviter les écueils. Si vous rencontrez des problèmes, vérifiez les journaux des erreurs ou contactez-moi pour une assistance supplémentaire. Bonne chance avec votre projet !</p><p id="182e449d-9ee7-80db-8fd0-cc17287502bc" class="">
+</p><p id="182e449d-9ee7-805c-881c-d7d5086c16b6" class="">Pour mettre à jour la version de votre projet Git sur GCP après avoir apporté des modifications localement, voici les étapes détaillées :</p><hr id="182e449d-9ee7-805b-84a2-cc91f89bbe31"/><h3 id="182e449d-9ee7-80ae-a237-df843bcdcdac" class=""><strong>Étape 1 : Commiter et pousser les modifications dans le dépôt Git</strong></h3><ol type="1" id="182e449d-9ee7-802d-89db-d2a575e02ddc" class="numbered-list" start="1"><li><strong>Dans votre environnement local</strong>, assurez-vous d&#x27;avoir commité et poussé les changements :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-808b-8e5b-e37d28b6f7a6" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">git add .
+git commit -m &quot;Description des modifications&quot;
+git push origin main
+</code></pre><ul id="182e449d-9ee7-8020-8565-f3a4ac3b40d2" class="bulleted-list"><li style="list-style-type:disc">Remplacez <code>main</code> par la branche que vous utilisez si nécessaire.</li></ul></li></ol><hr id="182e449d-9ee7-802f-99c1-ce9d9479c223"/><h3 id="182e449d-9ee7-8045-9979-ec76a58bd337" class=""><strong>Étape 2 : Accéder à votre VM sur GCP</strong></h3><ol type="1" id="182e449d-9ee7-8096-954c-edf0f9a51b8d" class="numbered-list" start="1"><li>Connectez-vous à la VM via SSH :<ul id="182e449d-9ee7-803a-bb7f-ccd376d3afd5" class="bulleted-list"><li style="list-style-type:disc">Depuis la console GCP, cliquez sur <strong>Compute Engine &gt; VM Instances</strong>, puis sur le bouton <strong>SSH</strong> à côté de votre VM.</li></ul></li></ol><hr id="182e449d-9ee7-80e6-b3d5-f15383ca4636"/><h3 id="182e449d-9ee7-802d-b83e-f7630b8e6a85" class=""><strong>Étape 3 : Mettre à jour le projet sur la VM</strong></h3><ol type="1" id="182e449d-9ee7-8033-8e5d-f1522463c140" class="numbered-list" start="1"><li><strong>Naviguez dans le répertoire du projet</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80fc-9020-c37131ccfedc" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">cd ~/migration-donnees-mongodb</code></pre></li></ol><ol type="1" id="182e449d-9ee7-80db-a3bc-f3ec4db97de9" class="numbered-list" start="2"><li><strong>Mettre à jour le code en tirant les derniers changements</strong> :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8084-bfce-e2e7a479986f" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">git pull origin main</code></pre><ul id="182e449d-9ee7-8006-aae5-de499cadc163" class="bulleted-list"><li style="list-style-type:disc">Remplacez <code>main</code> par la branche appropriée si nécessaire.</li></ul></li></ol><hr id="182e449d-9ee7-80d8-ba18-ede46f6deecd"/><h3 id="182e449d-9ee7-801c-87f5-d1f303681599" class=""><strong>Étape 4 : Réinstaller les dépendances si nécessaire</strong></h3><ol type="1" id="182e449d-9ee7-80ca-bdec-d12e288309e7" class="numbered-list" start="1"><li>Si vous avez ajouté ou mis à jour des dépendances Python, réinstallez-les dans l&#x27;environnement virtuel :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-801c-890e-ea9b4cec25b3" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">source venv/bin/activate
+pip install -r requirements.txt</code></pre></li></ol><ol type="1" id="182e449d-9ee7-80c8-aa70-dcc828575c48" class="numbered-list" start="2"><li>Si des modifications concernent Docker, redémarrez les services avec :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80c2-9928-f7dfa61154a6" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">docker-compose down
+docker-compose up -d --build</code></pre></li></ol><hr id="182e449d-9ee7-8005-9efa-f8d4a2ff8177"/><h3 id="182e449d-9ee7-809a-ac3a-d0c39ef61888" class=""><strong>Étape 5 : Vérifier le fonctionnement</strong></h3><ol type="1" id="182e449d-9ee7-80ca-ad72-d33c14a310b6" class="numbered-list" start="1"><li>Testez les fonctionnalités mises à jour dans la VM pour confirmer que tout fonctionne correctement.</li></ol><hr id="182e449d-9ee7-8009-ae72-fa353afe703f"/><h3 id="182e449d-9ee7-80d0-a61a-ee3ddc0e67e2" class=""><strong>Étape 6 : Déconnecter et éteindre la VM (optionnel)</strong></h3><ol type="1" id="182e449d-9ee7-8094-a111-df9d2dd7304d" class="numbered-list" start="1"><li>Après les tests, si vous ne travaillez plus sur la VM, pensez à l&#x27;éteindre pour économiser les coûts :Ou depuis l&#x27;interface GCP, cliquez sur <strong>Arrêter</strong>.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8037-8587-f5f2185311bf" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">sudo shutdown now</code></pre></li></ol><p id="182e449d-9ee7-8037-a917-fc26b3c3d8c0" class="">
+</p><h3 id="182e449d-9ee7-8089-bfed-ee074ca32c71" class=""><strong>1. Vérifier si un environnement virtuel est créé</strong></h3><p id="182e449d-9ee7-8077-9c0b-e6a0727f69ee" class="">Un environnement virtuel est généralement un dossier nommé <code>venv</code> (ou un autre nom personnalisé) dans votre projet.</p><ol type="1" id="182e449d-9ee7-8012-b67d-fa495c87e487" class="numbered-list" start="1"><li><strong>Lister les fichiers dans votre répertoire actuel :</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-8067-bf88-ccc0767bf05d" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">ls</code></pre><ul id="182e449d-9ee7-801d-8cf1-f0ef1e3aeaed" class="bulleted-list"><li style="list-style-type:disc">Recherchez un dossier nommé <code>venv</code> (ou similaire).</li></ul><ul id="182e449d-9ee7-8031-8053-efb9db7f05ee" class="bulleted-list"><li style="list-style-type:disc">Si vous ne le voyez pas, vérifiez les dossiers cachés avec :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80c1-a867-ebfd7c092a54" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">ls -a</code></pre></li></ul></li></ol><ol type="1" id="182e449d-9ee7-80f8-a11c-f4226febf486" class="numbered-list" start="2"><li><strong>Vérifiez le contenu de l’environnement virtuel :</strong><ul id="182e449d-9ee7-80f7-bc31-e0d5f6380d34" class="bulleted-list"><li style="list-style-type:disc">Si le dossier <code>venv</code> existe, regardez son contenu pour confirmer :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80e2-a43c-edd42ccfc119" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">ls venv</code></pre></li></ul><ul id="182e449d-9ee7-805e-9526-e73ae043170b" class="bulleted-list"><li style="list-style-type:disc">Vous devriez voir des sous-dossiers comme <code>bin</code>, <code>lib</code>, et <code>include</code> dans un environnement virtuel valide.</li></ul></li></ol><hr id="182e449d-9ee7-807c-b6a6-cfd54025aaf8"/><h3 id="182e449d-9ee7-807a-b1ca-f80fc1e54522" class=""><strong>2. Vérifier si un environnement virtuel est activé</strong></h3><p id="182e449d-9ee7-800c-872e-f5425bc7240d" class="">Lorsque l’environnement virtuel est activé :</p><ul id="182e449d-9ee7-8091-9893-f7427606df11" class="bulleted-list"><li style="list-style-type:disc">Vous verrez son nom affiché au début de chaque ligne de commande entre parenthèses. Par exemple :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80c9-a967-e4a57e1266f1" class="code"><code class="language-Ruby" style="white-space:pre-wrap;word-break:break-all">(venv) user@machine:~/project$</code></pre></li></ul><h3 id="182e449d-9ee7-80df-94a1-ebc4330b3a6a" class=""><strong>Si ce n’est pas visible :</strong></h3><ol type="1" id="182e449d-9ee7-808e-8a29-c99a917a830d" class="numbered-list" start="1"><li><strong>Vérifiez manuellement l’activation avec la commande suivante :</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80df-9433-fc3e3f2e4637" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">which python</code></pre><ul id="182e449d-9ee7-801a-991e-c423d3e12102" class="bulleted-list"><li style="list-style-type:disc">Si l’environnement virtuel est activé, le chemin affiché pointera vers un Python dans le dossier <code>venv</code>. Par exemple :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80f9-a2ed-d7c86b372a88" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">/path/to/project/venv/bin/python</code></pre></li></ul></li></ol><ol type="1" id="182e449d-9ee7-80d4-b128-e15162869557" class="numbered-list" start="2"><li><strong>Si le chemin pointe vers </strong><code><strong>/usr/bin/python</strong></code><strong> ou similaire :</strong><ul id="182e449d-9ee7-80b4-a91e-e96ac4652fa5" class="bulleted-list"><li style="list-style-type:disc">Cela signifie que l’environnement virtuel n’est pas activé.</li></ul></li></ol><hr id="182e449d-9ee7-80f6-8caf-f61b3e6c6969"/><h3 id="182e449d-9ee7-809d-b1d2-c2b9a651be9f" class=""><strong>3. Activer un environnement virtuel</strong></h3><p id="182e449d-9ee7-80f0-86ad-d22ddacb22f3" class="">Si l’environnement virtuel existe mais n’est pas activé :</p><ol type="1" id="182e449d-9ee7-80a8-8935-f6d756eb8092" class="numbered-list" start="1"><li>Activez-le avec la commande suivante :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-80cb-bb59-d13e0bd6ffd0" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">source venv/bin/activate</code></pre><ul id="182e449d-9ee7-8005-9f16-c6185e9ce053" class="bulleted-list"><li style="list-style-type:disc">Pour Windows :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-807b-bba4-c5a1a69c4e51" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">venv\Scripts\activate</code></pre></li></ul></li></ol><ol type="1" id="182e449d-9ee7-80ef-9281-ed5463e59df8" class="numbered-list" start="2"><li>Vérifiez qu’il est activé :<ul id="182e449d-9ee7-80b9-9ccd-e3569d8ccc3e" class="bulleted-list"><li style="list-style-type:disc">Le prompt de commande affichera <code>(venv)</code> au début de la ligne.</li></ul></li></ol><hr id="182e449d-9ee7-80a9-8a62-d12ac3232e2d"/><h3 id="182e449d-9ee7-8091-9cbb-fa8a6ecd4780" class=""><strong>4. Si aucun environnement virtuel n’existe</strong></h3><p id="182e449d-9ee7-80a2-bfbc-c4ccae2343c9" class="">Si aucun environnement virtuel n’a été créé :</p><ol type="1" id="182e449d-9ee7-8029-a6c1-dac322367d83" class="numbered-list" start="1"><li>Créez-en un :<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="182e449d-9ee7-809b-97a1-e05b9ff42928" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">python3 -m venv venv</code></pre></li></ol><ol type="1" id="182e449d-9ee7-80a7-9cc4-d1baaed41346" class="numbered-list" start="2"><li>Activez-le comme indiqué ci-dessus.</li></ol><hr id="182e449d-9ee7-800f-9b69-d815d8ba6f36"/><h3 id="182e449d-9ee7-8091-912f-ce9426bd841c" class=""><strong>Résumé</strong></h3><ul id="182e449d-9ee7-80c7-b674-e0620aa99692" class="bulleted-list"><li style="list-style-type:disc"><strong>Pour savoir si un environnement est créé :</strong> Cherchez un dossier <code>venv</code> dans votre projet.</li></ul><ul id="182e449d-9ee7-80a3-868f-d384b3e1553e" class="bulleted-list"><li style="list-style-type:disc"><strong>Pour savoir s’il est activé :</strong> Regardez si <code>(venv)</code> apparaît dans votre ligne de commande ou utilisez <code>which python</code>.</li></ul><p id="182e449d-9ee7-8086-9b86-fb5dce1c5e52" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,560 @@
+2025-01-21 09:40:33.158 | INFO     | __main__:<module>:23 - Démarrage du notebook
+2025-01-21 09:40:33.160 | INFO     | __main__:setup_and_log_directories:58 - Répertoire racine pour le projet défini : migration-donnees-mongodb
+2025-01-21 09:40:33.162 | INFO     | __main__:setup_and_log_directories:62 - Répertoire pour les fichiers bruts (RAW_DIR) configuré : migration-donnees-mongodb\data\raw
+2025-01-21 09:40:33.163 | INFO     | __main__:setup_and_log_directories:66 - Répertoire pour les fichiers nettoyés (PROCESSED_DIR) configuré : migration-donnees-mongodb\data\processed
+2025-01-21 09:40:33.164 | INFO     | __main__:setup_and_log_directories:70 - Répertoire pour les scripts (SCRIPTS_DIR) configuré : migration-donnees-mongodb\scripts
+2025-01-21 09:40:33.165 | INFO     | __main__:<module>:88 - Répertoires vérifiés et créés avec succès.
+2025-01-21 09:40:33.766 | INFO     | __main__:<module>:9 - Dataset téléchargé avec succès
+2025-01-21 09:40:33.767 | INFO     | __main__:<module>:19 - Fichiers disponibles dans le dataset : ['healthcare_dataset.csv']
+2025-01-21 09:40:33.884 | INFO     | __main__:<module>:31 - Fichier 'healthcare_dataset.csv' chargé avec succès. Nombre de lignes : 55500. Nombre de colonnes : 15.
+2025-01-21 09:40:33.894 | INFO     | __main__:<module>:2 - ============================================================
+2025-01-21 09:40:33.895 | INFO     | __main__:<module>:3 - Début de l'exportation des DataFrames en fichiers CSV
+2025-01-21 09:40:33.897 | INFO     | __main__:<module>:4 - ----------
+2025-01-21 09:40:34.091 | INFO     | __main__:export_dataframes_to_csv:35 - ✅ DataFrame 'healthcare_data' exporté avec succès : data\raw\healthcare_data.csv
+2025-01-21 09:40:34.092 | INFO     | __main__:<module>:43 - ----------
+2025-01-21 09:40:34.093 | INFO     | __main__:<module>:44 - Fin de l'exportation des DataFrames en fichiers CSV
+2025-01-21 09:40:34.093 | INFO     | __main__:<module>:45 - ============================================================
+2025-01-21 09:40:34.107 | INFO     | __main__:<module>:3 - Aperçu des données : 
+            Name  Age  Gender Blood Type Medical Condition Date of Admission            Doctor                    Hospital Insurance Provider  Billing Amount  Room Number Admission Type Discharge Date   Medication  Test Results
+0  Bobby JacksOn   30    Male         B-            Cancer        2024-01-31     Matthew Smith             Sons and Miller         Blue Cross    18856.281306          328         Urgent     2024-02-02  Paracetamol        Normal
+1   LesLie TErRy   62    Male         A+           Obesity        2019-08-20   Samantha Davies                     Kim Inc           Medicare    33643.327287          265      Emergency     2019-08-26    Ibuprofen  Inconclusive
+2    DaNnY sMitH   76  Female         A-           Obesity        2022-09-22  Tiffany Mitchell                    Cook PLC              Aetna    27955.096079          205      Emergency     2022-10-07      Aspirin        Normal
+3   andrEw waTtS   28  Female         O+          Diabetes        2020-11-18       Kevin Wells  Hernandez Rogers and Vang,           Medicare    37909.782410          450       Elective     2020-12-18    Ibuprofen      Abnormal
+4  adrIENNE bEll   43  Female        AB+            Cancer        2022-09-19    Kathleen Hanna                 White-White              Aetna    14238.317814          458         Urgent     2022-10-09   Penicillin      Abnormal
+
+2025-01-21 09:40:34.109 | INFO     | __main__:<module>:7 - Résumé pour le dataset 'healthcare_dataset':
+2025-01-21 09:40:34.475 | INFO     | __main__:<module>:11 - ============================================================
+2025-01-21 09:40:34.476 | INFO     | __main__:<module>:15 - 📊 Types des colonnes pour le DataFrame 'healthcare'
+2025-01-21 09:40:34.477 | INFO     | __main__:<module>:16 - ------------------------------------------------------------
+2025-01-21 09:40:34.489 | INFO     | __main__:<module>:23 - 🔹 Name : object | Valeurs : str
+2025-01-21 09:40:34.500 | INFO     | __main__:<module>:23 - 🔹 Age : int64 | Valeurs : int
+2025-01-21 09:40:34.511 | INFO     | __main__:<module>:23 - 🔹 Gender : object | Valeurs : str
+2025-01-21 09:40:34.521 | INFO     | __main__:<module>:23 - 🔹 Blood Type : object | Valeurs : str
+2025-01-21 09:40:34.533 | INFO     | __main__:<module>:23 - 🔹 Medical Condition : object | Valeurs : str
+2025-01-21 09:40:34.545 | INFO     | __main__:<module>:23 - 🔹 Date of Admission : object | Valeurs : str
+2025-01-21 09:40:34.557 | INFO     | __main__:<module>:23 - 🔹 Doctor : object | Valeurs : str
+2025-01-21 09:40:34.569 | INFO     | __main__:<module>:23 - 🔹 Hospital : object | Valeurs : str
+2025-01-21 09:40:34.581 | INFO     | __main__:<module>:23 - 🔹 Insurance Provider : object | Valeurs : str
+2025-01-21 09:40:34.594 | INFO     | __main__:<module>:23 - 🔹 Billing Amount : float64 | Valeurs : float
+2025-01-21 09:40:34.608 | INFO     | __main__:<module>:23 - 🔹 Room Number : int64 | Valeurs : int
+2025-01-21 09:40:34.619 | INFO     | __main__:<module>:23 - 🔹 Admission Type : object | Valeurs : str
+2025-01-21 09:40:34.629 | INFO     | __main__:<module>:23 - 🔹 Discharge Date : object | Valeurs : str
+2025-01-21 09:40:34.639 | INFO     | __main__:<module>:23 - 🔹 Medication : object | Valeurs : str
+2025-01-21 09:40:34.650 | INFO     | __main__:<module>:23 - 🔹 Test Results : object | Valeurs : str
+2025-01-21 09:40:34.651 | INFO     | __main__:<module>:26 - ============================================================
+
+2025-01-21 09:40:34.736 | INFO     | __main__:<module>:36 - Colonnes générées après le merge : Index(['temp_id', 'Name', 'Age', 'Gender', 'Blood Type', 'Medical Condition', 'Date of Admission', 'Doctor', 'Hospital', 'Insurance Provider', 'Billing Amount', 'Room Number', 'Admission Type', 'Discharge Date', 'Medication', 'Test Results', 'is_duplicate', 'is_primary', 'group_id'], dtype='object')
+2025-01-21 09:40:34.737 | WARNING  | __main__:<module>:47 - La colonne 'Name_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:40:34.738 | WARNING  | __main__:<module>:47 - La colonne 'Age_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:40:34.738 | WARNING  | __main__:<module>:47 - La colonne 'Gender_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:40:34.739 | WARNING  | __main__:<module>:47 - La colonne 'Blood Type_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:40:34.741 | WARNING  | __main__:<module>:47 - La colonne 'Medical Condition_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:40:34.742 | WARNING  | __main__:<module>:47 - La colonne 'Date of Admission_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:40:34.743 | WARNING  | __main__:<module>:47 - La colonne 'Doctor_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:40:34.744 | WARNING  | __main__:<module>:47 - La colonne 'Hospital_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:40:34.745 | WARNING  | __main__:<module>:47 - La colonne 'Insurance Provider_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:40:34.747 | WARNING  | __main__:<module>:47 - La colonne 'Billing Amount_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:40:34.748 | WARNING  | __main__:<module>:47 - La colonne 'Room Number_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:40:34.749 | WARNING  | __main__:<module>:47 - La colonne 'Admission Type_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:40:34.750 | WARNING  | __main__:<module>:47 - La colonne 'Discharge Date_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:40:34.751 | WARNING  | __main__:<module>:47 - La colonne 'Medication_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:40:34.752 | WARNING  | __main__:<module>:47 - La colonne 'Test Results_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:40:34.753 | INFO     | __main__:<module>:52 - Groupes concernés par des doublons : [81, 21, 279, 61, 211, 383, 112, 196, 231, 55, 309, 508, 172, 384, 387, 202, 450, 92, 481, 432, 223, 307, 183, 114, 394, 404, 85, 227, 164, 366, 28, 430, 257, 378, 95, 502, 472, 152, 496, 40, 301, 178, 461, 241, 515, 17, 107, 410, 118, 498, 518, 75, 269, 186, 278, 32, 373, 251, 339, 26, 501, 138, 206, 140, 375, 67, 299, 367, 157, 117, 425, 197, 131, 128, 71, 284, 449, 479, 207, 139, 204, 219, 259, 274, 455, 477, 395, 97, 188, 361, 534, 525, 13, 267, 136, 218, 69, 41, 124, 89, 72, 439, 143, 492, 533, 187, 289, 260, 108, 385, 332, 122, 266, 456, 34, 101, 371, 58, 296, 311, 180, 419, 150, 78, 190, 369, 159, 195, 179, 320, 451, 8, 99, 146, 393, 322, 512, 53, 250, 243, 434, 464, 185, 297, 50, 191, 225, 105, 520, 382, 465, 4, 354, 347, 209, 109, 217, 104, 390, 350, 386, 532, 411, 275, 43, 141, 359, 397, 429, 169, 177, 293, 220, 153, 230, 235, 379, 189, 356, 503, 514, 485, 443, 155, 282, 222, 205, 506, 165, 484, 238, 16, 133, 252, 380, 264, 120, 463, 233, 331, 82, 182, 249, 482, 47, 377, 400, 391, 521, 343, 167, 292, 93, 295, 171, 467, 115, 522, 363, 98, 291, 470, 20, 446, 487, 77, 460, 242, 402, 364, 306, 22, 431, 335, 262, 210, 27, 270, 511, 74, 529, 163, 253, 254, 48, 414, 281, 173, 73, 63, 38, 277, 338, 480, 340, 68, 415, 84, 509, 458, 123, 126, 392, 351, 417, 325, 111, 83, 424, 176, 256, 35, 313, 286, 106, 294, 57, 149, 76, 300, 19, 528, 103, 240, 94, 440, 154, 489, 328, 271, 144, 324, 433, 389, 374, 304, 388, 490, 276, 341, 147, 184, 346, 427, 370, 453, 305, 221, 505, 471, 491, 170, 321, 355, 524, 272, 31, 298, 493, 25, 125, 365, 212, 436, 7, 9, 360, 288, 317, 497, 408, 372, 132, 24, 200, 507, 110, 310, 255, 116, 473, 435, 156, 426, 466, 353, 60, 406, 396, 344, 420, 283, 265, 62, 44, 90, 323, 316, 11, 263, 476, 148, 3, 454, 287, 273, 18, 412, 280, 403, 79, 318, 42, 158, 258, 192, 407, 499, 486, 87, 516, 290, 495, 142, 423, 100, 229, 345, 421, 234, 5, 45, 137, 442, 59, 504, 166, 102, 302, 37, 319, 459, 314, 203, 452, 162, 56, 224, 457, 308, 86, 199, 39, 2, 368, 312, 29, 66, 468, 376, 448, 236, 483, 14, 208, 46, 194, 96, 358, 462, 474, 239, 237, 526, 228, 193, 447, 488, 413, 441, 337, 381, 330, 232, 418, 245, 36, 6, 500, 15, 168, 248, 416, 80, 198, 401, 268, 174, 399, 478, 213, 49, 65, 398, 315, 215, 342, 357, 151, 54, 513, 129, 422, 113, 64, 30, 519, 409, 1, 405, 244, 201, 475, 329, 130, 33, 445, 469, 444, 226, 12, 135, 51, 349, 160, 91, 494, 121, 119, 88, 348, 336, 333, 428, 517, 303, 52, 352, 437, 161, 23, 261, 127, 510, 134, 327, 216, 246, 70, 530, 145, 10, 247, 214, 531, 326, 285, 438, 527, 362, 334, 523, 175, 181]
+2025-01-21 09:40:34.760 | INFO     | __main__:<module>:58 - Groupes de doublons avec colonnes de différences : 
+   temp_id                Name  Age  Gender Blood Type Medical Condition Date of Admission             Doctor        Hospital Insurance Provider  Billing Amount  Room Number Admission Type Discharge Date  Medication  Test Results  is_duplicate  is_primary  group_id
+0    50023        samuel joyce   56    male         o+         arthritis        2022-11-03     krista hartman  thomas-ballard   unitedhealthcare    15654.830587          157         urgent     2022-11-22     aspirin  inconclusive          True       False        81
+1    50040    kimberly vasquez   26    male         a-           obesity        2023-10-23   jennifer bennett       cowan inc   unitedhealthcare    38142.109678          313         urgent     2023-11-18  penicillin      abnormal          True       False        21
+2    50055      scott thornton   55  female         b-           obesity        2021-04-08      joshua ingram      keller llc           medicare    30894.904511          455         urgent     2021-04-15     aspirin      abnormal          True       False       279
+3    50070         william lee   27  female         o+         arthritis        2020-01-31  lauren montgomery   winters-simon              cigna    46229.434901          153       elective     2020-02-13     lipitor        normal          True       False        61
+4    50078  christopher norris   38    male        ab-         arthritis        2023-01-14       denise blair     inc morales           medicare     9072.127142          452      emergency     2023-02-12  penicillin        normal          True       False       211
+2025-01-21 09:40:34.761 | INFO     | __main__:<module>:59 - Colonnes avec des différences détectées : []
+2025-01-21 09:40:34.782 | INFO     | __main__:<module>:15 - Contenu complet des groupes triés par 'group_id' : 
+     temp_id                 Name  Age  Gender Blood Type Medical Condition Date of Admission                 Doctor                      Hospital Insurance Provider  Billing Amount  Room Number Admission Type Discharge Date   Medication  Test Results  is_duplicate  is_primary  group_id
+20      1336     kimberly vasquez   26    male         a-           obesity        2023-10-23       jennifer bennett                     cowan inc   unitedhealthcare    38142.109678          313         urgent     2023-11-18   penicillin      abnormal          True        True        21
+1      50040     kimberly vasquez   26    male         a-           obesity        2023-10-23       jennifer bennett                     cowan inc   unitedhealthcare    38142.109678          313         urgent     2023-11-18   penicillin      abnormal          True       False        21
+54      3960      reginald wright   50    male        ab-            asthma        2020-04-25          michael arias       clark, and estes thomas              aetna    26886.655207          210         urgent     2020-05-03  paracetamol      abnormal          True        True        55
+9      50102      reginald wright   50    male        ab-            asthma        2020-04-25          michael arias       clark, and estes thomas              aetna    26886.655207          210         urgent     2020-05-03  paracetamol      abnormal          True       False        55
+60      4485          william lee   27  female         o+         arthritis        2020-01-31      lauren montgomery                 winters-simon              cigna    46229.434901          153       elective     2020-02-13      lipitor        normal          True        True        61
+3      50070          william lee   27  female         o+         arthritis        2020-01-31      lauren montgomery                 winters-simon              cigna    46229.434901          153       elective     2020-02-13      lipitor        normal          True       False        61
+80      6319         samuel joyce   56    male         o+         arthritis        2022-11-03         krista hartman                thomas-ballard   unitedhealthcare    15654.830587          157         urgent     2022-11-22      aspirin  inconclusive          True        True        81
+0      50023         samuel joyce   56    male         o+         arthritis        2022-11-03         krista hartman                thomas-ballard   unitedhealthcare    15654.830587          157         urgent     2022-11-22      aspirin  inconclusive          True       False        81
+91      6954        marissa miles   58  female         o-         arthritis        2023-10-10          brandi lozano      dillon nichols, kane and   unitedhealthcare    15300.911357          461         urgent     2023-11-06    ibuprofen        normal          True        True        92
+17     50159        marissa miles   58  female         o-         arthritis        2023-10-10          brandi lozano      dillon nichols, kane and   unitedhealthcare    15300.911357          461         urgent     2023-11-06    ibuprofen        normal          True       False        92
+111    10473       matthew foster   60  female        ab-           obesity        2020-02-12           taylor frank                  ltd alvarado              aetna     4735.300151          140         urgent     2020-02-25   penicillin        normal          True        True       112
+6      50086       matthew foster   60  female        ab-           obesity        2020-02-12           taylor frank                  ltd alvarado              aetna     4735.300151          140         urgent     2020-02-25   penicillin        normal          True       False       112
+171    17584           mary jones   41    male         b-           obesity        2019-07-02  mr. lawrence adams md         and smith smith, ryan              cigna    34290.947528          171         urgent     2019-07-09  paracetamol      abnormal          True        True       172
+12     50120           mary jones   41    male         b-           obesity        2019-07-02  mr. lawrence adams md         and smith smith, ryan              cigna    34290.947528          171         urgent     2019-07-09  paracetamol      abnormal          True       False       172
+195    19056      manuel thornton   51    male         o-            asthma        2023-07-25             kathy king    morgan hernandez, and beck   unitedhealthcare    45601.814762          378         urgent     2023-08-08    ibuprofen        normal          True        True       196
+7      50090      manuel thornton   51    male         o-            asthma        2023-07-25             kathy king    morgan hernandez, and beck   unitedhealthcare    45601.814762          378         urgent     2023-08-08    ibuprofen        normal          True       False       196
+201    19755  christopher hill md   62  female         a-      hypertension        2022-09-09      rebecca henderson                 and sons long           medicare    14709.612213          101       elective     2022-09-18      aspirin  inconclusive          True        True       202
+15     50147  christopher hill md   62  female         a-      hypertension        2022-09-09      rebecca henderson                 and sons long           medicare    14709.612213          101       elective     2022-09-18      aspirin  inconclusive          True       False       202
+210    20704   christopher norris   38    male        ab-         arthritis        2023-01-14           denise blair                   inc morales           medicare     9072.127142          452      emergency     2023-02-12   penicillin        normal          True        True       211
+4      50078   christopher norris   38    male        ab-         arthritis        2023-01-14           denise blair                   inc morales           medicare     9072.127142          452      emergency     2023-02-12   penicillin        normal          True       False       211
+222    21978      christine price   50    male         a-      hypertension        2020-10-19          valerie welch             hernandez-sherman   unitedhealthcare     4183.594572          270         urgent     2020-11-14  paracetamol        normal          True        True       223
+20     50182      christine price   50    male         a-      hypertension        2020-10-19          valerie welch             hernandez-sherman   unitedhealthcare     4183.594572          270         urgent     2020-11-14  paracetamol        normal          True       False       223
+230    22483       madeline baker   49    male         a+            cancer        2019-11-18       melissa alvarado        lane riley and fisher,              cigna     3840.740363          144      emergency     2019-12-07  paracetamol  inconclusive          True        True       231
+8      50095       madeline baker   49    male         a+            cancer        2019-11-18       melissa alvarado        lane riley and fisher,              cigna     3840.740363          144      emergency     2019-12-07  paracetamol  inconclusive          True       False       231
+278    27018       scott thornton   55  female         b-           obesity        2021-04-08          joshua ingram                    keller llc           medicare    30894.904511          455         urgent     2021-04-15      aspirin      abnormal          True        True       279
+2      50055       scott thornton   55  female         b-           obesity        2021-04-08          joshua ingram                    keller llc           medicare    30894.904511          455         urgent     2021-04-15      aspirin      abnormal          True       False       279
+306    29669            kim oneal   50    male        ab+            cancer        2020-09-22         shelby charles      murphy everett and shea,   unitedhealthcare    46002.065675          500       elective     2020-10-03  paracetamol  inconclusive          True        True       307
+21     50187            kim oneal   50    male        ab+            cancer        2020-09-22         shelby charles      murphy everett and shea,   unitedhealthcare    46002.065675          500       elective     2020-10-03  paracetamol  inconclusive          True       False       307
+308    29803    deanna cunningham   81    male         b+            cancer        2021-08-29       wesley patterson                 baldwin group         blue cross    14184.775367          238      emergency     2021-09-06      lipitor        normal          True        True       309
+10     50103    deanna cunningham   81    male         b+            cancer        2021-08-29       wesley patterson                 baldwin group         blue cross    14184.775367          238      emergency     2021-09-06      lipitor        normal          True       False       309
+382    36822          travis best   65  female         b+            asthma        2020-01-15       kristin anderson                thomas-johnson         blue cross     5903.933834          246         urgent     2020-02-14      aspirin      abnormal          True        True       383
+5      50081          travis best   65  female         b+            asthma        2020-01-15       kristin anderson                thomas-johnson         blue cross     5903.933834          246         urgent     2020-02-14      aspirin      abnormal          True       False       383
+383    36950          susan brown   81  female         o+           obesity        2019-06-05           joshua davis                    plc wright           medicare    45370.293819          378      emergency     2019-06-13  paracetamol      abnormal          True        True       384
+13     50124          susan brown   81  female         o+           obesity        2019-06-05           joshua davis                    plc wright           medicare    45370.293819          378      emergency     2019-06-13  paracetamol      abnormal          True       False       384
+386    37273      terry nicholson   76  female         o-         arthritis        2023-06-18          laura jenkins      gomez bryant, and murphy              aetna    12474.684730          165         urgent     2023-06-29  paracetamol      abnormal          True        True       387
+14     50137      terry nicholson   76  female         o-         arthritis        2023-06-18          laura jenkins      gomez bryant, and murphy              aetna    12474.684730          165         urgent     2023-06-29  paracetamol      abnormal          True       False       387
+431    40721          jacob smith   54    male         a-      hypertension        2020-02-27       melissa robinson  estrada mueller, jimenez and           medicare    29617.009035          224         urgent     2020-03-10      aspirin      abnormal          True        True       432
+19     50180          jacob smith   54    male         a-      hypertension        2020-02-27       melissa robinson  estrada mueller, jimenez and           medicare    29617.009035          224         urgent     2020-03-10      aspirin      abnormal          True       False       432
+449    42323            amy green   79  female         b+           obesity        2021-03-30          brett johnson             taylor-williamson   unitedhealthcare    23402.358491          249       elective     2021-04-27   penicillin      abnormal          True        True       450
+16     50151            amy green   79  female         b+           obesity        2021-03-30          brett johnson             taylor-williamson   unitedhealthcare    23402.358491          249       elective     2021-04-27   penicillin      abnormal          True       False       450
+480    45432     angelica wilkins   53  female         a-          diabetes        2023-10-29        michael francis                  price-stuart           medicare     1666.476595          422         urgent     2023-11-14      lipitor      abnormal          True        True       481
+18     50171     angelica wilkins   53  female         a-          diabetes        2023-10-29        michael francis                  price-stuart           medicare     1666.476595          422         urgent     2023-11-14      lipitor      abnormal          True       False       481
+507    47686     cynthia sullivan   77    male         a+         arthritis        2022-10-01          tanya collins                    garcia inc              cigna     9764.712742          306      emergency     2022-10-26      aspirin  inconclusive          True        True       508
+11     50116     cynthia sullivan   77    male         a+         arthritis        2022-10-01          tanya collins                    garcia inc              cigna     9764.712742          306      emergency     2022-10-26      aspirin  inconclusive          True       False       508
+2025-01-21 09:40:34.860 | INFO     | __main__:<module>:21 - Nombre de lignes après suppression des doublons : 54966
+2025-01-21 09:40:34.864 | INFO     | __main__:<module>:22 - Aperçu des données nettoyées : 
+            Name  Age  Gender Blood Type Medical Condition Date of Admission            Doctor                    Hospital Insurance Provider  Billing Amount  Room Number Admission Type Discharge Date   Medication  Test Results
+0  Bobby JacksOn   30    Male         B-            Cancer        2024-01-31     Matthew Smith             Sons and Miller         Blue Cross    18856.281306          328         Urgent     2024-02-02  Paracetamol        Normal
+1   LesLie TErRy   62    Male         A+           Obesity        2019-08-20   Samantha Davies                     Kim Inc           Medicare    33643.327287          265      Emergency     2019-08-26    Ibuprofen  Inconclusive
+2    DaNnY sMitH   76  Female         A-           Obesity        2022-09-22  Tiffany Mitchell                    Cook PLC              Aetna    27955.096079          205      Emergency     2022-10-07      Aspirin        Normal
+3   andrEw waTtS   28  Female         O+          Diabetes        2020-11-18       Kevin Wells  Hernandez Rogers and Vang,           Medicare    37909.782410          450       Elective     2020-12-18    Ibuprofen      Abnormal
+4  adrIENNE bEll   43  Female        AB+            Cancer        2022-09-19    Kathleen Hanna                 White-White              Aetna    14238.317814          458         Urgent     2022-10-09   Penicillin      Abnormal
+2025-01-21 09:40:34.872 | INFO     | __main__:<module>:4 - Analyse initiale des données :
+2025-01-21 09:40:34.874 | INFO     | __main__:<module>:5 - Colonnes disponibles : ['Name', 'Age', 'Gender', 'Blood Type', 'Medical Condition', 'Date of Admission', 'Doctor', 'Hospital', 'Insurance Provider', 'Billing Amount', 'Room Number', 'Admission Type', 'Discharge Date', 'Medication', 'Test Results']
+2025-01-21 09:40:34.876 | INFO     | __main__:<module>:6 - Types des colonnes avant transformation : 
+Name                   object
+Age                     int64
+Gender                 object
+Blood Type             object
+Medical Condition      object
+Date of Admission      object
+Doctor                 object
+Hospital               object
+Insurance Provider     object
+Billing Amount        float64
+Room Number             int64
+Admission Type         object
+Discharge Date         object
+Medication             object
+Test Results           object
+dtype: object
+2025-01-21 09:40:34.881 | INFO     | __main__:<module>:12 - Statistiques pour 'Date of Admission': 
+count          54966
+unique          1827
+top       2024-03-16
+freq              50
+Name: Date of Admission, dtype: object
+2025-01-21 09:40:34.887 | INFO     | __main__:<module>:12 - Statistiques pour 'Discharge Date': 
+count          54966
+unique          1856
+top       2020-03-15
+freq              53
+Name: Discharge Date, dtype: object
+2025-01-21 09:40:34.900 | INFO     | __main__:<module>:12 - Statistiques pour 'Doctor': 
+count             54966
+unique            40341
+top       Michael Smith
+freq                 27
+Name: Doctor, dtype: object
+2025-01-21 09:40:34.913 | INFO     | __main__:<module>:12 - Statistiques pour 'Hospital': 
+count         54966
+unique        39876
+top       LLC Smith
+freq             44
+Name: Hospital, dtype: object
+2025-01-21 09:40:34.918 | INFO     | __main__:<module>:17 - Valeurs initiales pour 'Gender' : {'Male', 'Female'}
+2025-01-21 09:40:34.923 | INFO     | __main__:<module>:23 - Valeurs initiales pour 'Blood Type' : {'A-', 'O-', 'B+', 'AB-', 'O+', 'A+', 'B-', 'AB+'}
+2025-01-21 09:40:34.957 | INFO     | __main__:<module>:8 - Les colonnes de dates ont été converties en type datetime.
+2025-01-21 09:40:34.989 | INFO     | __main__:<module>:15 - Les colonnes de texte ont été normalisées (espaces supprimés, titres formatés).
+2025-01-21 09:40:35.000 | INFO     | __main__:<module>:4 - Analyse après transformation des données :
+2025-01-21 09:40:35.002 | INFO     | __main__:<module>:5 - Types des colonnes après transformation : 
+Name                          object
+Age                            int64
+Gender                        object
+Blood Type                    object
+Medical Condition             object
+Date of Admission     datetime64[ns]
+Doctor                        object
+Hospital                      object
+Insurance Provider            object
+Billing Amount               float64
+Room Number                    int64
+Admission Type                object
+Discharge Date        datetime64[ns]
+Medication                    object
+Test Results                  object
+dtype: object
+2025-01-21 09:40:35.004 | INFO     | __main__:<module>:10 - Exemple de valeurs après conversion pour 'Date of Admission': 
+0   2024-01-31
+1   2019-08-20
+2   2022-09-22
+3   2020-11-18
+4   2022-09-19
+Name: Date of Admission, dtype: datetime64[ns]
+2025-01-21 09:40:35.006 | INFO     | __main__:<module>:10 - Exemple de valeurs après conversion pour 'Discharge Date': 
+0   2024-02-02
+1   2019-08-26
+2   2022-10-07
+3   2020-12-18
+4   2022-10-09
+Name: Discharge Date, dtype: datetime64[ns]
+2025-01-21 09:40:35.008 | INFO     | __main__:<module>:15 - Exemple de valeurs après normalisation pour 'Doctor': 
+0       Matthew Smith
+1     Samantha Davies
+2    Tiffany Mitchell
+3         Kevin Wells
+4      Kathleen Hanna
+Name: Doctor, dtype: object
+2025-01-21 09:40:35.011 | INFO     | __main__:<module>:15 - Exemple de valeurs après normalisation pour 'Hospital': 
+0               Sons And Miller
+1                       Kim Inc
+2                      Cook Plc
+3    Hernandez Rogers And Vang,
+4                   White-White
+Name: Hospital, dtype: object
+2025-01-21 09:40:35.023 | INFO     | __main__:<module>:2 - ============================================================
+2025-01-21 09:40:35.025 | INFO     | __main__:<module>:3 - Début de l'exportation des DataFrames en fichiers CSV
+2025-01-21 09:40:35.027 | INFO     | __main__:<module>:4 - ----------
+2025-01-21 09:40:35.271 | INFO     | __main__:export_dataframes_to_csv:35 - ✅ DataFrame 'healthcare_data' exporté avec succès : data\processed\healthcare_data.csv
+2025-01-21 09:40:35.273 | INFO     | __main__:<module>:9 - ----------
+2025-01-21 09:40:35.273 | INFO     | __main__:<module>:10 - Fin de l'exportation des DataFrames en fichiers CSV
+2025-01-21 09:40:35.274 | INFO     | __main__:<module>:11 - ============================================================
+2025-01-21 09:40:35.286 | INFO     | __main__:<module>:17 - Connexion réussie à MongoDB sur localhost:27017 pour la base 'healthcare_database'.
+2025-01-21 09:40:35.288 | INFO     | __main__:<module>:20 - Test de la connexion à MongoDB...
+2025-01-21 09:40:35.299 | SUCCESS  | __main__:<module>:22 - Connexion validée avec succès.
+2025-01-21 09:50:39.499 | INFO     | __main__:<module>:23 - Démarrage du notebook
+2025-01-21 09:50:39.501 | INFO     | __main__:setup_and_log_directories:58 - Répertoire racine pour le projet défini : migration-donnees-mongodb
+2025-01-21 09:50:39.502 | INFO     | __main__:setup_and_log_directories:62 - Répertoire pour les fichiers bruts (RAW_DIR) configuré : migration-donnees-mongodb\data\raw
+2025-01-21 09:50:39.504 | INFO     | __main__:setup_and_log_directories:66 - Répertoire pour les fichiers nettoyés (PROCESSED_DIR) configuré : migration-donnees-mongodb\data\processed
+2025-01-21 09:50:39.505 | INFO     | __main__:setup_and_log_directories:70 - Répertoire pour les scripts (SCRIPTS_DIR) configuré : migration-donnees-mongodb\scripts
+2025-01-21 09:50:39.506 | INFO     | __main__:<module>:88 - Répertoires vérifiés et créés avec succès.
+2025-01-21 09:50:40.178 | INFO     | __main__:<module>:9 - Dataset téléchargé avec succès
+2025-01-21 09:50:40.179 | INFO     | __main__:<module>:19 - Fichiers disponibles dans le dataset : ['healthcare_dataset.csv']
+2025-01-21 09:50:40.281 | INFO     | __main__:<module>:31 - Fichier 'healthcare_dataset.csv' chargé avec succès. Nombre de lignes : 55500. Nombre de colonnes : 15.
+2025-01-21 09:50:40.294 | INFO     | __main__:<module>:2 - ============================================================
+2025-01-21 09:50:40.296 | INFO     | __main__:<module>:3 - Début de l'exportation des DataFrames en fichiers CSV
+2025-01-21 09:50:40.297 | INFO     | __main__:<module>:4 - ----------
+2025-01-21 09:50:40.517 | INFO     | __main__:export_dataframes_to_csv:35 - ✅ DataFrame 'healthcare_data' exporté avec succès : data\raw\healthcare_data.csv
+2025-01-21 09:50:40.518 | INFO     | __main__:<module>:43 - ----------
+2025-01-21 09:50:40.518 | INFO     | __main__:<module>:44 - Fin de l'exportation des DataFrames en fichiers CSV
+2025-01-21 09:50:40.519 | INFO     | __main__:<module>:45 - ============================================================
+2025-01-21 09:50:40.531 | INFO     | __main__:<module>:3 - Aperçu des données : 
+            Name  Age  Gender Blood Type Medical Condition Date of Admission            Doctor                    Hospital Insurance Provider  Billing Amount  Room Number Admission Type Discharge Date   Medication  Test Results
+0  Bobby JacksOn   30    Male         B-            Cancer        2024-01-31     Matthew Smith             Sons and Miller         Blue Cross    18856.281306          328         Urgent     2024-02-02  Paracetamol        Normal
+1   LesLie TErRy   62    Male         A+           Obesity        2019-08-20   Samantha Davies                     Kim Inc           Medicare    33643.327287          265      Emergency     2019-08-26    Ibuprofen  Inconclusive
+2    DaNnY sMitH   76  Female         A-           Obesity        2022-09-22  Tiffany Mitchell                    Cook PLC              Aetna    27955.096079          205      Emergency     2022-10-07      Aspirin        Normal
+3   andrEw waTtS   28  Female         O+          Diabetes        2020-11-18       Kevin Wells  Hernandez Rogers and Vang,           Medicare    37909.782410          450       Elective     2020-12-18    Ibuprofen      Abnormal
+4  adrIENNE bEll   43  Female        AB+            Cancer        2022-09-19    Kathleen Hanna                 White-White              Aetna    14238.317814          458         Urgent     2022-10-09   Penicillin      Abnormal
+
+2025-01-21 09:50:40.532 | INFO     | __main__:<module>:7 - Résumé pour le dataset 'healthcare_dataset':
+2025-01-21 09:50:40.860 | INFO     | __main__:<module>:11 - ============================================================
+2025-01-21 09:50:40.861 | INFO     | __main__:<module>:15 - 📊 Types des colonnes pour le DataFrame 'healthcare'
+2025-01-21 09:50:40.862 | INFO     | __main__:<module>:16 - ------------------------------------------------------------
+2025-01-21 09:50:40.873 | INFO     | __main__:<module>:23 - 🔹 Name : object | Valeurs : str
+2025-01-21 09:50:40.884 | INFO     | __main__:<module>:23 - 🔹 Age : int64 | Valeurs : int
+2025-01-21 09:50:40.895 | INFO     | __main__:<module>:23 - 🔹 Gender : object | Valeurs : str
+2025-01-21 09:50:40.906 | INFO     | __main__:<module>:23 - 🔹 Blood Type : object | Valeurs : str
+2025-01-21 09:50:40.916 | INFO     | __main__:<module>:23 - 🔹 Medical Condition : object | Valeurs : str
+2025-01-21 09:50:40.926 | INFO     | __main__:<module>:23 - 🔹 Date of Admission : object | Valeurs : str
+2025-01-21 09:50:40.937 | INFO     | __main__:<module>:23 - 🔹 Doctor : object | Valeurs : str
+2025-01-21 09:50:40.947 | INFO     | __main__:<module>:23 - 🔹 Hospital : object | Valeurs : str
+2025-01-21 09:50:40.957 | INFO     | __main__:<module>:23 - 🔹 Insurance Provider : object | Valeurs : str
+2025-01-21 09:50:40.968 | INFO     | __main__:<module>:23 - 🔹 Billing Amount : float64 | Valeurs : float
+2025-01-21 09:50:40.979 | INFO     | __main__:<module>:23 - 🔹 Room Number : int64 | Valeurs : int
+2025-01-21 09:50:40.988 | INFO     | __main__:<module>:23 - 🔹 Admission Type : object | Valeurs : str
+2025-01-21 09:50:40.999 | INFO     | __main__:<module>:23 - 🔹 Discharge Date : object | Valeurs : str
+2025-01-21 09:50:41.011 | INFO     | __main__:<module>:23 - 🔹 Medication : object | Valeurs : str
+2025-01-21 09:50:41.021 | INFO     | __main__:<module>:23 - 🔹 Test Results : object | Valeurs : str
+2025-01-21 09:50:41.022 | INFO     | __main__:<module>:26 - ============================================================
+
+2025-01-21 09:50:41.102 | INFO     | __main__:<module>:36 - Colonnes générées après le merge : Index(['temp_id', 'Name', 'Age', 'Gender', 'Blood Type', 'Medical Condition', 'Date of Admission', 'Doctor', 'Hospital', 'Insurance Provider', 'Billing Amount', 'Room Number', 'Admission Type', 'Discharge Date', 'Medication', 'Test Results', 'is_duplicate', 'is_primary', 'group_id'], dtype='object')
+2025-01-21 09:50:41.104 | WARNING  | __main__:<module>:47 - La colonne 'Name_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:50:41.105 | WARNING  | __main__:<module>:47 - La colonne 'Age_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:50:41.106 | WARNING  | __main__:<module>:47 - La colonne 'Gender_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:50:41.107 | WARNING  | __main__:<module>:47 - La colonne 'Blood Type_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:50:41.109 | WARNING  | __main__:<module>:47 - La colonne 'Medical Condition_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:50:41.110 | WARNING  | __main__:<module>:47 - La colonne 'Date of Admission_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:50:41.111 | WARNING  | __main__:<module>:47 - La colonne 'Doctor_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:50:41.112 | WARNING  | __main__:<module>:47 - La colonne 'Hospital_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:50:41.113 | WARNING  | __main__:<module>:47 - La colonne 'Insurance Provider_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:50:41.114 | WARNING  | __main__:<module>:47 - La colonne 'Billing Amount_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:50:41.115 | WARNING  | __main__:<module>:47 - La colonne 'Room Number_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:50:41.116 | WARNING  | __main__:<module>:47 - La colonne 'Admission Type_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:50:41.117 | WARNING  | __main__:<module>:47 - La colonne 'Discharge Date_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:50:41.118 | WARNING  | __main__:<module>:47 - La colonne 'Medication_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:50:41.119 | WARNING  | __main__:<module>:47 - La colonne 'Test Results_primary' n'existe pas. Comparaison ignorée.
+2025-01-21 09:50:41.120 | INFO     | __main__:<module>:52 - Groupes concernés par des doublons : [81, 21, 279, 61, 211, 383, 112, 196, 231, 55, 309, 508, 172, 384, 387, 202, 450, 92, 481, 432, 223, 307, 183, 114, 394, 404, 85, 227, 164, 366, 28, 430, 257, 378, 95, 502, 472, 152, 496, 40, 301, 178, 461, 241, 515, 17, 107, 410, 118, 498, 518, 75, 269, 186, 278, 32, 373, 251, 339, 26, 501, 138, 206, 140, 375, 67, 299, 367, 157, 117, 425, 197, 131, 128, 71, 284, 449, 479, 207, 139, 204, 219, 259, 274, 455, 477, 395, 97, 188, 361, 534, 525, 13, 267, 136, 218, 69, 41, 124, 89, 72, 439, 143, 492, 533, 187, 289, 260, 108, 385, 332, 122, 266, 456, 34, 101, 371, 58, 296, 311, 180, 419, 150, 78, 190, 369, 159, 195, 179, 320, 451, 8, 99, 146, 393, 322, 512, 53, 250, 243, 434, 464, 185, 297, 50, 191, 225, 105, 520, 382, 465, 4, 354, 347, 209, 109, 217, 104, 390, 350, 386, 532, 411, 275, 43, 141, 359, 397, 429, 169, 177, 293, 220, 153, 230, 235, 379, 189, 356, 503, 514, 485, 443, 155, 282, 222, 205, 506, 165, 484, 238, 16, 133, 252, 380, 264, 120, 463, 233, 331, 82, 182, 249, 482, 47, 377, 400, 391, 521, 343, 167, 292, 93, 295, 171, 467, 115, 522, 363, 98, 291, 470, 20, 446, 487, 77, 460, 242, 402, 364, 306, 22, 431, 335, 262, 210, 27, 270, 511, 74, 529, 163, 253, 254, 48, 414, 281, 173, 73, 63, 38, 277, 338, 480, 340, 68, 415, 84, 509, 458, 123, 126, 392, 351, 417, 325, 111, 83, 424, 176, 256, 35, 313, 286, 106, 294, 57, 149, 76, 300, 19, 528, 103, 240, 94, 440, 154, 489, 328, 271, 144, 324, 433, 389, 374, 304, 388, 490, 276, 341, 147, 184, 346, 427, 370, 453, 305, 221, 505, 471, 491, 170, 321, 355, 524, 272, 31, 298, 493, 25, 125, 365, 212, 436, 7, 9, 360, 288, 317, 497, 408, 372, 132, 24, 200, 507, 110, 310, 255, 116, 473, 435, 156, 426, 466, 353, 60, 406, 396, 344, 420, 283, 265, 62, 44, 90, 323, 316, 11, 263, 476, 148, 3, 454, 287, 273, 18, 412, 280, 403, 79, 318, 42, 158, 258, 192, 407, 499, 486, 87, 516, 290, 495, 142, 423, 100, 229, 345, 421, 234, 5, 45, 137, 442, 59, 504, 166, 102, 302, 37, 319, 459, 314, 203, 452, 162, 56, 224, 457, 308, 86, 199, 39, 2, 368, 312, 29, 66, 468, 376, 448, 236, 483, 14, 208, 46, 194, 96, 358, 462, 474, 239, 237, 526, 228, 193, 447, 488, 413, 441, 337, 381, 330, 232, 418, 245, 36, 6, 500, 15, 168, 248, 416, 80, 198, 401, 268, 174, 399, 478, 213, 49, 65, 398, 315, 215, 342, 357, 151, 54, 513, 129, 422, 113, 64, 30, 519, 409, 1, 405, 244, 201, 475, 329, 130, 33, 445, 469, 444, 226, 12, 135, 51, 349, 160, 91, 494, 121, 119, 88, 348, 336, 333, 428, 517, 303, 52, 352, 437, 161, 23, 261, 127, 510, 134, 327, 216, 246, 70, 530, 145, 10, 247, 214, 531, 326, 285, 438, 527, 362, 334, 523, 175, 181]
+2025-01-21 09:50:41.124 | INFO     | __main__:<module>:58 - Groupes de doublons avec colonnes de différences : 
+   temp_id                Name  Age  Gender Blood Type Medical Condition Date of Admission             Doctor        Hospital Insurance Provider  Billing Amount  Room Number Admission Type Discharge Date  Medication  Test Results  is_duplicate  is_primary  group_id
+0    50023        samuel joyce   56    male         o+         arthritis        2022-11-03     krista hartman  thomas-ballard   unitedhealthcare    15654.830587          157         urgent     2022-11-22     aspirin  inconclusive          True       False        81
+1    50040    kimberly vasquez   26    male         a-           obesity        2023-10-23   jennifer bennett       cowan inc   unitedhealthcare    38142.109678          313         urgent     2023-11-18  penicillin      abnormal          True       False        21
+2    50055      scott thornton   55  female         b-           obesity        2021-04-08      joshua ingram      keller llc           medicare    30894.904511          455         urgent     2021-04-15     aspirin      abnormal          True       False       279
+3    50070         william lee   27  female         o+         arthritis        2020-01-31  lauren montgomery   winters-simon              cigna    46229.434901          153       elective     2020-02-13     lipitor        normal          True       False        61
+4    50078  christopher norris   38    male        ab-         arthritis        2023-01-14       denise blair     inc morales           medicare     9072.127142          452      emergency     2023-02-12  penicillin        normal          True       False       211
+2025-01-21 09:50:41.125 | INFO     | __main__:<module>:59 - Colonnes avec des différences détectées : []
+2025-01-21 09:50:41.143 | INFO     | __main__:<module>:15 - Contenu complet des groupes triés par 'group_id' : 
+     temp_id                 Name  Age  Gender Blood Type Medical Condition Date of Admission                 Doctor                      Hospital Insurance Provider  Billing Amount  Room Number Admission Type Discharge Date   Medication  Test Results  is_duplicate  is_primary  group_id
+20      1336     kimberly vasquez   26    male         a-           obesity        2023-10-23       jennifer bennett                     cowan inc   unitedhealthcare    38142.109678          313         urgent     2023-11-18   penicillin      abnormal          True        True        21
+1      50040     kimberly vasquez   26    male         a-           obesity        2023-10-23       jennifer bennett                     cowan inc   unitedhealthcare    38142.109678          313         urgent     2023-11-18   penicillin      abnormal          True       False        21
+54      3960      reginald wright   50    male        ab-            asthma        2020-04-25          michael arias       clark, and estes thomas              aetna    26886.655207          210         urgent     2020-05-03  paracetamol      abnormal          True        True        55
+9      50102      reginald wright   50    male        ab-            asthma        2020-04-25          michael arias       clark, and estes thomas              aetna    26886.655207          210         urgent     2020-05-03  paracetamol      abnormal          True       False        55
+60      4485          william lee   27  female         o+         arthritis        2020-01-31      lauren montgomery                 winters-simon              cigna    46229.434901          153       elective     2020-02-13      lipitor        normal          True        True        61
+3      50070          william lee   27  female         o+         arthritis        2020-01-31      lauren montgomery                 winters-simon              cigna    46229.434901          153       elective     2020-02-13      lipitor        normal          True       False        61
+80      6319         samuel joyce   56    male         o+         arthritis        2022-11-03         krista hartman                thomas-ballard   unitedhealthcare    15654.830587          157         urgent     2022-11-22      aspirin  inconclusive          True        True        81
+0      50023         samuel joyce   56    male         o+         arthritis        2022-11-03         krista hartman                thomas-ballard   unitedhealthcare    15654.830587          157         urgent     2022-11-22      aspirin  inconclusive          True       False        81
+91      6954        marissa miles   58  female         o-         arthritis        2023-10-10          brandi lozano      dillon nichols, kane and   unitedhealthcare    15300.911357          461         urgent     2023-11-06    ibuprofen        normal          True        True        92
+17     50159        marissa miles   58  female         o-         arthritis        2023-10-10          brandi lozano      dillon nichols, kane and   unitedhealthcare    15300.911357          461         urgent     2023-11-06    ibuprofen        normal          True       False        92
+111    10473       matthew foster   60  female        ab-           obesity        2020-02-12           taylor frank                  ltd alvarado              aetna     4735.300151          140         urgent     2020-02-25   penicillin        normal          True        True       112
+6      50086       matthew foster   60  female        ab-           obesity        2020-02-12           taylor frank                  ltd alvarado              aetna     4735.300151          140         urgent     2020-02-25   penicillin        normal          True       False       112
+171    17584           mary jones   41    male         b-           obesity        2019-07-02  mr. lawrence adams md         and smith smith, ryan              cigna    34290.947528          171         urgent     2019-07-09  paracetamol      abnormal          True        True       172
+12     50120           mary jones   41    male         b-           obesity        2019-07-02  mr. lawrence adams md         and smith smith, ryan              cigna    34290.947528          171         urgent     2019-07-09  paracetamol      abnormal          True       False       172
+195    19056      manuel thornton   51    male         o-            asthma        2023-07-25             kathy king    morgan hernandez, and beck   unitedhealthcare    45601.814762          378         urgent     2023-08-08    ibuprofen        normal          True        True       196
+7      50090      manuel thornton   51    male         o-            asthma        2023-07-25             kathy king    morgan hernandez, and beck   unitedhealthcare    45601.814762          378         urgent     2023-08-08    ibuprofen        normal          True       False       196
+201    19755  christopher hill md   62  female         a-      hypertension        2022-09-09      rebecca henderson                 and sons long           medicare    14709.612213          101       elective     2022-09-18      aspirin  inconclusive          True        True       202
+15     50147  christopher hill md   62  female         a-      hypertension        2022-09-09      rebecca henderson                 and sons long           medicare    14709.612213          101       elective     2022-09-18      aspirin  inconclusive          True       False       202
+210    20704   christopher norris   38    male        ab-         arthritis        2023-01-14           denise blair                   inc morales           medicare     9072.127142          452      emergency     2023-02-12   penicillin        normal          True        True       211
+4      50078   christopher norris   38    male        ab-         arthritis        2023-01-14           denise blair                   inc morales           medicare     9072.127142          452      emergency     2023-02-12   penicillin        normal          True       False       211
+222    21978      christine price   50    male         a-      hypertension        2020-10-19          valerie welch             hernandez-sherman   unitedhealthcare     4183.594572          270         urgent     2020-11-14  paracetamol        normal          True        True       223
+20     50182      christine price   50    male         a-      hypertension        2020-10-19          valerie welch             hernandez-sherman   unitedhealthcare     4183.594572          270         urgent     2020-11-14  paracetamol        normal          True       False       223
+230    22483       madeline baker   49    male         a+            cancer        2019-11-18       melissa alvarado        lane riley and fisher,              cigna     3840.740363          144      emergency     2019-12-07  paracetamol  inconclusive          True        True       231
+8      50095       madeline baker   49    male         a+            cancer        2019-11-18       melissa alvarado        lane riley and fisher,              cigna     3840.740363          144      emergency     2019-12-07  paracetamol  inconclusive          True       False       231
+278    27018       scott thornton   55  female         b-           obesity        2021-04-08          joshua ingram                    keller llc           medicare    30894.904511          455         urgent     2021-04-15      aspirin      abnormal          True        True       279
+2      50055       scott thornton   55  female         b-           obesity        2021-04-08          joshua ingram                    keller llc           medicare    30894.904511          455         urgent     2021-04-15      aspirin      abnormal          True       False       279
+306    29669            kim oneal   50    male        ab+            cancer        2020-09-22         shelby charles      murphy everett and shea,   unitedhealthcare    46002.065675          500       elective     2020-10-03  paracetamol  inconclusive          True        True       307
+21     50187            kim oneal   50    male        ab+            cancer        2020-09-22         shelby charles      murphy everett and shea,   unitedhealthcare    46002.065675          500       elective     2020-10-03  paracetamol  inconclusive          True       False       307
+308    29803    deanna cunningham   81    male         b+            cancer        2021-08-29       wesley patterson                 baldwin group         blue cross    14184.775367          238      emergency     2021-09-06      lipitor        normal          True        True       309
+10     50103    deanna cunningham   81    male         b+            cancer        2021-08-29       wesley patterson                 baldwin group         blue cross    14184.775367          238      emergency     2021-09-06      lipitor        normal          True       False       309
+382    36822          travis best   65  female         b+            asthma        2020-01-15       kristin anderson                thomas-johnson         blue cross     5903.933834          246         urgent     2020-02-14      aspirin      abnormal          True        True       383
+5      50081          travis best   65  female         b+            asthma        2020-01-15       kristin anderson                thomas-johnson         blue cross     5903.933834          246         urgent     2020-02-14      aspirin      abnormal          True       False       383
+383    36950          susan brown   81  female         o+           obesity        2019-06-05           joshua davis                    plc wright           medicare    45370.293819          378      emergency     2019-06-13  paracetamol      abnormal          True        True       384
+13     50124          susan brown   81  female         o+           obesity        2019-06-05           joshua davis                    plc wright           medicare    45370.293819          378      emergency     2019-06-13  paracetamol      abnormal          True       False       384
+386    37273      terry nicholson   76  female         o-         arthritis        2023-06-18          laura jenkins      gomez bryant, and murphy              aetna    12474.684730          165         urgent     2023-06-29  paracetamol      abnormal          True        True       387
+14     50137      terry nicholson   76  female         o-         arthritis        2023-06-18          laura jenkins      gomez bryant, and murphy              aetna    12474.684730          165         urgent     2023-06-29  paracetamol      abnormal          True       False       387
+431    40721          jacob smith   54    male         a-      hypertension        2020-02-27       melissa robinson  estrada mueller, jimenez and           medicare    29617.009035          224         urgent     2020-03-10      aspirin      abnormal          True        True       432
+19     50180          jacob smith   54    male         a-      hypertension        2020-02-27       melissa robinson  estrada mueller, jimenez and           medicare    29617.009035          224         urgent     2020-03-10      aspirin      abnormal          True       False       432
+449    42323            amy green   79  female         b+           obesity        2021-03-30          brett johnson             taylor-williamson   unitedhealthcare    23402.358491          249       elective     2021-04-27   penicillin      abnormal          True        True       450
+16     50151            amy green   79  female         b+           obesity        2021-03-30          brett johnson             taylor-williamson   unitedhealthcare    23402.358491          249       elective     2021-04-27   penicillin      abnormal          True       False       450
+480    45432     angelica wilkins   53  female         a-          diabetes        2023-10-29        michael francis                  price-stuart           medicare     1666.476595          422         urgent     2023-11-14      lipitor      abnormal          True        True       481
+18     50171     angelica wilkins   53  female         a-          diabetes        2023-10-29        michael francis                  price-stuart           medicare     1666.476595          422         urgent     2023-11-14      lipitor      abnormal          True       False       481
+507    47686     cynthia sullivan   77    male         a+         arthritis        2022-10-01          tanya collins                    garcia inc              cigna     9764.712742          306      emergency     2022-10-26      aspirin  inconclusive          True        True       508
+11     50116     cynthia sullivan   77    male         a+         arthritis        2022-10-01          tanya collins                    garcia inc              cigna     9764.712742          306      emergency     2022-10-26      aspirin  inconclusive          True       False       508
+2025-01-21 09:50:41.216 | INFO     | __main__:<module>:21 - Nombre de lignes après suppression des doublons : 54966
+2025-01-21 09:50:41.219 | INFO     | __main__:<module>:22 - Aperçu des données nettoyées : 
+            Name  Age  Gender Blood Type Medical Condition Date of Admission            Doctor                    Hospital Insurance Provider  Billing Amount  Room Number Admission Type Discharge Date   Medication  Test Results
+0  Bobby JacksOn   30    Male         B-            Cancer        2024-01-31     Matthew Smith             Sons and Miller         Blue Cross    18856.281306          328         Urgent     2024-02-02  Paracetamol        Normal
+1   LesLie TErRy   62    Male         A+           Obesity        2019-08-20   Samantha Davies                     Kim Inc           Medicare    33643.327287          265      Emergency     2019-08-26    Ibuprofen  Inconclusive
+2    DaNnY sMitH   76  Female         A-           Obesity        2022-09-22  Tiffany Mitchell                    Cook PLC              Aetna    27955.096079          205      Emergency     2022-10-07      Aspirin        Normal
+3   andrEw waTtS   28  Female         O+          Diabetes        2020-11-18       Kevin Wells  Hernandez Rogers and Vang,           Medicare    37909.782410          450       Elective     2020-12-18    Ibuprofen      Abnormal
+4  adrIENNE bEll   43  Female        AB+            Cancer        2022-09-19    Kathleen Hanna                 White-White              Aetna    14238.317814          458         Urgent     2022-10-09   Penicillin      Abnormal
+2025-01-21 09:50:41.230 | INFO     | __main__:<module>:4 - Analyse initiale des données :
+2025-01-21 09:50:41.232 | INFO     | __main__:<module>:5 - Colonnes disponibles : ['Name', 'Age', 'Gender', 'Blood Type', 'Medical Condition', 'Date of Admission', 'Doctor', 'Hospital', 'Insurance Provider', 'Billing Amount', 'Room Number', 'Admission Type', 'Discharge Date', 'Medication', 'Test Results']
+2025-01-21 09:50:41.234 | INFO     | __main__:<module>:6 - Types des colonnes avant transformation : 
+Name                   object
+Age                     int64
+Gender                 object
+Blood Type             object
+Medical Condition      object
+Date of Admission      object
+Doctor                 object
+Hospital               object
+Insurance Provider     object
+Billing Amount        float64
+Room Number             int64
+Admission Type         object
+Discharge Date         object
+Medication             object
+Test Results           object
+dtype: object
+2025-01-21 09:50:41.239 | INFO     | __main__:<module>:12 - Statistiques pour 'Date of Admission': 
+count          54966
+unique          1827
+top       2024-03-16
+freq              50
+Name: Date of Admission, dtype: object
+2025-01-21 09:50:41.245 | INFO     | __main__:<module>:12 - Statistiques pour 'Discharge Date': 
+count          54966
+unique          1856
+top       2020-03-15
+freq              53
+Name: Discharge Date, dtype: object
+2025-01-21 09:50:41.259 | INFO     | __main__:<module>:12 - Statistiques pour 'Doctor': 
+count             54966
+unique            40341
+top       Michael Smith
+freq                 27
+Name: Doctor, dtype: object
+2025-01-21 09:50:41.272 | INFO     | __main__:<module>:12 - Statistiques pour 'Hospital': 
+count         54966
+unique        39876
+top       LLC Smith
+freq             44
+Name: Hospital, dtype: object
+2025-01-21 09:50:41.276 | INFO     | __main__:<module>:17 - Valeurs initiales pour 'Gender' : {'Female', 'Male'}
+2025-01-21 09:50:41.280 | INFO     | __main__:<module>:23 - Valeurs initiales pour 'Blood Type' : {'B-', 'O+', 'AB+', 'O-', 'AB-', 'A+', 'B+', 'A-'}
+2025-01-21 09:50:41.312 | INFO     | __main__:<module>:8 - Les colonnes de dates ont été converties en type datetime.
+2025-01-21 09:50:41.354 | INFO     | __main__:<module>:15 - Les colonnes de texte ont été normalisées (espaces supprimés, titres formatés).
+2025-01-21 09:50:41.363 | INFO     | __main__:<module>:4 - Analyse après transformation des données :
+2025-01-21 09:50:41.365 | INFO     | __main__:<module>:5 - Types des colonnes après transformation : 
+Name                          object
+Age                            int64
+Gender                        object
+Blood Type                    object
+Medical Condition             object
+Date of Admission     datetime64[ns]
+Doctor                        object
+Hospital                      object
+Insurance Provider            object
+Billing Amount               float64
+Room Number                    int64
+Admission Type                object
+Discharge Date        datetime64[ns]
+Medication                    object
+Test Results                  object
+dtype: object
+2025-01-21 09:50:41.367 | INFO     | __main__:<module>:10 - Exemple de valeurs après conversion pour 'Date of Admission': 
+0   2024-01-31
+1   2019-08-20
+2   2022-09-22
+3   2020-11-18
+4   2022-09-19
+Name: Date of Admission, dtype: datetime64[ns]
+2025-01-21 09:50:41.368 | INFO     | __main__:<module>:10 - Exemple de valeurs après conversion pour 'Discharge Date': 
+0   2024-02-02
+1   2019-08-26
+2   2022-10-07
+3   2020-12-18
+4   2022-10-09
+Name: Discharge Date, dtype: datetime64[ns]
+2025-01-21 09:50:41.369 | INFO     | __main__:<module>:15 - Exemple de valeurs après normalisation pour 'Name': 
+0    Bobby Jackson
+1     Leslie Terry
+2      Danny Smith
+3     Andrew Watts
+4    Adrienne Bell
+Name: Name, dtype: object
+2025-01-21 09:50:41.370 | INFO     | __main__:<module>:15 - Exemple de valeurs après normalisation pour 'Doctor': 
+0       Matthew Smith
+1     Samantha Davies
+2    Tiffany Mitchell
+3         Kevin Wells
+4      Kathleen Hanna
+Name: Doctor, dtype: object
+2025-01-21 09:50:41.371 | INFO     | __main__:<module>:15 - Exemple de valeurs après normalisation pour 'Hospital': 
+0               Sons And Miller
+1                       Kim Inc
+2                      Cook Plc
+3    Hernandez Rogers And Vang,
+4                   White-White
+Name: Hospital, dtype: object
+2025-01-21 09:50:41.378 | INFO     | __main__:<module>:2 - ============================================================
+2025-01-21 09:50:41.380 | INFO     | __main__:<module>:3 - Début de l'exportation des DataFrames en fichiers CSV
+2025-01-21 09:50:41.380 | INFO     | __main__:<module>:4 - ----------
+2025-01-21 09:50:41.618 | INFO     | __main__:export_dataframes_to_csv:35 - ✅ DataFrame 'healthcare_data' exporté avec succès : data\processed\healthcare_data.csv
+2025-01-21 09:50:41.619 | INFO     | __main__:<module>:9 - ----------
+2025-01-21 09:50:41.620 | INFO     | __main__:<module>:10 - Fin de l'exportation des DataFrames en fichiers CSV
+2025-01-21 09:50:41.622 | INFO     | __main__:<module>:11 - ============================================================
+2025-01-21 09:50:41.644 | INFO     | __main__:<module>:19 - Connexion réussie à MongoDB sur localhost:27017 pour la base 'healthcare_database'.
+2025-01-21 09:50:41.645 | INFO     | __main__:<module>:22 - Test de la connexion à MongoDB...
+2025-01-21 09:50:41.676 | SUCCESS  | __main__:<module>:24 - Connexion validée avec succès.
+2025-01-21 09:50:41.677 | ERROR    | __main__:<module>:28 - Le fichier processed_data\healthcare_data.csv est introuvable.
+2025-01-21 09:50:41.678 | ERROR    | __main__:<module>:45 - Erreur lors de la connexion ou du chargement des données : Fichier introuvable : processed_data\healthcare_data.csv
+2025-01-21 09:57:28.750 | INFO     | __main__:<module>:20 - Connexion réussie à MongoDB sur localhost:27017 pour la base 'healthcare_database'.
+2025-01-21 09:57:28.753 | INFO     | __main__:<module>:23 - Test de la connexion à MongoDB...
+2025-01-21 09:57:28.762 | SUCCESS  | __main__:<module>:25 - Connexion validée avec succès.
+2025-01-21 09:57:28.867 | INFO     | __main__:<module>:33 - Fichier CSV chargé avec succès : f:\1.Boulot\02_Openclassrooms\Github\migration-donnees-mongodb\data\processed\healthcare_data.csv
+2025-01-21 09:57:28.868 | INFO     | __main__:<module>:36 - Insertion des données dans MongoDB...
+2025-01-21 09:57:30.167 | SUCCESS  | __main__:<module>:39 - Données insérées avec succès dans la collection 'patients_data'.
+2025-01-21 09:57:31.140 | INFO     | __main__:<module>:43 - Nombre total de documents dans la collection 'patients_data': 487413
+2025-01-21 09:58:51.799 | INFO     | __main__:<module>:20 - Connexion réussie à MongoDB sur localhost:27017 pour la base 'healthcare_database'.
+2025-01-21 09:58:51.801 | INFO     | __main__:<module>:23 - Test de la connexion à MongoDB...
+2025-01-21 09:58:51.813 | SUCCESS  | __main__:<module>:25 - Connexion validée avec succès.
+2025-01-21 09:58:51.909 | INFO     | __main__:<module>:33 - Fichier CSV chargé avec succès : f:\1.Boulot\02_Openclassrooms\Github\migration-donnees-mongodb\data\processed\healthcare_data.csv
+2025-01-21 09:58:51.911 | INFO     | __main__:<module>:36 - Insertion des données dans MongoDB...
+2025-01-21 09:58:53.096 | SUCCESS  | __main__:<module>:39 - Données insérées avec succès dans la collection 'patients_data'.
+2025-01-21 09:58:53.391 | INFO     | __main__:<module>:43 - Nombre total de documents dans la collection 'patients_data': 542379
+2025-01-21 10:02:06.095 | INFO     | __main__:<module>:2 - Exemple de données insérées dans MongoDB :
+2025-01-21 10:02:06.097 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90ea'), 'Name': 'Bobby JacksOn', 'Age': 30, 'Gender': 'Male', 'Blood Type': 'B-', 'Medical Condition': 'Cancer', 'Date of Admission': '2024-01-31', 'Doctor': 'Matthew Smith', 'Hospital': 'Sons and Miller', 'Insurance Provider': 'Blue Cross', 'Billing Amount': 18856.281305978155, 'Room Number': 328, 'Admission Type': 'Urgent', 'Discharge Date': '2024-02-02', 'Medication': 'Paracetamol', 'Test Results': 'Normal'}
+2025-01-21 10:02:06.098 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90ed'), 'Name': 'andrEw waTtS', 'Age': 28, 'Gender': 'Female', 'Blood Type': 'O+', 'Medical Condition': 'Diabetes', 'Date of Admission': '2020-11-18', 'Doctor': 'Kevin Wells', 'Hospital': 'Hernandez Rogers and Vang,', 'Insurance Provider': 'Medicare', 'Billing Amount': 37909.78240987528, 'Room Number': 450, 'Admission Type': 'Elective', 'Discharge Date': '2020-12-18', 'Medication': 'Ibuprofen', 'Test Results': 'Abnormal'}
+2025-01-21 10:02:06.099 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90ee'), 'Name': 'adrIENNE bEll', 'Age': 43, 'Gender': 'Female', 'Blood Type': 'AB+', 'Medical Condition': 'Cancer', 'Date of Admission': '2022-09-19', 'Doctor': 'Kathleen Hanna', 'Hospital': 'White-White', 'Insurance Provider': 'Aetna', 'Billing Amount': 14238.317813937623, 'Room Number': 458, 'Admission Type': 'Urgent', 'Discharge Date': '2022-10-09', 'Medication': 'Penicillin', 'Test Results': 'Abnormal'}
+2025-01-21 10:02:06.100 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90ef'), 'Name': 'EMILY JOHNSOn', 'Age': 36, 'Gender': 'Male', 'Blood Type': 'A+', 'Medical Condition': 'Asthma', 'Date of Admission': '2023-12-20', 'Doctor': 'Taylor Newton', 'Hospital': 'Nunez-Humphrey', 'Insurance Provider': 'UnitedHealthcare', 'Billing Amount': 48145.11095104189, 'Room Number': 389, 'Admission Type': 'Urgent', 'Discharge Date': '2023-12-24', 'Medication': 'Ibuprofen', 'Test Results': 'Normal'}
+2025-01-21 10:02:06.101 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90f0'), 'Name': 'edwArD EDWaRDs', 'Age': 21, 'Gender': 'Female', 'Blood Type': 'AB-', 'Medical Condition': 'Diabetes', 'Date of Admission': '2020-11-03', 'Doctor': 'Kelly Olson', 'Hospital': 'Group Middleton', 'Insurance Provider': 'Medicare', 'Billing Amount': 19580.87234486093, 'Room Number': 389, 'Admission Type': 'Emergency', 'Discharge Date': '2020-11-15', 'Medication': 'Paracetamol', 'Test Results': 'Inconclusive'}
+2025-01-21 10:02:18.897 | INFO     | __main__:<module>:20 - Connexion réussie à MongoDB sur localhost:27017 pour la base 'healthcare_database'.
+2025-01-21 10:02:18.898 | INFO     | __main__:<module>:23 - Test de la connexion à MongoDB...
+2025-01-21 10:02:18.909 | SUCCESS  | __main__:<module>:25 - Connexion validée avec succès.
+2025-01-21 10:02:19.009 | INFO     | __main__:<module>:33 - Fichier CSV chargé avec succès : f:\1.Boulot\02_Openclassrooms\Github\migration-donnees-mongodb\data\processed\healthcare_data.csv
+2025-01-21 10:02:19.010 | INFO     | __main__:<module>:36 - Insertion des données dans MongoDB...
+2025-01-21 10:02:20.115 | SUCCESS  | __main__:<module>:39 - Données insérées avec succès dans la collection 'patients_data'.
+2025-01-21 10:02:20.457 | INFO     | __main__:<module>:43 - Nombre total de documents dans la collection 'patients_data': 597345
+2025-01-21 10:02:27.717 | INFO     | __main__:<module>:2 - Exemple de données insérées dans MongoDB :
+2025-01-21 10:02:27.719 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90ea'), 'Name': 'Bobby JacksOn', 'Age': 30, 'Gender': 'Male', 'Blood Type': 'B-', 'Medical Condition': 'Cancer', 'Date of Admission': '2024-01-31', 'Doctor': 'Matthew Smith', 'Hospital': 'Sons and Miller', 'Insurance Provider': 'Blue Cross', 'Billing Amount': 18856.281305978155, 'Room Number': 328, 'Admission Type': 'Urgent', 'Discharge Date': '2024-02-02', 'Medication': 'Paracetamol', 'Test Results': 'Normal'}
+2025-01-21 10:02:27.720 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90ed'), 'Name': 'andrEw waTtS', 'Age': 28, 'Gender': 'Female', 'Blood Type': 'O+', 'Medical Condition': 'Diabetes', 'Date of Admission': '2020-11-18', 'Doctor': 'Kevin Wells', 'Hospital': 'Hernandez Rogers and Vang,', 'Insurance Provider': 'Medicare', 'Billing Amount': 37909.78240987528, 'Room Number': 450, 'Admission Type': 'Elective', 'Discharge Date': '2020-12-18', 'Medication': 'Ibuprofen', 'Test Results': 'Abnormal'}
+2025-01-21 10:02:27.721 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90ee'), 'Name': 'adrIENNE bEll', 'Age': 43, 'Gender': 'Female', 'Blood Type': 'AB+', 'Medical Condition': 'Cancer', 'Date of Admission': '2022-09-19', 'Doctor': 'Kathleen Hanna', 'Hospital': 'White-White', 'Insurance Provider': 'Aetna', 'Billing Amount': 14238.317813937623, 'Room Number': 458, 'Admission Type': 'Urgent', 'Discharge Date': '2022-10-09', 'Medication': 'Penicillin', 'Test Results': 'Abnormal'}
+2025-01-21 10:02:27.723 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90ef'), 'Name': 'EMILY JOHNSOn', 'Age': 36, 'Gender': 'Male', 'Blood Type': 'A+', 'Medical Condition': 'Asthma', 'Date of Admission': '2023-12-20', 'Doctor': 'Taylor Newton', 'Hospital': 'Nunez-Humphrey', 'Insurance Provider': 'UnitedHealthcare', 'Billing Amount': 48145.11095104189, 'Room Number': 389, 'Admission Type': 'Urgent', 'Discharge Date': '2023-12-24', 'Medication': 'Ibuprofen', 'Test Results': 'Normal'}
+2025-01-21 10:02:27.724 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90f0'), 'Name': 'edwArD EDWaRDs', 'Age': 21, 'Gender': 'Female', 'Blood Type': 'AB-', 'Medical Condition': 'Diabetes', 'Date of Admission': '2020-11-03', 'Doctor': 'Kelly Olson', 'Hospital': 'Group Middleton', 'Insurance Provider': 'Medicare', 'Billing Amount': 19580.87234486093, 'Room Number': 389, 'Admission Type': 'Emergency', 'Discharge Date': '2020-11-15', 'Medication': 'Paracetamol', 'Test Results': 'Inconclusive'}
+2025-01-21 10:02:30.255 | INFO     | __main__:<module>:2 - Exemple de données insérées dans MongoDB :
+2025-01-21 10:02:30.258 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90ea'), 'Name': 'Bobby JacksOn', 'Age': 30, 'Gender': 'Male', 'Blood Type': 'B-', 'Medical Condition': 'Cancer', 'Date of Admission': '2024-01-31', 'Doctor': 'Matthew Smith', 'Hospital': 'Sons and Miller', 'Insurance Provider': 'Blue Cross', 'Billing Amount': 18856.281305978155, 'Room Number': 328, 'Admission Type': 'Urgent', 'Discharge Date': '2024-02-02', 'Medication': 'Paracetamol', 'Test Results': 'Normal'}
+2025-01-21 10:02:30.259 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90ed'), 'Name': 'andrEw waTtS', 'Age': 28, 'Gender': 'Female', 'Blood Type': 'O+', 'Medical Condition': 'Diabetes', 'Date of Admission': '2020-11-18', 'Doctor': 'Kevin Wells', 'Hospital': 'Hernandez Rogers and Vang,', 'Insurance Provider': 'Medicare', 'Billing Amount': 37909.78240987528, 'Room Number': 450, 'Admission Type': 'Elective', 'Discharge Date': '2020-12-18', 'Medication': 'Ibuprofen', 'Test Results': 'Abnormal'}
+2025-01-21 10:02:30.260 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90ee'), 'Name': 'adrIENNE bEll', 'Age': 43, 'Gender': 'Female', 'Blood Type': 'AB+', 'Medical Condition': 'Cancer', 'Date of Admission': '2022-09-19', 'Doctor': 'Kathleen Hanna', 'Hospital': 'White-White', 'Insurance Provider': 'Aetna', 'Billing Amount': 14238.317813937623, 'Room Number': 458, 'Admission Type': 'Urgent', 'Discharge Date': '2022-10-09', 'Medication': 'Penicillin', 'Test Results': 'Abnormal'}
+2025-01-21 10:02:30.262 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90ef'), 'Name': 'EMILY JOHNSOn', 'Age': 36, 'Gender': 'Male', 'Blood Type': 'A+', 'Medical Condition': 'Asthma', 'Date of Admission': '2023-12-20', 'Doctor': 'Taylor Newton', 'Hospital': 'Nunez-Humphrey', 'Insurance Provider': 'UnitedHealthcare', 'Billing Amount': 48145.11095104189, 'Room Number': 389, 'Admission Type': 'Urgent', 'Discharge Date': '2023-12-24', 'Medication': 'Ibuprofen', 'Test Results': 'Normal'}
+2025-01-21 10:02:30.263 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90f0'), 'Name': 'edwArD EDWaRDs', 'Age': 21, 'Gender': 'Female', 'Blood Type': 'AB-', 'Medical Condition': 'Diabetes', 'Date of Admission': '2020-11-03', 'Doctor': 'Kelly Olson', 'Hospital': 'Group Middleton', 'Insurance Provider': 'Medicare', 'Billing Amount': 19580.87234486093, 'Room Number': 389, 'Admission Type': 'Emergency', 'Discharge Date': '2020-11-15', 'Medication': 'Paracetamol', 'Test Results': 'Inconclusive'}
+2025-01-21 10:03:34.171 | INFO     | __main__:<module>:2 - Nombre de lignes après suppression des doublons : 54966
+2025-01-21 10:03:34.175 | INFO     | __main__:<module>:3 - Aperçu des données nettoyées : 
+            Name  Age  Gender Blood Type Medical Condition Date of Admission            Doctor                    Hospital Insurance Provider  Billing Amount  Room Number Admission Type Discharge Date   Medication  Test Results
+0  Bobby Jackson   30    Male         B-            Cancer        2024-01-31     Matthew Smith             Sons And Miller         Blue Cross    18856.281306          328         Urgent     2024-02-02  Paracetamol        Normal
+1   Leslie Terry   62    Male         A+           Obesity        2019-08-20   Samantha Davies                     Kim Inc           Medicare    33643.327287          265      Emergency     2019-08-26    Ibuprofen  Inconclusive
+2    Danny Smith   76  Female         A-           Obesity        2022-09-22  Tiffany Mitchell                    Cook Plc              Aetna    27955.096079          205      Emergency     2022-10-07      Aspirin        Normal
+3   Andrew Watts   28  Female         O+          Diabetes        2020-11-18       Kevin Wells  Hernandez Rogers And Vang,           Medicare    37909.782410          450       Elective     2020-12-18    Ibuprofen      Abnormal
+4  Adrienne Bell   43  Female        AB+            Cancer        2022-09-19    Kathleen Hanna                 White-White              Aetna    14238.317814          458         Urgent     2022-10-09   Penicillin      Abnormal
+2025-01-21 10:03:48.067 | INFO     | __main__:<module>:2 - ============================================================
+2025-01-21 10:03:48.068 | INFO     | __main__:<module>:3 - Début de l'exportation des DataFrames en fichiers CSV
+2025-01-21 10:03:48.069 | INFO     | __main__:<module>:4 - ----------
+2025-01-21 10:03:48.263 | INFO     | __main__:export_dataframes_to_csv:35 - ✅ DataFrame 'healthcare_data' exporté avec succès : data\processed\healthcare_data.csv
+2025-01-21 10:03:48.264 | INFO     | __main__:<module>:9 - ----------
+2025-01-21 10:03:48.265 | INFO     | __main__:<module>:10 - Fin de l'exportation des DataFrames en fichiers CSV
+2025-01-21 10:03:48.266 | INFO     | __main__:<module>:11 - ============================================================
+2025-01-21 10:03:51.432 | INFO     | __main__:<module>:20 - Connexion réussie à MongoDB sur localhost:27017 pour la base 'healthcare_database'.
+2025-01-21 10:03:51.434 | INFO     | __main__:<module>:23 - Test de la connexion à MongoDB...
+2025-01-21 10:03:51.447 | SUCCESS  | __main__:<module>:25 - Connexion validée avec succès.
+2025-01-21 10:03:51.542 | INFO     | __main__:<module>:33 - Fichier CSV chargé avec succès : f:\1.Boulot\02_Openclassrooms\Github\migration-donnees-mongodb\data\processed\healthcare_data.csv
+2025-01-21 10:03:51.543 | INFO     | __main__:<module>:36 - Insertion des données dans MongoDB...
+2025-01-21 10:03:52.785 | SUCCESS  | __main__:<module>:39 - Données insérées avec succès dans la collection 'patients_data'.
+2025-01-21 10:03:53.137 | INFO     | __main__:<module>:43 - Nombre total de documents dans la collection 'patients_data': 652311
+2025-01-21 10:03:55.578 | INFO     | __main__:<module>:2 - Exemple de données insérées dans MongoDB :
+2025-01-21 10:03:55.580 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90ea'), 'Name': 'Bobby JacksOn', 'Age': 30, 'Gender': 'Male', 'Blood Type': 'B-', 'Medical Condition': 'Cancer', 'Date of Admission': '2024-01-31', 'Doctor': 'Matthew Smith', 'Hospital': 'Sons and Miller', 'Insurance Provider': 'Blue Cross', 'Billing Amount': 18856.281305978155, 'Room Number': 328, 'Admission Type': 'Urgent', 'Discharge Date': '2024-02-02', 'Medication': 'Paracetamol', 'Test Results': 'Normal'}
+2025-01-21 10:03:55.582 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90ed'), 'Name': 'andrEw waTtS', 'Age': 28, 'Gender': 'Female', 'Blood Type': 'O+', 'Medical Condition': 'Diabetes', 'Date of Admission': '2020-11-18', 'Doctor': 'Kevin Wells', 'Hospital': 'Hernandez Rogers and Vang,', 'Insurance Provider': 'Medicare', 'Billing Amount': 37909.78240987528, 'Room Number': 450, 'Admission Type': 'Elective', 'Discharge Date': '2020-12-18', 'Medication': 'Ibuprofen', 'Test Results': 'Abnormal'}
+2025-01-21 10:03:55.583 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90ee'), 'Name': 'adrIENNE bEll', 'Age': 43, 'Gender': 'Female', 'Blood Type': 'AB+', 'Medical Condition': 'Cancer', 'Date of Admission': '2022-09-19', 'Doctor': 'Kathleen Hanna', 'Hospital': 'White-White', 'Insurance Provider': 'Aetna', 'Billing Amount': 14238.317813937623, 'Room Number': 458, 'Admission Type': 'Urgent', 'Discharge Date': '2022-10-09', 'Medication': 'Penicillin', 'Test Results': 'Abnormal'}
+2025-01-21 10:03:55.585 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90ef'), 'Name': 'EMILY JOHNSOn', 'Age': 36, 'Gender': 'Male', 'Blood Type': 'A+', 'Medical Condition': 'Asthma', 'Date of Admission': '2023-12-20', 'Doctor': 'Taylor Newton', 'Hospital': 'Nunez-Humphrey', 'Insurance Provider': 'UnitedHealthcare', 'Billing Amount': 48145.11095104189, 'Room Number': 389, 'Admission Type': 'Urgent', 'Discharge Date': '2023-12-24', 'Medication': 'Ibuprofen', 'Test Results': 'Normal'}
+2025-01-21 10:03:55.587 | INFO     | __main__:<module>:5 - {'_id': ObjectId('6773f09fa3b984f50bff90f0'), 'Name': 'edwArD EDWaRDs', 'Age': 21, 'Gender': 'Female', 'Blood Type': 'AB-', 'Medical Condition': 'Diabetes', 'Date of Admission': '2020-11-03', 'Doctor': 'Kelly Olson', 'Hospital': 'Group Middleton', 'Insurance Provider': 'Medicare', 'Billing Amount': 19580.87234486093, 'Room Number': 389, 'Admission Type': 'Emergency', 'Discharge Date': '2020-11-15', 'Medication': 'Paracetamol', 'Test Results': 'Inconclusive'}
+2025-01-21 10:04:22.118 | INFO     | __main__:<module>:20 - Connexion réussie à MongoDB sur localhost:27017 pour la base 'healthcare_database'.
+2025-01-21 10:04:22.120 | INFO     | __main__:<module>:23 - Test de la connexion à MongoDB...
+2025-01-21 10:04:22.130 | SUCCESS  | __main__:<module>:25 - Connexion validée avec succès.
+2025-01-21 10:04:22.131 | INFO     | __main__:<module>:28 - Suppression des données existantes dans la collection...
+2025-01-21 10:04:36.053 | SUCCESS  | __main__:<module>:30 - Collection nettoyée avec succès.
+2025-01-21 10:04:36.153 | INFO     | __main__:<module>:38 - Fichier CSV chargé avec succès : f:\1.Boulot\02_Openclassrooms\Github\migration-donnees-mongodb\data\processed\healthcare_data.csv
+2025-01-21 10:04:36.154 | INFO     | __main__:<module>:41 - Insertion des données dans MongoDB...
+2025-01-21 10:04:37.226 | SUCCESS  | __main__:<module>:44 - Données insérées avec succès dans la collection 'patients_data'.
+2025-01-21 10:04:37.252 | INFO     | __main__:<module>:48 - Nombre total de documents dans la collection 'patients_data': 54966
+2025-01-21 10:05:53.382 | INFO     | __main__:<module>:2 - Exemple de données insérées dans MongoDB :
+2025-01-21 10:05:53.386 | INFO     | __main__:<module>:5 - {'_id': ObjectId('678f6324dda3f9c34ab92423'), 'Name': 'Bobby Jackson', 'Age': 30, 'Gender': 'Male', 'Blood Type': 'B-', 'Medical Condition': 'Cancer', 'Date of Admission': '2024-01-31', 'Doctor': 'Matthew Smith', 'Hospital': 'Sons And Miller', 'Insurance Provider': 'Blue Cross', 'Billing Amount': 18856.281305978155, 'Room Number': 328, 'Admission Type': 'Urgent', 'Discharge Date': '2024-02-02', 'Medication': 'Paracetamol', 'Test Results': 'Normal'}
+2025-01-21 10:05:53.387 | INFO     | __main__:<module>:5 - {'_id': ObjectId('678f6324dda3f9c34ab92424'), 'Name': 'Leslie Terry', 'Age': 62, 'Gender': 'Male', 'Blood Type': 'A+', 'Medical Condition': 'Obesity', 'Date of Admission': '2019-08-20', 'Doctor': 'Samantha Davies', 'Hospital': 'Kim Inc', 'Insurance Provider': 'Medicare', 'Billing Amount': 33643.327286577885, 'Room Number': 265, 'Admission Type': 'Emergency', 'Discharge Date': '2019-08-26', 'Medication': 'Ibuprofen', 'Test Results': 'Inconclusive'}
+2025-01-21 10:05:53.388 | INFO     | __main__:<module>:5 - {'_id': ObjectId('678f6324dda3f9c34ab92425'), 'Name': 'Danny Smith', 'Age': 76, 'Gender': 'Female', 'Blood Type': 'A-', 'Medical Condition': 'Obesity', 'Date of Admission': '2022-09-22', 'Doctor': 'Tiffany Mitchell', 'Hospital': 'Cook Plc', 'Insurance Provider': 'Aetna', 'Billing Amount': 27955.096078842456, 'Room Number': 205, 'Admission Type': 'Emergency', 'Discharge Date': '2022-10-07', 'Medication': 'Aspirin', 'Test Results': 'Normal'}
+2025-01-21 10:05:53.390 | INFO     | __main__:<module>:5 - {'_id': ObjectId('678f6324dda3f9c34ab92426'), 'Name': 'Andrew Watts', 'Age': 28, 'Gender': 'Female', 'Blood Type': 'O+', 'Medical Condition': 'Diabetes', 'Date of Admission': '2020-11-18', 'Doctor': 'Kevin Wells', 'Hospital': 'Hernandez Rogers And Vang,', 'Insurance Provider': 'Medicare', 'Billing Amount': 37909.78240987528, 'Room Number': 450, 'Admission Type': 'Elective', 'Discharge Date': '2020-12-18', 'Medication': 'Ibuprofen', 'Test Results': 'Abnormal'}
+2025-01-21 10:05:53.390 | INFO     | __main__:<module>:5 - {'_id': ObjectId('678f6324dda3f9c34ab92427'), 'Name': 'Adrienne Bell', 'Age': 43, 'Gender': 'Female', 'Blood Type': 'AB+', 'Medical Condition': 'Cancer', 'Date of Admission': '2022-09-19', 'Doctor': 'Kathleen Hanna', 'Hospital': 'White-White', 'Insurance Provider': 'Aetna', 'Billing Amount': 14238.317813937623, 'Room Number': 458, 'Admission Type': 'Urgent', 'Discharge Date': '2022-10-09', 'Medication': 'Penicillin', 'Test Results': 'Abnormal'}
+2025-01-21 10:06:33.042 | INFO     | __main__:<module>:20 - Connexion réussie à MongoDB sur localhost:27017 pour la base 'healthcare_database_notebook'.
+2025-01-21 10:06:33.044 | INFO     | __main__:<module>:23 - Test de la connexion à MongoDB...
+2025-01-21 10:06:33.057 | SUCCESS  | __main__:<module>:25 - Connexion validée avec succès.
+2025-01-21 10:06:33.059 | INFO     | __main__:<module>:28 - Suppression des données existantes dans la collection...
+2025-01-21 10:06:33.061 | SUCCESS  | __main__:<module>:30 - Collection nettoyée avec succès.
+2025-01-21 10:06:33.159 | INFO     | __main__:<module>:38 - Fichier CSV chargé avec succès : f:\1.Boulot\02_Openclassrooms\Github\migration-donnees-mongodb\data\processed\healthcare_data.csv
+2025-01-21 10:06:33.160 | INFO     | __main__:<module>:41 - Insertion des données dans MongoDB...
+2025-01-21 10:06:34.328 | SUCCESS  | __main__:<module>:44 - Données insérées avec succès dans la collection 'patients_data'.
+2025-01-21 10:06:34.359 | INFO     | __main__:<module>:48 - Nombre total de documents dans la collection 'patients_data': 54966
+2025-01-21 10:06:39.760 | INFO     | __main__:<module>:2 - Exemple de données insérées dans MongoDB :
+2025-01-21 10:06:39.762 | INFO     | __main__:<module>:5 - {'_id': ObjectId('678f6399dda3f9c34ab9fada'), 'Name': 'Bobby Jackson', 'Age': 30, 'Gender': 'Male', 'Blood Type': 'B-', 'Medical Condition': 'Cancer', 'Date of Admission': '2024-01-31', 'Doctor': 'Matthew Smith', 'Hospital': 'Sons And Miller', 'Insurance Provider': 'Blue Cross', 'Billing Amount': 18856.281305978155, 'Room Number': 328, 'Admission Type': 'Urgent', 'Discharge Date': '2024-02-02', 'Medication': 'Paracetamol', 'Test Results': 'Normal'}
+2025-01-21 10:06:39.765 | INFO     | __main__:<module>:5 - {'_id': ObjectId('678f6399dda3f9c34ab9fadb'), 'Name': 'Leslie Terry', 'Age': 62, 'Gender': 'Male', 'Blood Type': 'A+', 'Medical Condition': 'Obesity', 'Date of Admission': '2019-08-20', 'Doctor': 'Samantha Davies', 'Hospital': 'Kim Inc', 'Insurance Provider': 'Medicare', 'Billing Amount': 33643.327286577885, 'Room Number': 265, 'Admission Type': 'Emergency', 'Discharge Date': '2019-08-26', 'Medication': 'Ibuprofen', 'Test Results': 'Inconclusive'}
+2025-01-21 10:06:39.766 | INFO     | __main__:<module>:5 - {'_id': ObjectId('678f6399dda3f9c34ab9fadc'), 'Name': 'Danny Smith', 'Age': 76, 'Gender': 'Female', 'Blood Type': 'A-', 'Medical Condition': 'Obesity', 'Date of Admission': '2022-09-22', 'Doctor': 'Tiffany Mitchell', 'Hospital': 'Cook Plc', 'Insurance Provider': 'Aetna', 'Billing Amount': 27955.096078842456, 'Room Number': 205, 'Admission Type': 'Emergency', 'Discharge Date': '2022-10-07', 'Medication': 'Aspirin', 'Test Results': 'Normal'}
+2025-01-21 10:06:39.769 | INFO     | __main__:<module>:5 - {'_id': ObjectId('678f6399dda3f9c34ab9fadd'), 'Name': 'Andrew Watts', 'Age': 28, 'Gender': 'Female', 'Blood Type': 'O+', 'Medical Condition': 'Diabetes', 'Date of Admission': '2020-11-18', 'Doctor': 'Kevin Wells', 'Hospital': 'Hernandez Rogers And Vang,', 'Insurance Provider': 'Medicare', 'Billing Amount': 37909.78240987528, 'Room Number': 450, 'Admission Type': 'Elective', 'Discharge Date': '2020-12-18', 'Medication': 'Ibuprofen', 'Test Results': 'Abnormal'}
+2025-01-21 10:06:39.770 | INFO     | __main__:<module>:5 - {'_id': ObjectId('678f6399dda3f9c34ab9fade'), 'Name': 'Adrienne Bell', 'Age': 43, 'Gender': 'Female', 'Blood Type': 'AB+', 'Medical Condition': 'Cancer', 'Date of Admission': '2022-09-19', 'Doctor': 'Kathleen Hanna', 'Hospital': 'White-White', 'Insurance Provider': 'Aetna', 'Billing Amount': 14238.317813937623, 'Room Number': 458, 'Admission Type': 'Urgent', 'Discharge Date': '2022-10-09', 'Medication': 'Penicillin', 'Test Results': 'Abnormal'}
